@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rikaz — Food Import &amp; Distribution, Libya</title>
+<meta name="description" content="Rikaz brings quality food brands to the Libyan market through efficient distribution, strong partnerships and professional market development.">
+<meta name="theme-color" content="#0F4F45">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="vendor/react.production.min.js"></script>
+<script src="vendor/react-dom.production.min.js"></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -28,7 +36,7 @@ input::placeholder,textarea::placeholder{color:#8A9391}
 <!-- NAV -->
 <header style="position:sticky;top:0;z-index:50;background:rgba(247,246,241,0.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(15,79,69,0.14)">
   <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4cqw,48px);height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px">
-    <button onClick="{{ goHome }}" style="background:none;border:0;padding:0;cursor:pointer;display:flex;align-items:center"><img src="assets/logo-full-horizontal.png" alt="Rikaz" style="height:42px;width:auto;display:block"></button>
+    <button onClick="{{ goHome }}" style="background:none;border:0;padding:0;cursor:pointer;display:flex;align-items:center"><img src="assets/logo-full-horizontal.webp" alt="Rikaz" style="height:42px;width:auto;display:block"></button>
     <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
       <nav style="display:flex;align-items:center;gap:clamp(18px,2.4cqw,34px);height:68px">
         <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
@@ -143,7 +151,7 @@ input::placeholder,textarea::placeholder{color:#8A9391}
       <div style="display:grid;grid-template-columns:{{ cols4min2 }};gap:1px;background:rgba(15,79,69,0.14);border:1px solid rgba(15,79,69,0.14)">
         <sc-for list="{{ featuredBrands }}" as="b" hint-placeholder-count="7">
           <button onClick="{{ b.open }}" style="aspect-ratio:16/9;background:#fff;border:0;cursor:pointer;display:grid;place-items:center;padding:18px 26px;overflow:hidden;transition:background .15s" style-hover="background:#F7F6F1">
-            <img src="{{ b.logo }}" alt="{{ b.name }}" style="max-width:100%;max-height:56px;width:auto;height:auto;object-fit:contain;display:block">
+            <img loading="lazy" decoding="async" src="{{ b.logo }}" alt="{{ b.name }}" style="max-width:100%;max-height:56px;width:auto;height:auto;object-fit:contain;display:block">
           </button>
         </sc-for>
         <button onClick="{{ goBrands }}" style="aspect-ratio:16/9;background:#0F4F45;border:0;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding:18px;color:#fff;font-family:inherit;text-align:start;transition:background .15s" style-hover="background:#1B7A6A">
@@ -168,7 +176,7 @@ input::placeholder,textarea::placeholder{color:#8A9391}
       <button onClick="{{ goMarket }}" style="margin-top:26px;background:none;border:0;padding:0 0 3px;min-height:{{ linkTap }};cursor:pointer;color:#0F4F45;font-weight:600;font-size:14px;font-family:inherit;display:flex;align-items:center;gap:8px;box-shadow:inset 0 -1px 0 #B5A422;background-clip:content-box" style-hover="color:#7A6E12">{{ t.market.link }} <span>{{ arrow }}</span></button>
     </div>
     <div style="overflow:hidden;background:#fff;border:1px solid rgba(15,79,69,0.14);aspect-ratio:4/3;position:relative">
-      <iframe src="{{ mapSrc }}" title="Regions served" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+      <iframe loading="lazy" src="{{ mapSrc }}" title="Regions served" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
       <div style="position:absolute;inset-inline-start:0;bottom:0;display:flex;gap:16px;font-size:12px;color:#5C6866;background:#fff;padding:8px 12px;border-top:1px solid rgba(15,79,69,0.14);border-inline-end:1px solid rgba(15,79,69,0.14)">
         <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#B5A422;display:inline-block"></span>{{ t.market.hub }}</span>
         <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#1B7A6A;display:inline-block"></span>{{ t.market.served }}</span>
@@ -178,7 +186,7 @@ input::placeholder,textarea::placeholder{color:#8A9391}
 
   <!-- Statement band -->
   <section style="background:#0F4F45;color:#fff;position:relative;overflow:hidden">
-    <div style="position:absolute;inset-inline-end:-6%;top:-20%;width:44%;aspect-ratio:1;background:url(assets/mark-white.png) center/contain no-repeat;opacity:0.05"></div>
+    <div style="position:absolute;inset-inline-end:-6%;top:-20%;width:44%;aspect-ratio:1;background:url(assets/mark-white.webp) center/contain no-repeat;opacity:0.05"></div>
     <div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(64px,8cqw,120px) clamp(20px,4cqw,48px);display:grid;grid-template-columns:{{ splitCols }};gap:clamp(24px,4cqw,64px)">
       <div style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#D8CC63;display:flex;align-items:center;gap:12px;align-self:start;padding-top:10px"><span>04</span><span style="width:24px;height:1px;background:#B5A422;display:inline-block"></span>{{ t.commit.kicker }}</div>
       <div>
@@ -224,12 +232,12 @@ input::placeholder,textarea::placeholder{color:#8A9391}
 
   <section style="border-top:1px solid rgba(15,79,69,0.14);border-bottom:1px solid rgba(15,79,69,0.14);background:#fff">
     <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4cqw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))">
-      <div style="padding:clamp(36px,4cqw,64px) clamp(0px,3cqw,48px) clamp(36px,4cqw,64px) 0;border-inline-end:1px solid rgba(15,79,69,0.14)">
+      <div style="padding-block:clamp(36px,4cqw,64px);padding-inline:0 {{ mvPad }};border-inline-end:{{ mvSideBorder }};border-bottom:{{ mvStackBorder }}">
         <div style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:16px">{{ t.about.missionLabel }}</div>
         <p style="margin:0 0 14px;font-size:clamp(19px,1.8cqw,24px);font-weight:600;line-height:1.3;color:#0F4F45;letter-spacing:-0.015em">{{ t.about.mission1 }}</p>
         <p style="margin:0;font-size:15.5px;color:#5C6866">{{ t.about.mission2 }}</p>
       </div>
-      <div style="padding:clamp(36px,4cqw,64px) 0 clamp(36px,4cqw,64px) clamp(0px,3cqw,48px)">
+      <div style="padding-block:clamp(36px,4cqw,64px);padding-inline:{{ mvPad }} 0">
         <div style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:16px">{{ t.about.visionLabel }}</div>
         <p style="margin:0;font-size:clamp(19px,1.8cqw,24px);font-weight:600;line-height:1.3;color:#0F4F45;letter-spacing:-0.015em">{{ t.about.vision }}</p>
       </div>
@@ -241,7 +249,7 @@ input::placeholder,textarea::placeholder{color:#8A9391}
     <h2 style="margin:0 0 36px;font-size:clamp(28px,3.2cqw,44px);line-height:1.08;font-weight:600;letter-spacing:-0.025em;color:#0F4F45">{{ t.values.title }}</h2>
     <div style="display:grid;grid-template-columns:{{ cols5 }};gap:1px;background:rgba(15,79,69,0.14);border:1px solid rgba(15,79,69,0.14)">
       <sc-for list="{{ valueItems }}" as="v" hint-placeholder-count="5">
-        <div style="background:#F7F6F1;padding:26px 22px 28px;display:flex;flex-direction:column;gap:18px;min-height:220px">
+        <div style="background:#F7F6F1;padding:26px 22px 28px;display:flex;flex-direction:column;gap:18px;min-height:{{ valMinH }}">
           <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;font-weight:600;color:#7A6E12">{{ v.idx }}</span><span style="color:#0F4F45">{{ v.icon }}</span></div>
           <div style="margin-top:auto"><h3 style="margin:0 0 8px;font-size:18px;font-weight:600;color:#0F4F45;letter-spacing:-0.01em">{{ v.title }}</h3><p style="margin:0;font-size:14px;color:#5C6866;line-height:1.5">{{ v.body }}</p></div>
         </div>
@@ -285,7 +293,7 @@ input::placeholder,textarea::placeholder{color:#8A9391}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6866" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
         <input value="{{ query }}" onChange="{{ setQuery }}" placeholder="{{ t.brandsPage.search }}" style="flex:1;border:0;background:transparent;font-size:16px;outline:none;color:#1F2A28;min-width:0;height:100%">
       </div>
-      <select value="{{ country }}" onChange="{{ setCountry }}" style="height:52px;border:0;border-inline-end:1px solid rgba(15,79,69,0.14);background:transparent;padding:0 16px;font-size:14px;color:#1F2A28;cursor:pointer;outline:none">
+      <select value="{{ country }}" onChange="{{ setCountry }}" style="height:52px;border:0;border-inline-end:1px solid rgba(15,79,69,0.14);background:transparent;padding:0 16px;font-size:16px;color:#1F2A28;cursor:pointer;outline:none">
         <sc-for list="{{ countryOptions }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.l }}</option></sc-for>
       </select>
       <button onClick="{{ toggleSort }}" style="height:52px;border:0;background:{{ sortBg }};padding:0 18px;font-size:14px;font-weight:500;color:{{ sortColor }};cursor:pointer;font-family:inherit">{{ t.brandsPage.az }}</button>
@@ -306,7 +314,7 @@ input::placeholder,textarea::placeholder{color:#8A9391}
       <sc-for list="{{ filteredBrands }}" as="b" hint-placeholder-count="7">
         <div style="background:#fff;display:flex;flex-direction:column;transition:background .15s" style-hover="background:#FCFBF8">
           <button onClick="{{ b.open }}" style="border:0;cursor:pointer;height:150px;background:transparent;display:grid;place-items:center;padding:28px 40px;overflow:hidden;border-bottom:1px solid rgba(15,79,69,0.14)">
-            <img src="{{ b.logo }}" alt="{{ b.name }}" style="max-width:100%;max-height:88px;width:auto;height:auto;object-fit:contain;display:block">
+            <img loading="lazy" decoding="async" src="{{ b.logo }}" alt="{{ b.name }}" style="max-width:100%;max-height:88px;width:auto;height:auto;object-fit:contain;display:block">
           </button>
           <div style="padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1">
             <div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#5C6866;letter-spacing:0.04em"><span style="text-transform:uppercase">{{ b.catLabel }}</span><span>{{ b.countryLabel }}</span></div>
@@ -314,7 +322,7 @@ input::placeholder,textarea::placeholder{color:#8A9391}
             <p style="margin:0;font-size:14px;color:#5C6866;flex:1;line-height:1.5">{{ b.desc }}</p>
             <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:4px">
               <button onClick="{{ b.open }}" style="background:none;border:0;padding:0 0 2px;min-height:{{ linkTap }};cursor:pointer;color:#0F4F45;font-weight:600;font-size:13.5px;font-family:inherit;display:flex;align-items:center;gap:8px;box-shadow:inset 0 -1px 0 #B5A422" style-hover="color:#7A6E12">{{ t.brandsPage.view }} <span>{{ arrow }}</span></button>
-              <span style="font-size:12px;color:#8A9391">{{ b.count }} {{ t.brandPage.items }}</span>
+              <span style="font-size:12px;color:#8A9391">{{ b.count }} {{ b.countUnit }}</span>
             </div>
           </div>
         </div>
@@ -359,13 +367,13 @@ input::placeholder,textarea::placeholder{color:#8A9391}
   <section style="max-width:1280px;margin:0 auto;padding:clamp(36px,4cqw,56px) clamp(20px,4cqw,48px) clamp(56px,7cqw,104px)">
     <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:18px">
       <h2 style="margin:0;font-size:clamp(22px,2.4cqw,30px);font-weight:600;color:#0F4F45;letter-spacing:-0.02em">{{ t.brandPage.products }}</h2>
-      <span style="font-size:13px;color:#5C6866">{{ brandProductCount }} {{ t.brandPage.items }}</span>
+      <span style="font-size:13px;color:#5C6866">{{ brandProductCount }} {{ brandProductUnit }}</span>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:1px;background:rgba(15,79,69,0.14);border:1px solid rgba(15,79,69,0.14)">
       <sc-for list="{{ brandProducts }}" as="p" hint-placeholder-count="6">
         <button onClick="{{ p.open }}" style="text-align:start;background:#fff;border:0;cursor:pointer;padding:0;display:flex;flex-direction:column;font-family:inherit;transition:background .15s" style-hover="background:#FCFBF8">
           <div style="width:100%;aspect-ratio:1;display:grid;place-items:center;position:relative;border-bottom:1px solid rgba(15,79,69,0.14);padding:18px;overflow:hidden">
-            <sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ true }}"><img src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:contain;display:block;grid-area:1/1"></sc-if>
+            <sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ true }}"><img loading="lazy" decoding="async" src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:contain;display:block;grid-area:1/1"></sc-if>
             <sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}"><div style="width:46%;height:70%;background-image:linear-gradient(rgba(15,79,69,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(15,79,69,0.1) 1px,transparent 1px);background-size:12px 12px;border:1px solid rgba(15,79,69,0.14);display:grid;place-items:center"><span style="font-size:10px;color:#5C6866">{{ t.brandPage.pack }}</span></div></sc-if>
             <span style="position:absolute;top:10px;inset-inline-start:10px;font-size:12px;font-weight:600;padding:3px 8px;border-radius:2px;background:{{ p.badgeBg }};color:{{ p.badgeColor }};letter-spacing:0.04em">{{ p.badge }}</span>
           </div>
@@ -386,9 +394,9 @@ input::placeholder,textarea::placeholder{color:#8A9391}
 <main data-screen-label="Product detail">
   <section style="max-width:1280px;margin:0 auto;padding:clamp(24px,3cqw,40px) clamp(20px,4cqw,48px) clamp(56px,7cqw,104px)">
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:13px;color:#8A9391;margin-bottom:28px">
-      <button onClick="{{ goBrands }}" style="background:none;border:0;padding:0;min-height:{{ linkTap }};cursor:pointer;color:#5C6866;font-weight:500;font-family:inherit;font-size:13px" style-hover="color:#0F4F45">{{ t.nav.brands }}</button>
+      <button onClick="{{ goBrands }}" style="background:none;border:0;padding:0;min-height:{{ linkTap }};min-width:{{ linkTap }};text-align:start;cursor:pointer;color:#5C6866;font-weight:500;font-family:inherit;font-size:13px" style-hover="color:#0F4F45">{{ t.nav.brands }}</button>
       <span>/</span>
-      <button onClick="{{ openCurrentBrand }}" style="background:none;border:0;padding:0;min-height:{{ linkTap }};cursor:pointer;color:#5C6866;font-weight:500;font-family:inherit;font-size:13px" style-hover="color:#0F4F45">{{ brand.name }}</button>
+      <button onClick="{{ openCurrentBrand }}" style="background:none;border:0;padding:0;min-height:{{ linkTap }};min-width:{{ linkTap }};text-align:start;cursor:pointer;color:#5C6866;font-weight:500;font-family:inherit;font-size:13px" style-hover="color:#0F4F45">{{ brand.name }}</button>
       <span>/</span><span style="color:#0F4F45">{{ product.name }}</span>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(28px,4cqw,72px);align-items:start">
@@ -431,7 +439,7 @@ input::placeholder,textarea::placeholder{color:#8A9391}
         <sc-for list="{{ relatedProducts }}" as="p" hint-placeholder-count="4">
           <button onClick="{{ p.open }}" style="text-align:start;background:#fff;border:0;cursor:pointer;padding:0;display:flex;flex-direction:column;font-family:inherit;transition:background .15s" style-hover="background:#FCFBF8">
             <div style="width:100%;aspect-ratio:4/3;display:grid;place-items:center;position:relative;border-bottom:1px solid rgba(15,79,69,0.14);padding:14px;overflow:hidden">
-              <sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ true }}"><img src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:contain;display:block;grid-area:1/1"></sc-if>
+              <sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ true }}"><img loading="lazy" decoding="async" src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:contain;display:block;grid-area:1/1"></sc-if>
               <sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}"><div style="width:36%;height:70%;border:1px solid rgba(15,79,69,0.14);background-image:linear-gradient(rgba(15,79,69,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(15,79,69,0.1) 1px,transparent 1px);background-size:12px 12px"></div></sc-if>
             </div>
             <div style="padding:12px 14px 14px;width:100%"><div style="font-weight:600;color:#0F4F45;font-size:14px;line-height:1.3">{{ p.name }}</div><div style="font-size:12px;color:#5C6866;margin-top:4px"><bdi>{{ p.size }}</bdi></div></div>
@@ -456,7 +464,7 @@ input::placeholder,textarea::placeholder{color:#8A9391}
   </section>
   <section style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4cqw,48px)">
     <div style="background:#fff;border:1px solid rgba(15,79,69,0.14);aspect-ratio:{{ mapRatio }};position:relative;overflow:hidden">
-      <iframe src="{{ mapSrc }}" title="Regions served" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+      <iframe loading="lazy" src="{{ mapSrc }}" title="Regions served" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
       <div style="position:absolute;inset-inline-start:0;bottom:0;display:flex;gap:16px;font-size:12px;color:#5C6866;background:#fff;padding:8px 12px;border-top:1px solid rgba(15,79,69,0.14);border-inline-end:1px solid rgba(15,79,69,0.14)">
         <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#B5A422;display:inline-block"></span>{{ t.market.hub }}</span>
         <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#1B7A6A;display:inline-block"></span>{{ t.market.served }}</span>
@@ -502,7 +510,7 @@ input::placeholder,textarea::placeholder{color:#8A9391}
       </div>
       <div style="display:grid;grid-template-columns:{{ cols4 }};gap:1px;background:rgba(15,79,69,0.14);border:1px solid rgba(15,79,69,0.14)">
         <sc-for list="{{ logisticsRows }}" as="l" hint-placeholder-count="4">
-          <div style="background:#F7F6F1;padding:24px 22px 26px;min-height:190px;display:flex;flex-direction:column;justify-content:space-between;gap:20px">
+          <div style="background:#F7F6F1;padding:24px 22px 26px;min-height:{{ logMinH }};display:flex;flex-direction:column;justify-content:space-between;gap:20px">
             <span style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#5C6866">{{ l.k }}</span>
             <div><div style="font-size:clamp(24px,2.4cqw,32px);font-weight:600;color:#0F4F45;letter-spacing:-0.025em;line-height:1.1">{{ l.v }}</div><div style="font-size:13.5px;color:#5C6866;margin-top:8px">{{ l.d }}</div></div>
           </div>
@@ -592,7 +600,7 @@ input::placeholder,textarea::placeholder{color:#8A9391}
       <h2 style="margin:0 0 36px;font-size:clamp(26px,3cqw,40px);line-height:1.1;font-weight:600;letter-spacing:-0.025em;color:#0F4F45">{{ t.partnerPage.processTitle }}</h2>
       <div style="display:grid;grid-template-columns:{{ cols4 }};gap:1px;background:rgba(15,79,69,0.14);border:1px solid rgba(15,79,69,0.14)">
         <sc-for list="{{ pc.steps }}" as="st" hint-placeholder-count="4">
-          <div style="background:#F7F6F1;padding:24px 22px 28px;min-height:200px;display:flex;flex-direction:column;gap:22px">
+          <div style="background:#F7F6F1;padding:24px 22px 28px;min-height:{{ stepMinH }};display:flex;flex-direction:column;gap:22px">
             <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:clamp(26px,2.6cqw,34px);font-weight:600;color:#0F4F45;letter-spacing:-0.03em;line-height:1">{{ st.idx }}</span><span style="font-size:12px;color:#8A9391">{{ st.time }}</span></div>
             <div style="margin-top:auto"><div style="font-size:16px;font-weight:600;color:#0F4F45">{{ st.t }}</div><div style="font-size:14px;color:#5C6866;margin-top:6px">{{ st.d }}</div></div>
           </div>
@@ -620,7 +628,8 @@ input::placeholder,textarea::placeholder{color:#8A9391}
       <p style="margin:0;font-size:16px;color:#3E4A48;max-width:520px">{{ t.contactPage.sub }}</p>
     </div>
   </section>
-  <section style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4cqw,48px) clamp(56px,7cqw,104px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:1px;background:rgba(15,79,69,0.14);border:1px solid rgba(15,79,69,0.14)">
+  <section style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4cqw,48px) clamp(56px,7cqw,104px)">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:1px;background:rgba(15,79,69,0.14);border:1px solid rgba(15,79,69,0.14)">
     <div style="background:#fff;padding:clamp(24px,3cqw,44px)">
       <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
         <div style="display:flex;flex-direction:column;gap:18px">
@@ -677,10 +686,11 @@ input::placeholder,textarea::placeholder{color:#8A9391}
         </a>
       </div>
       <div style="flex:1;min-height:240px;position:relative;background:#E9EAE3;overflow:hidden">
-        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=13.14%2C32.87%2C13.24%2C32.92&amp;layer=mapnik&amp;marker=32.8952%2C13.1900" title="Office map" style="position:absolute;inset:0;width:100%;height:100%;border:0;filter:grayscale(1) contrast(0.95)"></iframe>
+        <iframe loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=13.14%2C32.87%2C13.24%2C32.92&amp;layer=mapnik&amp;marker=32.8952%2C13.1900" title="Office map" style="position:absolute;inset:0;width:100%;height:100%;border:0;filter:grayscale(1) contrast(0.95)"></iframe>
         <div style="position:absolute;inset-inline-start:0;bottom:0;font-size:12px;color:#5C6866;background:#fff;padding:8px 12px;border-top:1px solid rgba(15,79,69,0.14);border-inline-end:1px solid rgba(15,79,69,0.14)">{{ t.contactPage.mapLabel }}</div>
       </div>
     </div>
+  </div>
   </section>
 </main>
 </sc-if>
@@ -690,7 +700,7 @@ input::placeholder,textarea::placeholder{color:#8A9391}
 <footer style="background:#0F4F45;color:#fff;border-top:1px solid rgba(255,255,255,0.1);padding-bottom:{{ footerPadB }}">
   <div style="max-width:1280px;margin:0 auto;padding:clamp(48px,6cqw,72px) clamp(20px,4cqw,48px) 40px;display:grid;grid-template-columns:{{ footerCols }};gap:40px 32px">
     <div>
-      <img src="assets/logo-horizontal-white.png" alt="Rikaz" style="height:40px;display:block;margin-bottom:18px">
+      <img loading="lazy" decoding="async" src="assets/logo-horizontal-white.webp" alt="Rikaz" style="height:40px;display:block;margin-bottom:18px">
       <p style="margin:0;font-size:14px;line-height:1.6;color:rgba(255,255,255,0.72);max-width:300px">{{ t.footer.tagline }}</p>
     </div>
     <div>
@@ -728,7 +738,7 @@ input::placeholder,textarea::placeholder{color:#8A9391}
 <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
   <div style="position:fixed;inset:0;z-index:60;background:#F7F6F1;display:flex;flex-direction:column;overflow:auto">
     <div style="height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid rgba(15,79,69,0.14)">
-      <img src="assets/logo-full-horizontal.png" alt="Rikaz" style="height:42px;width:auto;display:block">
+      <img src="assets/logo-full-horizontal.webp" alt="Rikaz" style="height:42px;width:auto;display:block">
       <button onClick="{{ toggleMenu }}" aria-label="Close" style="width:44px;height:44px;border-radius:3px;border:1px solid rgba(15,79,69,0.2);background:#fff;cursor:pointer;display:grid;place-items:center;font-size:20px;color:#0F4F45;line-height:1">×</button>
     </div>
     <nav style="display:flex;flex-direction:column;padding:8px 20px">
@@ -741,8 +751,8 @@ input::placeholder,textarea::placeholder{color:#8A9391}
     </nav>
     <div style="margin-top:auto;padding:20px;display:flex;flex-direction:column;gap:14px;border-top:1px solid rgba(15,79,69,0.14)">
       <div style="display:flex;border:1px solid rgba(15,79,69,0.2);border-radius:3px;overflow:hidden;font-size:13px;font-weight:600;align-self:flex-start">
-        <button onClick="{{ setEn }}" style="border:0;padding:10px 18px;cursor:pointer;background:{{ enBg }};color:{{ enColor }};font-family:inherit">English</button>
-        <button onClick="{{ setAr }}" style="border:0;border-inline-start:1px solid rgba(15,79,69,0.2);padding:10px 18px;cursor:pointer;background:{{ arBg }};color:{{ arColor }};font-family:inherit">العربية</button>
+        <button onClick="{{ setEn }}" style="border:0;padding:0 18px;min-height:44px;cursor:pointer;background:{{ enBg }};color:{{ enColor }};font-family:inherit">English</button>
+        <button onClick="{{ setAr }}" style="border:0;border-inline-start:1px solid rgba(15,79,69,0.2);padding:0 18px;min-height:44px;cursor:pointer;background:{{ arBg }};color:{{ arColor }};font-family:inherit">العربية</button>
       </div>
       <button onClick="{{ goPartner }}" style="background:#0F4F45;color:#fff;border:0;border-radius:3px;padding:16px 18px;cursor:pointer;font-size:15px;font-weight:600;font-family:inherit">{{ t.nav.partner }}</button>
       <div style="font-size:12.5px;color:#5C6866;display:flex;flex-direction:column;gap:2px"><span>{{ t.footer.address }}</span><span dir="ltr" style="text-align:start">+218 91 000 0000</span><span>info@rikaz.ly</span></div>
@@ -789,30 +799,30 @@ const CATS = {
 };
 const COUNTRIES = { TR:{en:'Türkiye',ar:'تركيا'}, IT:{en:'Italy',ar:'إيطاليا'}, DE:{en:'Germany',ar:'ألمانيا'}, EG:{en:'Egypt',ar:'مصر'}, ES:{en:'Spain',ar:'إسبانيا'}, NL:{en:'Netherlands',ar:'هولندا'}, TN:{en:'Tunisia',ar:'تونس'}, BE:{en:'Belgium',ar:'بلجيكا'}, IN:{en:'India',ar:'الهند'} };
 const BRANDS = [
-  {id:'antat',name:'Antat',logo:'assets/brands/antat-logo.png',cat:'snacks',country:'TR',desc:{en:'Chocolate, candy and jelly confectionery, plus the Verona de luxe praline range.',ar:'شوكولاتة وحلوى وجيلي، إضافةً إلى تشكيلة برالين فيرونا الفاخرة.'},story:{en:'Antat is a Turkish confectionery house producing wrapped candies, jellies and boxed chocolate pralines for export markets across MENA. Rikaz distributes the full Antat range in Libya through retail and wholesale channels.',ar:'أنتات دار حلويات تركية تنتج الحلوى المغلفة والجيلي وبرالين الشوكولاتة المعلّبة لأسواق التصدير في المنطقة. توزّع رِكاز تشكيلة أنتات الكاملة في ليبيا عبر قنوات التجزئة والجملة.'}},
-  {id:'mymotto',name:'My Motto',logo:'assets/brands/mymotto-logo.png',cat:'snacks',country:'TR',desc:{en:'Crispy wafer bars in five flavours — no palm oil, no artificial colourings.',ar:'ألواح ويفر مقرمشة بخمس نكهات — بدون زيت نخيل وبدون ألوان صناعية.'},story:{en:'My Motto crispy wafers combine layered wafer with cream fillings and a source of fibre, in impulse-friendly single bars.',ar:'ويفر ماي موتو المقرمش يجمع طبقات الويفر بحشوات الكريمة ومصدر للألياف، في ألواح فردية مناسبة للشراء الفوري.'}},
-  {id:'sweetsmil',name:'Sweet Smil',logo:'assets/brands/sweetsmile-logo.png',cat:'snacks',country:'TR',desc:{en:'Assorted chocolate pralines in gift tins.',ar:'برالين شوكولاتة متنوّعة في علب هدايا معدنية.'},story:{en:'Sweet Smil offers filled chocolates in tall display tins — a gifting and seasonal line for supermarkets and sweet shops.',ar:'تقدّم سويت سميل شوكولاتة محشوة في علب معدنية طويلة للعرض — خط للهدايا والمواسم للمتاجر الكبرى ومحلات الحلويات.'}},
-  {id:'maretti',name:'Maretti',logo:'assets/brands/maretti-logo.png',cat:'snacks',country:'IT',desc:{en:'Oven-baked Italian-style bruschette chips.',ar:'رقائق بروسكيتا إيطالية الطابع مخبوزة بالفرن.'},story:{en:'Maretti bruschette are baked bread chips in savoury flavours, a premium salty snack for retail and HoReCa.',ar:'بروسكيتا ماريتي رقائق خبز مخبوزة بنكهات مالحة، وجبة خفيفة فاخرة للتجزئة وقطاع الضيافة.'}},
-  {id:'spuds',name:'Spuds',logo:'assets/brands/spuds-logo.png',cat:'snacks',country:'TR',desc:{en:'Craft-cooked kettle potato chips.',ar:'رقائق بطاطس مطبوخة بطريقة الحرفيين.'},story:{en:'Spuds Craft Cooked chips are slow-cooked in small batches for a thicker, crunchier bite.',ar:'رقائق سبادز تُطبخ ببطء على دفعات صغيرة لقرمشة أكثف.'}},
-  {id:'bonucci',name:'Bonucci',logo:'assets/brands/bonici-logo.png',cat:'snacks',country:'TR',desc:{en:'Biscuits and chocolate-coated treats.',ar:'بسكويت وحلويات مغطاة بالشوكولاتة.'},story:{en:'Bonucci is a value confectionery and biscuit line for the modern and traditional trade.',ar:'بونوتشي خط حلويات وبسكويت بقيمة مناسبة للتجارة الحديثة والتقليدية.'}},
-  {id:'uber',name:'Uber Energy Drink',logo:'assets/brands/uber-logo.png',cat:'beverages',country:'TR',desc:{en:'Carbonated energy drink in 250 ml cans.',ar:'مشروب طاقة غازي في عبوات 250 مل.'},story:{en:'Uber Energy Drink targets the fast-growing energy segment with a bold dragon identity and competitive pricing.',ar:'يستهدف مشروب أوبر للطاقة قطاع مشروبات الطاقة سريع النمو بهوية تنين جريئة وتسعير تنافسي.'}},
+  {id:'antat',name:'Antat',logo:'assets/brands/antat-logo.webp',cat:'snacks',country:'TR',desc:{en:'Chocolate, candy and jelly confectionery, plus the Verona de luxe praline range.',ar:'شوكولاتة وحلوى وجيلي، إضافةً إلى تشكيلة برالين فيرونا الفاخرة.'},story:{en:'Antat is a Turkish confectionery house producing wrapped candies, jellies and boxed chocolate pralines for export markets across MENA. Rikaz distributes the full Antat range in Libya through retail and wholesale channels.',ar:'أنتات دار حلويات تركية تنتج الحلوى المغلفة والجيلي وبرالين الشوكولاتة المعلّبة لأسواق التصدير في المنطقة. توزّع رِكاز تشكيلة أنتات الكاملة في ليبيا عبر قنوات التجزئة والجملة.'}},
+  {id:'mymotto',name:'My Motto',logo:'assets/brands/mymotto-logo.webp',cat:'snacks',country:'TR',desc:{en:'Crispy wafer bars in five flavours — no palm oil, no artificial colourings.',ar:'ألواح ويفر مقرمشة بخمس نكهات — بدون زيت نخيل وبدون ألوان صناعية.'},story:{en:'My Motto crispy wafers combine layered wafer with cream fillings and a source of fibre, in impulse-friendly single bars.',ar:'ويفر ماي موتو المقرمش يجمع طبقات الويفر بحشوات الكريمة ومصدر للألياف، في ألواح فردية مناسبة للشراء الفوري.'}},
+  {id:'sweetsmil',name:'Sweet Smil',logo:'assets/brands/sweetsmile-logo.webp',cat:'snacks',country:'TR',desc:{en:'Assorted chocolate pralines in gift tins.',ar:'برالين شوكولاتة متنوّعة في علب هدايا معدنية.'},story:{en:'Sweet Smil offers filled chocolates in tall display tins — a gifting and seasonal line for supermarkets and sweet shops.',ar:'تقدّم سويت سميل شوكولاتة محشوة في علب معدنية طويلة للعرض — خط للهدايا والمواسم للمتاجر الكبرى ومحلات الحلويات.'}},
+  {id:'maretti',name:'Maretti',logo:'assets/brands/maretti-logo.webp',cat:'snacks',country:'IT',desc:{en:'Oven-baked Italian-style bruschette chips.',ar:'رقائق بروسكيتا إيطالية الطابع مخبوزة بالفرن.'},story:{en:'Maretti bruschette are baked bread chips in savoury flavours, a premium salty snack for retail and HoReCa.',ar:'بروسكيتا ماريتي رقائق خبز مخبوزة بنكهات مالحة، وجبة خفيفة فاخرة للتجزئة وقطاع الضيافة.'}},
+  {id:'spuds',name:'Spuds',logo:'assets/brands/spuds-logo.webp',cat:'snacks',country:'TR',desc:{en:'Craft-cooked kettle potato chips.',ar:'رقائق بطاطس مطبوخة بطريقة الحرفيين.'},story:{en:'Spuds Craft Cooked chips are slow-cooked in small batches for a thicker, crunchier bite.',ar:'رقائق سبادز تُطبخ ببطء على دفعات صغيرة لقرمشة أكثف.'}},
+  {id:'bonucci',name:'Bonucci',logo:'assets/brands/bonici-logo.webp',cat:'snacks',country:'TR',desc:{en:'Biscuits and chocolate-coated treats.',ar:'بسكويت وحلويات مغطاة بالشوكولاتة.'},story:{en:'Bonucci is a value confectionery and biscuit line for the modern and traditional trade.',ar:'بونوتشي خط حلويات وبسكويت بقيمة مناسبة للتجارة الحديثة والتقليدية.'}},
+  {id:'uber',name:'Uber Energy Drink',logo:'assets/brands/uber-logo.webp',cat:'beverages',country:'TR',desc:{en:'Carbonated energy drink in 250 ml cans.',ar:'مشروب طاقة غازي في عبوات 250 مل.'},story:{en:'Uber Energy Drink targets the fast-growing energy segment with a bold dragon identity and competitive pricing.',ar:'يستهدف مشروب أوبر للطاقة قطاع مشروبات الطاقة سريع النمو بهوية تنين جريئة وتسعير تنافسي.'}},
 ];
 const PRODUCTS = [
-  {id:'an1',brand:'antat',img:'assets/brands/antat-product-1.png',name:'Assorted Candy Mix',nameAr:'حلوى مشكّلة',size:'1 kg',sku:'ANT-0101',status:'stock',shelf:'18 months',pack:{en:'Pillow bag',ar:'كيس'},caseQty:'10 × 1 kg',desc:{en:'Chocolate, candy and jelly assortment in individually wrapped pieces.',ar:'تشكيلة شوكولاتة وحلوى وجيلي بقطع مغلفة فردياً.'}},
-  {id:'an2',brand:'antat',img:'assets/brands/antat-product-2.png',name:'Fruit Jelly & Candy Mix',nameAr:'جيلي وحلوى بالفواكه',size:'1 kg',sku:'ANT-0102',status:'stock',shelf:'18 months',pack:{en:'Pillow bag',ar:'كيس'},caseQty:'10 × 1 kg',desc:{en:'Soft fruit jellies and hard candies, mixed pack.',ar:'جيلي فواكه طري وحلوى صلبة في عبوة مشكّلة.'}},
-  {id:'an3',brand:'antat',img:'assets/brands/antat-product-3.png',name:'Verona de luxe — Gold',nameAr:'فيرونا الفاخرة — ذهبي',size:'1 kg',sku:'ANT-0301',status:'stock',shelf:'12 months',pack:{en:'Clear gift box',ar:'علبة هدايا شفافة'},caseQty:'6 × 1 kg',desc:{en:'Milk chocolate pralines with hazelnut cream in gold wrap.',ar:'برالين شوكولاتة بالحليب بكريمة البندق بغلاف ذهبي.'}},
-  {id:'an4',brand:'antat',img:'assets/brands/antat-product-4.png',name:'Verona de luxe — Red',nameAr:'فيرونا الفاخرة — أحمر',size:'1 kg',sku:'ANT-0302',status:'stock',shelf:'12 months',pack:{en:'Clear gift box',ar:'علبة هدايا شفافة'},caseQty:'6 × 1 kg',desc:{en:'Chocolate pralines with strawberry cream filling.',ar:'برالين شوكولاتة بحشوة كريمة الفراولة.'}},
-  {id:'an5',brand:'antat',img:'assets/brands/antat-product-5.png',name:'Verona de luxe — Blue',nameAr:'فيرونا الفاخرة — أزرق',size:'1 kg',sku:'ANT-0303',status:'new',shelf:'12 months',pack:{en:'Clear gift box',ar:'علبة هدايا شفافة'},caseQty:'6 × 1 kg',desc:{en:'Dark and milk chocolate pralines with coconut cream.',ar:'برالين شوكولاتة داكنة وبالحليب بكريمة جوز الهند.'}},
-  {id:'an6',brand:'antat',img:'assets/brands/antat-product-6.png',name:'Verona de luxe — Dark',nameAr:'فيرونا الفاخرة — داكن',size:'1 kg',sku:'ANT-0304',status:'stock',shelf:'12 months',pack:{en:'Clear gift box',ar:'علبة هدايا شفافة'},caseQty:'6 × 1 kg',desc:{en:'Dark chocolate pralines with hazelnut and cocoa cream.',ar:'برالين شوكولاتة داكنة بكريمة البندق والكاكاو.'}},
-  {id:'mm1',brand:'mymotto',img:'assets/brands/mymotto-product-1.png',name:'Crispy Wafer — Strawberries & Cream',nameAr:'ويفر مقرمش — فراولة وكريمة',size:'40 g',sku:'MYM-0201',status:'stock',shelf:'12 months',pack:{en:'Flow-wrap',ar:'غلاف ملفوف'},caseQty:'24 × 40 g',desc:{en:'Layered wafer with strawberry cream. No palm oil, source of fibre.',ar:'ويفر طبقات بكريمة الفراولة. بدون زيت نخيل، مصدر للألياف.'}},
-  {id:'mm2',brand:'mymotto',img:'assets/brands/mymotto-product-2.png',name:'Crispy Wafer — Tiramisu',nameAr:'ويفر مقرمش — تيراميسو',size:'40 g',sku:'MYM-0202',status:'stock',shelf:'12 months',pack:{en:'Flow-wrap',ar:'غلاف ملفوف'},caseQty:'24 × 40 g',desc:{en:'Coffee-cream wafer inspired by tiramisu.',ar:'ويفر بكريمة القهوة مستوحى من التيراميسو.'}},
-  {id:'mm3',brand:'mymotto',img:'assets/brands/mymotto-product-3.png',name:'Crispy Wafer — Cocoa & Cocoa',nameAr:'ويفر مقرمش — كاكاو وكاكاو',size:'40 g',sku:'MYM-0203',status:'stock',shelf:'12 months',pack:{en:'Flow-wrap',ar:'غلاف ملفوف'},caseQty:'24 × 40 g',desc:{en:'Cocoa wafer with cocoa cream, chocolate coated.',ar:'ويفر كاكاو بكريمة الكاكاو مغطى بالشوكولاتة.'}},
-  {id:'mm4',brand:'mymotto',img:'assets/brands/mymotto-product-4.png',name:'Crispy Wafer — Vanilla Mousse',nameAr:'ويفر مقرمش — موس الفانيليا',size:'40 g',sku:'MYM-0204',status:'stock',shelf:'12 months',pack:{en:'Flow-wrap',ar:'غلاف ملفوف'},caseQty:'24 × 40 g',desc:{en:'Light vanilla mousse cream between crisp wafer layers.',ar:'كريمة موس فانيليا خفيفة بين طبقات ويفر مقرمشة.'}},
-  {id:'mm5',brand:'mymotto',img:'assets/brands/mymotto-product-5.png',name:'Crispy Wafer — Hazelnut & Cocoa',nameAr:'ويفر مقرمش — بندق وكاكاو',size:'40 g',sku:'MYM-0205',status:'new',shelf:'12 months',pack:{en:'Flow-wrap',ar:'غلاف ملفوف'},caseQty:'24 × 40 g',desc:{en:'Hazelnut-cocoa cream wafer, chocolate coated.',ar:'ويفر بكريمة البندق والكاكاو مغطى بالشوكولاتة.'}},
-  {id:'ss1',brand:'sweetsmil',img:'assets/brands/sweetsmile-product-1.png',name:'Praline Tin — Classic',nameAr:'علبة برالين — كلاسيك',size:'300 g',sku:'SWS-0401',status:'stock',shelf:'12 months',pack:{en:'Display tin',ar:'علبة معدنية'},caseQty:'12 × 300 g',desc:{en:'Assorted milk chocolate pralines in a tall gift tin.',ar:'برالين شوكولاتة بالحليب متنوّعة في علبة هدايا معدنية طويلة.'}},
-  {id:'ss2',brand:'sweetsmil',img:'assets/brands/sweetsmile-product-2.png',name:'Praline Tin — Gold',nameAr:'علبة برالين — ذهبي',size:'300 g',sku:'SWS-0402',status:'stock',shelf:'12 months',pack:{en:'Display tin',ar:'علبة معدنية'},caseQty:'12 × 300 g',desc:{en:'Hazelnut pralines in gold wrap.',ar:'برالين بالبندق بغلاف ذهبي.'}},
-  {id:'ss3',brand:'sweetsmil',img:'assets/brands/sweetsmile-product-3.png',name:'Praline Tin — Ruby',nameAr:'علبة برالين — روبي',size:'300 g',sku:'SWS-0403',status:'stock',shelf:'12 months',pack:{en:'Display tin',ar:'علبة معدنية'},caseQty:'12 × 300 g',desc:{en:'Strawberry-cream pralines in red wrap.',ar:'برالين بكريمة الفراولة بغلاف أحمر.'}},
-  {id:'ss4',brand:'sweetsmil',img:'assets/brands/sweetsmile-product-4.png',name:'Praline Tin — Blue',nameAr:'علبة برالين — أزرق',size:'300 g',sku:'SWS-0404',status:'soon',shelf:'12 months',pack:{en:'Display tin',ar:'علبة معدنية'},caseQty:'12 × 300 g',desc:{en:'Coconut-cream pralines in blue wrap.',ar:'برالين بكريمة جوز الهند بغلاف أزرق.'}},
+  {id:'an1',brand:'antat',img:'assets/brands/antat-product-1.webp',name:'Assorted Candy Mix',nameAr:'حلوى مشكّلة',size:'1 kg',sku:'ANT-0101',status:'stock',shelf:'18 months',pack:{en:'Pillow bag',ar:'كيس'},caseQty:'10 × 1 kg',desc:{en:'Chocolate, candy and jelly assortment in individually wrapped pieces.',ar:'تشكيلة شوكولاتة وحلوى وجيلي بقطع مغلفة فردياً.'}},
+  {id:'an2',brand:'antat',img:'assets/brands/antat-product-2.webp',name:'Fruit Jelly & Candy Mix',nameAr:'جيلي وحلوى بالفواكه',size:'1 kg',sku:'ANT-0102',status:'stock',shelf:'18 months',pack:{en:'Pillow bag',ar:'كيس'},caseQty:'10 × 1 kg',desc:{en:'Soft fruit jellies and hard candies, mixed pack.',ar:'جيلي فواكه طري وحلوى صلبة في عبوة مشكّلة.'}},
+  {id:'an3',brand:'antat',img:'assets/brands/antat-product-3.webp',name:'Verona de luxe — Gold',nameAr:'فيرونا الفاخرة — ذهبي',size:'1 kg',sku:'ANT-0301',status:'stock',shelf:'12 months',pack:{en:'Clear gift box',ar:'علبة هدايا شفافة'},caseQty:'6 × 1 kg',desc:{en:'Milk chocolate pralines with hazelnut cream in gold wrap.',ar:'برالين شوكولاتة بالحليب بكريمة البندق بغلاف ذهبي.'}},
+  {id:'an4',brand:'antat',img:'assets/brands/antat-product-4.webp',name:'Verona de luxe — Red',nameAr:'فيرونا الفاخرة — أحمر',size:'1 kg',sku:'ANT-0302',status:'stock',shelf:'12 months',pack:{en:'Clear gift box',ar:'علبة هدايا شفافة'},caseQty:'6 × 1 kg',desc:{en:'Chocolate pralines with strawberry cream filling.',ar:'برالين شوكولاتة بحشوة كريمة الفراولة.'}},
+  {id:'an5',brand:'antat',img:'assets/brands/antat-product-5.webp',name:'Verona de luxe — Blue',nameAr:'فيرونا الفاخرة — أزرق',size:'1 kg',sku:'ANT-0303',status:'new',shelf:'12 months',pack:{en:'Clear gift box',ar:'علبة هدايا شفافة'},caseQty:'6 × 1 kg',desc:{en:'Dark and milk chocolate pralines with coconut cream.',ar:'برالين شوكولاتة داكنة وبالحليب بكريمة جوز الهند.'}},
+  {id:'an6',brand:'antat',img:'assets/brands/antat-product-6.webp',name:'Verona de luxe — Dark',nameAr:'فيرونا الفاخرة — داكن',size:'1 kg',sku:'ANT-0304',status:'stock',shelf:'12 months',pack:{en:'Clear gift box',ar:'علبة هدايا شفافة'},caseQty:'6 × 1 kg',desc:{en:'Dark chocolate pralines with hazelnut and cocoa cream.',ar:'برالين شوكولاتة داكنة بكريمة البندق والكاكاو.'}},
+  {id:'mm1',brand:'mymotto',img:'assets/brands/mymotto-product-1.webp',name:'Crispy Wafer — Strawberries & Cream',nameAr:'ويفر مقرمش — فراولة وكريمة',size:'40 g',sku:'MYM-0201',status:'stock',shelf:'12 months',pack:{en:'Flow-wrap',ar:'غلاف ملفوف'},caseQty:'24 × 40 g',desc:{en:'Layered wafer with strawberry cream. No palm oil, source of fibre.',ar:'ويفر طبقات بكريمة الفراولة. بدون زيت نخيل، مصدر للألياف.'}},
+  {id:'mm2',brand:'mymotto',img:'assets/brands/mymotto-product-2.webp',name:'Crispy Wafer — Tiramisu',nameAr:'ويفر مقرمش — تيراميسو',size:'40 g',sku:'MYM-0202',status:'stock',shelf:'12 months',pack:{en:'Flow-wrap',ar:'غلاف ملفوف'},caseQty:'24 × 40 g',desc:{en:'Coffee-cream wafer inspired by tiramisu.',ar:'ويفر بكريمة القهوة مستوحى من التيراميسو.'}},
+  {id:'mm3',brand:'mymotto',img:'assets/brands/mymotto-product-3.webp',name:'Crispy Wafer — Cocoa & Cocoa',nameAr:'ويفر مقرمش — كاكاو وكاكاو',size:'40 g',sku:'MYM-0203',status:'stock',shelf:'12 months',pack:{en:'Flow-wrap',ar:'غلاف ملفوف'},caseQty:'24 × 40 g',desc:{en:'Cocoa wafer with cocoa cream, chocolate coated.',ar:'ويفر كاكاو بكريمة الكاكاو مغطى بالشوكولاتة.'}},
+  {id:'mm4',brand:'mymotto',img:'assets/brands/mymotto-product-4.webp',name:'Crispy Wafer — Vanilla Mousse',nameAr:'ويفر مقرمش — موس الفانيليا',size:'40 g',sku:'MYM-0204',status:'stock',shelf:'12 months',pack:{en:'Flow-wrap',ar:'غلاف ملفوف'},caseQty:'24 × 40 g',desc:{en:'Light vanilla mousse cream between crisp wafer layers.',ar:'كريمة موس فانيليا خفيفة بين طبقات ويفر مقرمشة.'}},
+  {id:'mm5',brand:'mymotto',img:'assets/brands/mymotto-product-5.webp',name:'Crispy Wafer — Hazelnut & Cocoa',nameAr:'ويفر مقرمش — بندق وكاكاو',size:'40 g',sku:'MYM-0205',status:'new',shelf:'12 months',pack:{en:'Flow-wrap',ar:'غلاف ملفوف'},caseQty:'24 × 40 g',desc:{en:'Hazelnut-cocoa cream wafer, chocolate coated.',ar:'ويفر بكريمة البندق والكاكاو مغطى بالشوكولاتة.'}},
+  {id:'ss1',brand:'sweetsmil',img:'assets/brands/sweetsmile-product-1.webp',name:'Praline Tin — Classic',nameAr:'علبة برالين — كلاسيك',size:'300 g',sku:'SWS-0401',status:'stock',shelf:'12 months',pack:{en:'Display tin',ar:'علبة معدنية'},caseQty:'12 × 300 g',desc:{en:'Assorted milk chocolate pralines in a tall gift tin.',ar:'برالين شوكولاتة بالحليب متنوّعة في علبة هدايا معدنية طويلة.'}},
+  {id:'ss2',brand:'sweetsmil',img:'assets/brands/sweetsmile-product-2.webp',name:'Praline Tin — Gold',nameAr:'علبة برالين — ذهبي',size:'300 g',sku:'SWS-0402',status:'stock',shelf:'12 months',pack:{en:'Display tin',ar:'علبة معدنية'},caseQty:'12 × 300 g',desc:{en:'Hazelnut pralines in gold wrap.',ar:'برالين بالبندق بغلاف ذهبي.'}},
+  {id:'ss3',brand:'sweetsmil',img:'assets/brands/sweetsmile-product-3.webp',name:'Praline Tin — Ruby',nameAr:'علبة برالين — روبي',size:'300 g',sku:'SWS-0403',status:'stock',shelf:'12 months',pack:{en:'Display tin',ar:'علبة معدنية'},caseQty:'12 × 300 g',desc:{en:'Strawberry-cream pralines in red wrap.',ar:'برالين بكريمة الفراولة بغلاف أحمر.'}},
+  {id:'ss4',brand:'sweetsmil',img:'assets/brands/sweetsmile-product-4.webp',name:'Praline Tin — Blue',nameAr:'علبة برالين — أزرق',size:'300 g',sku:'SWS-0404',status:'soon',shelf:'12 months',pack:{en:'Display tin',ar:'علبة معدنية'},caseQty:'12 × 300 g',desc:{en:'Coconut-cream pralines in blue wrap.',ar:'برالين بكريمة جوز الهند بغلاف أزرق.'}},
   {id:'ma1',brand:'maretti',name:'Bruschette — Tomato, Olives & Oregano',nameAr:'بروسكيتا — طماطم وزيتون وأوريغانو',size:'70 g',sku:'MAR-0501',status:'stock',shelf:'12 months',pack:{en:'Pillow bag',ar:'كيس'},caseQty:'18 × 70 g',desc:{en:'Oven-baked bread chips, Mediterranean seasoning.',ar:'رقائق خبز مخبوزة بتتبيلة متوسطية.'}},
   {id:'ma2',brand:'maretti',name:'Bruschette — Mixed Cheese',nameAr:'بروسكيتا — أجبان مشكّلة',size:'70 g',sku:'MAR-0502',status:'stock',shelf:'12 months',pack:{en:'Pillow bag',ar:'كيس'},caseQty:'18 × 70 g',desc:{en:'Baked bread chips with a four-cheese seasoning.',ar:'رقائق خبز مخبوزة بتتبيلة أربعة أجبان.'}},
   {id:'sp1',brand:'spuds',name:'Craft Cooked — Sea Salt',nameAr:'مطبوخة حرفياً — ملح بحري',size:'150 g',sku:'SPD-0601',status:'stock',shelf:'9 months',pack:{en:'Pillow bag',ar:'كيس'},caseQty:'12 × 150 g',desc:{en:'Kettle-cooked thick-cut chips with sea salt.',ar:'رقائق سميكة مطبوخة بالقدر مع ملح البحر.'}},
@@ -858,7 +868,7 @@ const T = {
     {title:'Continuous growth',body:'We continuously improve our operations, expand our reach, and seek new opportunities.'}]},
   team:{kicker:'Our team',title:'People who know the market.',sub:'Determination, market knowledge, and a hands-on approach to every part of the business.',portrait:'Portrait',people:[{n:'Name Surname',r:'General Manager'},{n:'Name Surname',r:'Commercial Director'},{n:'Name Surname',r:'Supply Chain Lead'},{n:'Name Surname',r:'Marketing & Activation'}]},
   brandsPage:{kicker:'Our Brands',title:'Brands and products we distribute.',sub:'A curated portfolio of food brands selected for quality, consumer appeal, and market potential.',search:'Search brands or products',allCountries:'All countries',all:'All categories',az:'A – Z',results:'brands',clear:'Clear filters',view:'View products',empty:'No brands match these filters.',catTitle:'Need the full price list?',catSub:'Wholesalers and retailers can request our complete catalogue and current trade price list as a PDF.',catCta:'Request catalogue'},
-  brandPage:{back:'All brands',products:'Products',items:'items',pack:'Pack shot',meta:{cat:'Category',origin:'Country of origin',range:'Products in range',since:'Distributed since'}},
+  brandPage:{back:'All brands',products:'Products',items:'items',item:'item',pack:'Pack shot',meta:{cat:'Category',origin:'Country of origin',range:'Products in range',since:'Distributed since'}},
   productPage:{imgLabel:'Product shot on clean background',enquire:'Enquire about this product',enquireShort:'Enquire',priceList:'Request price list',enquired:'Thank you — our sales team will contact you within one working day.',note:'B2B catalogue. Prices and minimum order quantities are provided on request.',related:'More from this brand',specs:{size:'Pack size',sku:'SKU',category:'Category',origin:'Country of origin',shelf:'Shelf life',pack:'Packaging',caseQty:'Case configuration',status:'Availability'}},
   badges:{stock:'In stock',new:'New',soon:'Coming soon'},
   marketPage:{kicker:'Our Market',title:'Where we sell, and how.',sub:'Coverage, channels and logistics for the Libyan food trade — from the Tripoli hub to wholesale depots in the south.',channelsKicker:'Channels',channelsTitle:'Three routes to the consumer.',channelsSub:'We balance modern retail, traditional wholesale and food service so brands reach every shelf that matters.',channelsNote:'Share of volume, last 12 months. Indicative figures.',channels:{retail:{n:'Retail',d:'Supermarkets, minimarkets and convenience stores in the major cities.'},wholesale:{n:'Wholesale',d:'Regional depots that supply traditional trade across the country.'},horeca:{n:'HoReCa',d:'Hotels, restaurants, cafés and catering in Tripoli and Benghazi.'}},
@@ -915,21 +925,41 @@ const pad2 = (n) => String(n).padStart(2,'0');
 const AR_UNITS = [[/\bkg\b/g,'كغ'],[/\bml\b/g,'مل'],[/(\d)\s*g\b/g,'$1 غ'],[/\bL\b/g,'لتر'],[/\bmonths?\b/g,'أشهر'],[/(\d)\s*h\b/g,'$1 ساعة'],[/(\d)\s*d\b/g,'$1 أيام']];
 const locU = (s, lang) => lang === 'ar' && typeof s === 'string' ? AR_UNITS.reduce((a, [re, r]) => a.replace(re, r), s) : s;
 
+const PAGES = ['home','about','brands','brand','product','market','partner','contact'];
+const readHash = () => {
+  if (typeof location === 'undefined') return {};
+  const [page, id] = location.hash.replace(/^#\/?/, '').split('/');
+  if (!page) return { page: 'home' };
+  if (!PAGES.includes(page)) return {};
+  if (page === 'brand') return BRANDS.some(b => b.id === id) ? { page, brandId: id } : { page: 'brands' };
+  if (page === 'product') { const p = PRODUCTS.find(x => x.id === id); return p ? { page, productId: p.id, brandId: p.brand } : { page: 'brands' }; }
+  return { page };
+};
+const hashFor = (s) => s.page === 'brand' ? `#/brand/${s.brandId}` : s.page === 'product' ? `#/product/${s.productId}` : s.page && s.page !== 'home' ? `#/${s.page}` : '#/';
+
 class Component extends DCLogic {
-  state = { heroIdx: 0, page: null, lang: null, brandId: 'antat', productId: 'an3', width: 1200, menuOpen: false, query: '', category: 'all', country: 'all', sortAz: false, enquired: false, partnerTab: 'suppliers', form: { name:'', company:'', email:'', type:'supplier', message:'' }, sent: false };
+  state = { heroIdx: 0, page: null, lang: null, brandId: 'antat', productId: 'an3', width: typeof window !== 'undefined' && window.innerWidth ? window.innerWidth : 1200, menuOpen: false, query: '', category: 'all', country: 'all', sortAz: false, enquired: false, partnerTab: 'suppliers', form: { name:'', company:'', email:'', type:'supplier', message:'' }, sent: false, ...readHash() };
   rootRef = React.createRef();
   componentDidMount() {
+    if (typeof window !== 'undefined') {
+      this.onHash = () => { const h = readHash(); if (h.page !== undefined && hashFor({ ...this.state, ...h }) !== hashFor(this.state)) { this.setState({ ...h, page: h.page, menuOpen: false, enquired: false }); window.scrollTo(0, 0); } };
+      window.addEventListener('hashchange', this.onHash);
+    }
     const el = this.rootRef.current; if (!el) return;
     this.ro = new ResizeObserver(([e]) => { const w = e.contentRect.width; if (Math.abs(w - this.state.width) > 4) this.setState({ width: w }); });
     this.ro.observe(el);
     this.startHero();
   }
-  componentWillUnmount() { if (this.ro) this.ro.disconnect(); clearInterval(this.heroTimer); }
+  componentWillUnmount() { if (this.onHash) window.removeEventListener('hashchange', this.onHash); if (this.ro) this.ro.disconnect(); clearInterval(this.heroTimer); }
   heroGo(i) { this.setState({ heroIdx: i }); this.startHero(); }
   startHero() { clearInterval(this.heroTimer); this.heroTimer = setInterval(() => this.setState(s => ({ heroIdx: s.heroIdx + 1 })), 4500); }
   nav(page, extra = {}) {
     this.setState({ page, menuOpen: false, enquired: false, ...extra });
-    if (!this.props.page && typeof window !== 'undefined') window.scrollTo(0, 0);
+    if (typeof window !== 'undefined') {
+      const h = hashFor({ ...this.state, page, ...extra });
+      if (location.hash !== h && !(h === '#/' && !location.hash)) location.hash = h;
+      window.scrollTo(0, 0);
+    }
   }
   setForm(k) { return (e) => this.setState(s => ({ form: { ...s.form, [k]: e.target.value } })); }
   renderVals() {
@@ -943,7 +973,7 @@ class Component extends DCLogic {
     const isMobile = s.width < 1000;
     const w = s.width, rep = (n) => `repeat(${n},minmax(0,1fr))`;
     const mob = isMobile;
-    const mobileVals = { stickyPos: w < 820 ? 'static' : 'sticky', mapRatio: w < 600 ? '4/3' : '16/8', fGap: mob ? '0px' : '9px', fTap: mob ? '44px' : '0px', linkTap: mob ? '44px' : '0px', chipH: mob ? '40px' : '0px', arrowSz: mob ? '44px' : '36px' };
+    const mobileVals = { stickyPos: w < 820 ? 'static' : 'sticky', mapRatio: w < 600 ? '4/3' : '16/8', fGap: mob ? '0px' : '9px', fTap: mob ? '44px' : '0px', linkTap: mob ? '44px' : '0px', chipH: mob ? '40px' : '0px', arrowSz: mob ? '44px' : '36px', valMinH: w < 520 ? '0px' : '220px', logMinH: w < 520 ? '0px' : '190px', stepMinH: w < 520 ? '0px' : '200px' };
     const layout = {
       heroCols: w >= 820 ? 'minmax(0,1.05fr) minmax(0,1fr)' : 'minmax(0,1fr)',
       splitCols: w >= 820 ? 'minmax(0,1fr) minmax(0,2fr)' : 'minmax(0,1fr)',
@@ -951,14 +981,16 @@ class Component extends DCLogic {
       cols4min2: rep(w >= 900 ? 4 : 2),
       cols5: rep(w >= 900 ? 5 : 1),
       cols3: rep(w >= 1000 ? 3 : w >= 600 ? 2 : 1),
+      mvPad: w < 720 ? '0px' : 'clamp(0px,3cqw,48px)', mvSideBorder: w < 720 ? '0' : '1px solid rgba(15,79,69,0.14)', mvStackBorder: w < 720 ? '1px solid rgba(15,79,69,0.14)' : '0',
       footerCols: w >= 900 ? 'minmax(0,1.4fr) repeat(3,minmax(0,1fr))' : rep(w >= 520 ? 2 : 1),
     };
     const go = (p) => () => this.nav(p);
     const pages = ['home','about','brands','market','partner','contact'];
     const active = page === 'brand' || page === 'product' ? 'brands' : page;
     const navItems = pages.map((p, i) => ({ key: p, idx: pad2(i + 1), label: t.nav[p], go: go(p), color: active === p ? '#0F4F45' : '#3E4A48', line: active === p ? '#B5A422' : 'transparent' }));
+    const unit = (n) => n === 1 && t.brandPage.item ? t.brandPage.item : t.brandPage.items;
     const countFor = (id) => PRODUCTS.filter(p => p.brand === id).length;
-    const decorate = (b) => ({ ...b, desc: L(b.desc), story: L(b.story), catLabel: CATS[b.cat][lang], countryLabel: COUNTRIES[b.country][lang], count: countFor(b.id), open: () => this.nav('brand', { brandId: b.id }) });
+    const decorate = (b) => ({ ...b, desc: L(b.desc), story: L(b.story), catLabel: CATS[b.cat][lang], countryLabel: COUNTRIES[b.country][lang], count: countFor(b.id), countUnit: unit(countFor(b.id)), open: () => this.nav('brand', { brandId: b.id }) });
     const brands = BRANDS.map(decorate);
     const q = s.query.trim().toLowerCase();
     let filtered = brands.filter(b => (s.category === 'all' || b.cat === s.category) && (s.country === 'all' || b.country === s.country) &&
@@ -982,7 +1014,7 @@ class Component extends DCLogic {
       { k: sp.shelf, v: product.shelf }, { k: sp.pack, v: product.packLabel }, { k: sp.caseQty, v: product.caseQty }, { k: sp.status, v: product.badge },
     ];
     const bm = t.brandPage.meta;
-    const brandMeta = [{ k: bm.cat, v: brand.catLabel }, { k: bm.origin, v: brand.countryLabel }, { k: bm.range, v: `${brand.count} ${t.brandPage.items}` }, { k: bm.since, v: '2024' }];
+    const brandMeta = [{ k: bm.cat, v: brand.catLabel }, { k: bm.origin, v: brand.countryLabel }, { k: bm.range, v: `${brand.count} ${unit(brand.count)}` }, { k: bm.since, v: '2024' }];
     const hasFilters = s.category !== 'all' || s.country !== 'all' || !!q || s.sortAz;
     const brandCount = BRANDS.length, skuCount = PRODUCTS.length;
     const stats = [{ v: String(brandCount), l: t.stats.brands }, { v: String(skuCount), l: t.stats.skus }, { v: '10', l: t.stats.regions }, { v: '1,200+', l: t.stats.partners }];
@@ -1022,7 +1054,7 @@ class Component extends DCLogic {
       query: s.query, setQuery: (e) => this.setState({ query: e.target.value }), country: s.country, setCountry: (e) => this.setState({ country: e.target.value }),
       countryOptions, categoryChips, toggleSort: () => this.setState(st => ({ sortAz: !st.sortAz })), sortBg: s.sortAz ? '#0F4F45' : 'transparent', sortColor: s.sortAz ? '#fff' : '#1F2A28',
       filteredBrands: filtered, resultCount: filtered.length, noResults: filtered.length === 0, hasFilters, clearFilters: () => this.setState({ category: 'all', country: 'all', query: '', sortAz: false }),
-      brand, brandMeta, brandProducts, brandProductCount: brandProducts.length, product, specRows, openCurrentBrand: () => this.nav('brand', { brandId: pb.id }),
+      brand, brandMeta, brandProducts, brandProductCount: brandProducts.length, brandProductUnit: unit(brandProducts.length), product, specRows, openCurrentBrand: () => this.nav('brand', { brandId: pb.id }),
       relatedProducts: PRODUCTS.filter(p => p.brand === product.brand && p.id !== product.id).slice(0, 4).map(decP),
       enquire: () => this.setState({ enquired: true }), enquired: s.enquired,
       coverageRows, channelRows, logisticsRows, partnerTabs, pc, partnerCards,
