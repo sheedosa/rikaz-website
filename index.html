@@ -110,11 +110,11 @@ input::placeholder,textarea::placeholder{color:#8A9391}
 
   <!-- Stats -->
   <section style="border-top:1px solid rgba(15,79,69,0.14);border-bottom:1px solid rgba(15,79,69,0.14);background:#fff">
-    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4cqw,48px);display:grid;grid-template-columns:{{ cols4 }}">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4cqw,48px);display:grid;grid-template-columns:{{ statCols }};gap:{{ statGap }};background:{{ statGridBg }};background-clip:content-box">
       <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
-        <div style="padding:clamp(32px,4cqw,56px) clamp(16px,2cqw,28px) clamp(28px,3.4cqw,48px);border-inline-start:1px solid rgba(15,79,69,0.14);border-bottom:1px solid rgba(15,79,69,0.14);margin-bottom:-1px;display:flex;flex-direction:column;justify-content:flex-start;gap:18px">
-          <div style="font-size:clamp(44px,6cqw,96px);white-space:nowrap;font-weight:600;letter-spacing:-0.05em;color:#0F4F45;line-height:0.9">{{ s.v }}</div>
-          <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#5C6866;line-height:1.4"><span style="width:16px;height:1px;background:#B5A422;display:inline-block;flex:none;margin-top:8px"></span>{{ s.l }}</div>
+        <div style="padding:clamp(32px,4cqw,56px) clamp(16px,2cqw,28px) clamp(28px,3.4cqw,48px);background:#fff;text-align:{{ statAlign }};align-items:{{ statAlign }};border-inline-start:{{ statCellBorder }};border-bottom:{{ statCellBorder }};margin-bottom:{{ statMb }};display:flex;flex-direction:column;justify-content:flex-start;gap:18px">
+          <div style="font-size:{{ statNum }};white-space:nowrap;font-weight:600;letter-spacing:-0.05em;color:#0F4F45;line-height:0.9">{{ s.v }}</div>
+          <div style="display:flex;align-items:flex-start;justify-content:{{ statJustify }};gap:10px;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#5C6866;line-height:1.4"><span style="width:16px;height:1px;background:#B5A422;display:{{ statDash }};flex:none;margin-top:8px"></span>{{ s.l }}</div>
         </div>
       </sc-for>
     </div>
@@ -470,9 +470,9 @@ input::placeholder,textarea::placeholder{color:#8A9391}
         <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#1B7A6A;display:inline-block"></span>{{ t.market.served }}</span>
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:{{ cols4 }};border:1px solid rgba(15,79,69,0.14);border-top:0;background:#fff">
+    <div style="display:grid;grid-template-columns:{{ statCols }};gap:{{ statGap }};border:1px solid rgba(15,79,69,0.14);border-top:0;background:{{ statGridBgW }}">
       <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
-        <div style="padding:22px 24px;border-inline-end:1px solid rgba(15,79,69,0.14)">
+        <div style="padding:22px 24px;background:#fff;text-align:{{ statAlign }};border-inline-end:{{ statCellBorder }}">
           <div style="font-size:clamp(26px,2.6cqw,36px);font-weight:600;letter-spacing:-0.03em;color:#0F4F45;line-height:1">{{ s.v }}</div>
           <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#5C6866;margin-top:8px">{{ s.l }}</div>
         </div>
@@ -510,7 +510,7 @@ input::placeholder,textarea::placeholder{color:#8A9391}
       </div>
       <div style="display:grid;grid-template-columns:{{ cols4 }};gap:1px;background:rgba(15,79,69,0.14);border:1px solid rgba(15,79,69,0.14)">
         <sc-for list="{{ logisticsRows }}" as="l" hint-placeholder-count="4">
-          <div style="background:#F7F6F1;padding:24px 22px 26px;min-height:{{ logMinH }};display:flex;flex-direction:column;justify-content:space-between;gap:20px">
+          <div style="background:#F7F6F1;padding:24px 22px 26px;min-height:{{ logMinH }};text-align:{{ statAlign }};align-items:{{ statAlign }};display:flex;flex-direction:column;justify-content:space-between;gap:20px">
             <span style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#5C6866">{{ l.k }}</span>
             <div><div style="font-size:clamp(24px,2.4cqw,32px);font-weight:600;color:#0F4F45;letter-spacing:-0.025em;line-height:1.1">{{ l.v }}</div><div style="font-size:13.5px;color:#5C6866;margin-top:8px">{{ l.d }}</div></div>
           </div>
@@ -973,7 +973,9 @@ class Component extends DCLogic {
     const isMobile = s.width < 1000;
     const w = s.width, rep = (n) => `repeat(${n},minmax(0,1fr))`;
     const mob = isMobile;
-    const mobileVals = { stickyPos: w < 820 ? 'static' : 'sticky', mapRatio: w < 600 ? '4/3' : '16/8', fGap: mob ? '0px' : '9px', fTap: mob ? '44px' : '0px', linkTap: mob ? '44px' : '0px', chipH: mob ? '40px' : '0px', arrowSz: mob ? '44px' : '36px', valMinH: w < 520 ? '0px' : '220px', logMinH: w < 520 ? '0px' : '190px', stepMinH: w < 520 ? '0px' : '200px' };
+    const mobileVals = { stickyPos: w < 820 ? 'static' : 'sticky', mapRatio: w < 600 ? '4/3' : '16/8', fGap: mob ? '0px' : '9px', fTap: mob ? '44px' : '0px', linkTap: mob ? '44px' : '0px', chipH: mob ? '40px' : '0px', arrowSz: mob ? '44px' : '36px', valMinH: w < 520 ? '0px' : '220px', logMinH: w < 520 ? '0px' : '190px', stepMinH: w < 520 ? '0px' : '200px',
+      statCols: rep(w >= 900 ? 4 : 2), statAlign: w < 900 ? 'center' : 'start', statJustify: w < 900 ? 'center' : 'flex-start', statGap: w < 900 ? '1px' : '0px',
+      statGridBg: w < 900 ? 'rgba(15,79,69,0.14)' : 'transparent', statGridBgW: w < 900 ? 'rgba(15,79,69,0.14)' : '#fff', statCellBorder: w < 900 ? '0' : '1px solid rgba(15,79,69,0.14)', statMb: w < 900 ? '0px' : '-1px', statDash: w < 900 ? 'none' : 'inline-block', statNum: w < 420 ? '40px' : 'clamp(44px,6cqw,96px)' };
     const layout = {
       heroCols: w >= 820 ? 'minmax(0,1.05fr) minmax(0,1fr)' : 'minmax(0,1fr)',
       splitCols: w >= 820 ? 'minmax(0,1fr) minmax(0,2fr)' : 'minmax(0,1fr)',
