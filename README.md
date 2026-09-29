@@ -5,5 +5,4 @@ Static site — no build step. Serve locally with `python3 -m http.server` and o
 
 Live (GitHub Pages): https://sheedosa.github.io/rikaz-website/
 
-Still missing images (add to `assets/brands/`): `bonici-logo.png`, `maretti-logo.png`,
-`mymotto-logo.png`, `uber-logo.png`, `sweetsmile-product-4.png`.
+Still missing images (add to `assets/brands/`): `uber-logo.png`, `sweetsmile-product-4.png`.
