@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Readex+Pro:wght@400;500;600&family=Noto+Kufi+Arabic:wght@400;500;600&family=Alexandria:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>html,body{margin:0;height:100%;background:#fff;overflow:hidden}svg{display:block;width:100%;height:100%}</style>
+</head><body>
+<svg id="m"></svg>
+<script>
+const q = new URLSearchParams(location.search);
+const lang = q.get('lang') || 'en';
+const AR = lang === 'ar';
+const AR_FONT = q.get('arfont') || 'Readex Pro';
+const FONT = AR ? `'${AR_FONT}',sans-serif` : "'Instrument Sans',sans-serif";
+const GREEN = '#0F4F45', TEAL = '#1B7A6A', GOLD = '#B5A422', INK = '#1F2A28', MUTED = '#5C6866';
+// label placement: dx, dy, anchor (mirrored for RTL not needed — geography is fixed)
+const cities = [
+  {n:'Tripoli',  a:'طرابلس', c:[13.19,32.89], s:'hub',    l:[-3,-14,'end']},
+  {n:'Benghazi', a:'بنغازي', c:[20.07,32.12], s:'hub',    l:[0,22,'middle']},
+  {n:'Zawiya',   a:'الزاوية', c:[12.73,32.75], s:'served', l:[-8,16,'end']},
+  {n:'Al Khums', a:'الخمس',  c:[14.26,32.65], s:'served', l:[2,-11,'start']},
+  {n:'Zliten',   a:'زليتن',  c:[14.57,32.47], s:'served', l:[-6,16,'end']},
+  {n:'Misrata',  a:'مصراتة', c:[15.09,32.38], s:'served', l:[6,15,'start']},
+  {n:'Sirte',    a:'سرت',    c:[16.59,31.21], s:'soon',   l:[0,18,'middle']},
+  {n:'Al Bayda', a:'البيضاء', c:[21.76,32.76], s:'served', l:[0,-11,'middle']},
+  {n:'Tobruk',   a:'طبرق',   c:[23.98,32.08], s:'served', l:[0,-11,'middle']},
+  {n:'Sabha',    a:'سبها',   c:[14.43,27.04], s:'served', l:[10,4,'start']},
+];
+const neighbours = {'788':['Tunisia','تونس'],'012':['Algeria','الجزائر'],'818':['Egypt','مصر'],'562':['Niger','النيجر'],'148':['Chad','تشاد'],'729':['Sudan','السودان']};
+let topo;
+async function draw() {
+  if (!topo) topo = await (await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json')).json();
+  const all = topojson.feature(topo, topo.objects.countries);
+  const libya = all.features.find(f => f.id === '434');
+  const borders = topojson.mesh(topo, topo.objects.countries, (a, b) => a !== b);
+  const W = innerWidth, H = innerHeight;
+  const small = W < 560, tiny = W < 420;
+  const svg = d3.select('#m').html('').attr('viewBox', `0 0 ${W} ${H}`);
+  const pad = small ? 18 : Math.max(28, Math.min(W, H) * 0.08);
+  const proj = d3.geoMercator().fitExtent([[pad, pad + (small ? 10 : 18)], [W - pad, H - pad - (small ? 8 : 26)]], libya);
+  const path = d3.geoPath(proj);
+  const defs = svg.append('defs');
+  defs.append('clipPath').attr('id', 'ly').append('path').datum(libya).attr('d', path);
+  const grid = defs.append('pattern').attr('id', 'grid').attr('width', 14).attr('height', 14).attr('patternUnits', 'userSpaceOnUse');
+  grid.append('path').attr('d', 'M14 0H0V14').attr('fill', 'none').attr('stroke', 'rgba(15,79,69,0.07)').attr('stroke-width', 1);
+
+  // neighbours
+  svg.append('g').selectAll('path').data(all.features.filter(f => f.id !== '434')).join('path')
+    .attr('d', path).attr('fill', '#F3F2EC');
+  svg.append('path').datum(borders).attr('d', path).attr('fill', 'none').attr('stroke', '#fff').attr('stroke-width', 1.2);
+  // neighbour names
+  const nl = svg.append('g').attr('display', small ? 'none' : null).attr('font-family', FONT).attr('font-size', 10.5).attr('letter-spacing', AR ? 0 : '0.14em').attr('fill', '#9AA3A1').attr('text-anchor', 'middle');
+  all.features.filter(f => neighbours[f.id]).forEach(f => {
+    const inter = { type: 'Feature', geometry: f.geometry };
+    let [x, y] = path.centroid(inter);
+    const b = path.bounds(inter);
+    x = Math.max(b[0][0] + 30, Math.min(b[1][0] - 30, Math.max(40, Math.min(W - 40, x))));
+    y = Math.max(b[0][1] + 16, Math.min(b[1][1] - 10, Math.max(30, Math.min(H - 20, y))));
+    if (x < 30 || x > W - 30 || y < 20 || y > H - 34) return;
+    nl.append('text').attr('class','deco').attr('x', x).attr('y', y).text(AR ? neighbours[f.id][1] : neighbours[f.id][0].toUpperCase());
+  });
+  // sea label
+  const [sx, sy] = proj([18.6, 33.9]);
+  if (!small) svg.append('text').attr('class','deco').attr('x', sx).attr('y', Math.max(18, sy)).attr('text-anchor', 'middle').attr('font-family', FONT)
+    .attr('font-size', 11).attr('font-style', AR ? 'normal' : 'italic').attr('fill', '#8FA9A4').attr('letter-spacing', AR ? 0 : '0.06em')
+    .text(AR ? 'البحر الأبيض المتوسط' : 'Mediterranean Sea');
+
+  // Libya
+  svg.append('path').datum(libya).attr('d', path).attr('fill', '#EAF1EE');
+  svg.append('rect').attr('width', W).attr('height', H).attr('fill', 'url(#grid)').attr('clip-path', 'url(#ly)');
+  svg.append('path').datum(libya).attr('d', path).attr('fill', 'none').attr('stroke', GREEN).attr('stroke-width', 1.25).attr('stroke-linejoin', 'round');
+  const [lx, ly] = proj([19.2, 25.2]);
+  if (!small) svg.append('text').attr('class','deco').attr('x', lx).attr('y', ly).attr('text-anchor', 'middle').attr('font-family', FONT).attr('font-size', 13).attr('font-weight', 600)
+    .attr('letter-spacing', AR ? 0 : '0.32em').attr('fill', 'rgba(15,79,69,0.28)').text(AR ? 'ليبيا' : 'LIBYA');
+
+  // routes — coastal corridor + inland spur
+  const by = Object.fromEntries(cities.map(c => [c.n, c]));
+  const line = d3.line().curve(d3.curveCatmullRom.alpha(0.5));
+  const rg = svg.append('g').attr('fill', 'none').attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round');
+  const seg = (names, planned) => rg.append('path').attr('d', line(names.map(n => proj(by[n].c))))
+    .attr('stroke', planned ? MUTED : TEAL).attr('stroke-width', planned ? 1.2 : 1.6)
+    .attr('stroke-dasharray', planned ? '2 4' : null).attr('opacity', planned ? 0.7 : 0.8);
+  seg(['Zawiya','Tripoli','Al Khums','Zliten','Misrata'], false);
+  seg(['Misrata','Sirte','Benghazi'], true);
+  seg(['Benghazi','Al Bayda','Tobruk'], false);
+  // inland spur Tripoli → Sabha, gentle bow
+  { const [x1,y1]=proj(by.Tripoli.c), [x2,y2]=proj(by.Sabha.c);
+    rg.append('path').attr('d', `M${x1},${y1} Q${(x1+x2)/2-(y2-y1)*0.12},${(y1+y2)/2} ${x2},${y2}`)
+      .attr('stroke', TEAL).attr('stroke-width', 1.6).attr('opacity', 0.8); }
+
+  // points
+  const pg = svg.append('g');
+  cities.forEach(c => {
+    const [x, y] = proj(c.c);
+    const g = pg.append('g').attr('transform', `translate(${x},${y})`);
+    if (c.s === 'hub') {
+      g.append('circle').attr('r', 11).attr('fill', GOLD).attr('opacity', 0.18);
+      g.append('circle').attr('r', 5.5).attr('fill', GOLD).attr('stroke', '#fff').attr('stroke-width', 2);
+    } else if (c.s === 'soon') {
+      g.append('circle').attr('r', 3.8).attr('fill', '#fff').attr('stroke', MUTED).attr('stroke-width', 1.4);
+    } else {
+      g.append('circle').attr('r', 3.8).attr('fill', TEAL).attr('stroke', '#fff').attr('stroke-width', 1.6);
+    }
+  });
+  // labels: priority order, collision-avoided, size-aware
+  const minor = new Set(['Zawiya','Al Khums','Zliten','Al Bayda']);
+  const smallPos = { Benghazi:[0,20,'middle'], Tripoli:[0,-12,'middle'], Misrata:[4,16,'middle'], Sirte:[0,16,'middle'], Tobruk:[0,-9,'middle'], Sabha:[8,4,'start'] };
+  const rank = (c) => c.s === 'hub' ? 0 : minor.has(c.n) ? 2 : 1;
+  const order = [...cities].sort((a, b) => rank(a) - rank(b));
+  const lg = svg.append('g').attr('font-family', FONT);
+  const placed = [];
+  const hit = (b) => placed.some(p => b.x < p.x + p.width + 2 && b.x + b.width + 2 > p.x && b.y < p.y + p.height && b.y + b.height > p.y);
+  order.forEach(c => {
+    if (small && minor.has(c.n)) return;
+    const [x, y] = proj(c.c), [dx, dy, anchor] = (small && smallPos[c.n]) || c.l;
+    const hub = c.s === 'hub';
+    const el = lg.append('text').attr('x', x + dx).attr('y', y + dy).attr('text-anchor', anchor)
+      .attr('font-size', hub ? (tiny ? 11 : small ? 12 : 13) : (tiny ? 10 : small ? 10.5 : 11.5)).attr('font-weight', hub ? 600 : 500)
+      .attr('fill', c.s === 'soon' ? MUTED : (hub ? GREEN : INK))
+      .attr('stroke', '#fff').attr('stroke-width', 3.5).attr('stroke-linejoin', 'round').attr('paint-order', 'stroke')
+      .text(AR ? c.a : c.n);
+    const b = el.node().getBBox();
+    if (b.x < 2 || b.x + b.width > W - 2 || b.y < 2 || hit(b)) { el.remove(); return; }
+    placed.push(b);
+  });
+  svg.selectAll('text.deco').each(function(){ const b=this.getBBox(); if (hit(b)) this.remove(); });
+  // scale bar
+  const [a1] = proj([10.5, 20.3]), [a2] = proj([10.5 + 500 / (111.32 * Math.cos(20.3 * Math.PI / 180)), 20.3]);
+  const sbw = a2 - a1, sbx = W - 16 - sbw, sby = H - 14;
+  const sb = svg.append('g').attr('display', tiny ? 'none' : null).attr('font-family', FONT).attr('font-size', 10).attr('fill', MUTED);
+  sb.append('path').attr('d', `M${sbx},${sby - 4}V${sby}H${sbx + sbw}V${sby - 4}`).attr('fill', 'none').attr('stroke', MUTED).attr('stroke-width', 1);
+  sb.append('text').attr('x', sbx + sbw / 2).attr('y', sby - 7).attr('text-anchor', 'middle').text(AR ? '500 كم' : '500 km');
+}
+draw();
+let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(draw, 120); });
+</script>
+</body></html>

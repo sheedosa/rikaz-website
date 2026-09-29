@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700&family=Alexandria:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F7F6F1;color:#1F2A28;-webkit-font-smoothing:antialiased}
+a{color:#0F4F45;text-decoration:none}a:hover{color:#7A6E12}
+*{box-sizing:border-box}
+[dir=rtl],[dir=rtl] *{letter-spacing:0 !important}
+[dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3{line-height:1.35 !important}
+[dir=rtl] p{line-height:1.8}
+input,select,button,textarea{font-family:inherit}
+input::placeholder,textarea::placeholder{color:#8A9391}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" dir="{{ dir }}" style="font-family:{{ fontStack }};background:#F7F6F1;color:#1F2A28;line-height:1.5;text-wrap:pretty;font-variant-numeric:tabular-nums">
+<div style="container-type:inline-size">
+
+
+<!-- NAV -->
+<header style="position:sticky;top:0;z-index:50;background:rgba(247,246,241,0.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(15,79,69,0.14)">
+  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4cqw,48px);height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <button onClick="{{ goHome }}" style="background:none;border:0;padding:0;cursor:pointer;display:flex;align-items:center"><img src="assets/logo-full-horizontal.png" alt="Rikaz" style="height:42px;width:auto;display:block"></button>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;align-items:center;gap:clamp(18px,2.4cqw,34px);height:68px">
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
+          <button onClick="{{ n.go }}" style="background:none;border:0;padding:0;height:68px;cursor:pointer;font-size:14px;font-weight:500;letter-spacing:0.01em;white-space:nowrap;color:{{ n.color }};box-shadow:inset 0 -2px 0 {{ n.line }};font-family:inherit;transition:color .15s" style-hover="color:#0F4F45">{{ n.label }}</button>
+        </sc-for>
+      </nav>
+      <div style="display:flex;align-items:center;gap:14px;flex:none">
+        <div style="display:flex;flex:none;border:1px solid rgba(15,79,69,0.2);border-radius:3px;overflow:hidden;font-size:12px;font-weight:600;letter-spacing:0.04em">
+          <button onClick="{{ setEn }}" style="border:0;padding:7px 11px;cursor:pointer;background:{{ enBg }};color:{{ enColor }};font-family:inherit">EN</button>
+          <button onClick="{{ setAr }}" style="border:0;border-inline-start:1px solid rgba(15,79,69,0.2);padding:7px 11px;cursor:pointer;background:{{ arBg }};color:{{ arColor }};font-family:inherit">AR</button>
+        </div>
+        <button onClick="{{ goPartner }}" style="background:#0F4F45;color:#fff;border:0;border-radius:3px;padding:10px 18px;cursor:pointer;font-size:13.5px;font-weight:600;font-family:inherit;white-space:nowrap;flex:none;transition:background .15s" style-hover="background:#1B7A6A">{{ t.nav.partner }}</button>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleMenu }}" aria-label="Menu" style="width:44px;height:44px;border-radius:3px;border:1px solid rgba(15,79,69,0.2);background:#fff;cursor:pointer;display:grid;place-items:center">
+        <div style="display:flex;flex-direction:column;gap:5px"><span style="display:block;width:18px;height:1.5px;background:#0F4F45"></span><span style="display:block;width:18px;height:1.5px;background:#0F4F45"></span><span style="display:block;width:18px;height:1.5px;background:#B5A422"></span></div>
+      </button>
+    </sc-if>
+  </div>
+</header>
+
+
+<!-- ============ HOME ============ -->
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<main data-screen-label="Home">
+  <!-- Hero -->
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(48px,6cqw,88px) clamp(20px,4cqw,48px) clamp(40px,5cqw,72px);display:grid;grid-template-columns:{{ heroCols }};gap:clamp(32px,5cqw,80px);align-items:center">
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:28px"><span style="width:24px;height:1px;background:#B5A422;display:inline-block"></span>{{ t.hero.kicker }}</div>
+      <h1 style="margin:0 0 22px;font-size:clamp(38px,5cqw,66px);line-height:1.02;font-weight:600;letter-spacing:-0.03em;color:#0F4F45">{{ t.hero.title }}</h1>
+      <p style="margin:0 0 36px;font-size:clamp(16px,1.3cqw,18px);line-height:1.6;color:#3E4A48;max-width:520px">{{ t.hero.sub }}</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <button onClick="{{ goBrands }}" style="background:#0F4F45;color:#fff;border:0;border-radius:3px;padding:14px 24px;cursor:pointer;font-size:14.5px;font-weight:600;font-family:inherit;transition:background .15s" style-hover="background:#1B7A6A">{{ t.hero.cta1 }}</button>
+        <button onClick="{{ goPartner }}" style="background:transparent;color:#0F4F45;border:1px solid rgba(15,79,69,0.35);border-radius:3px;padding:14px 24px;cursor:pointer;font-size:14.5px;font-weight:600;font-family:inherit;transition:border-color .15s" style-hover="border-color:#0F4F45">{{ t.hero.cta2 }}</button>
+      </div>
+    </div>
+    <div style="position:relative">
+      <div style="position:relative;aspect-ratio:1/1.02;background:{{ heroBg }};border:1px solid rgba(15,79,69,0.14);overflow:hidden;transition:background .6s ease">
+        <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(15,79,69,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(15,79,69,0.06) 1px,transparent 1px);background-size:48px 48px;background-position:-1px -1px"></div>
+        <div style="position:absolute;inset-inline:0;top:0;display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid rgba(15,79,69,0.1);background:rgba(255,255,255,0.55);backdrop-filter:blur(6px);z-index:3">
+          <div style="height:30px;display:flex;align-items:center"><img src="{{ heroCur.logo }}" alt="{{ heroCur.brand }}" style="max-height:30px;max-width:120px;width:auto;height:auto;display:block"></div>
+          <span style="font-size:12px;font-weight:600;letter-spacing:0.08em;color:#0F4F45">{{ heroCur.idx }} <span style="color:#8A9391">/ {{ heroTotal }}</span></span>
+        </div>
+        <sc-for list="{{ heroSlides }}" as="h" hint-placeholder-count="1">
+          <button onClick="{{ h.open }}" aria-label="{{ h.name }}" style="position:absolute;inset:78px 0 100px;border:0;background:none;padding:0 10%;cursor:pointer;display:grid;grid-template:minmax(0,1fr)/minmax(0,1fr);overflow:visible;opacity:{{ h.opacity }};transform:{{ h.transform }};transition:opacity .7s ease,transform .9s cubic-bezier(.2,.7,.2,1);pointer-events:{{ h.pe }};z-index:2">
+            <img src="{{ h.img }}" alt="{{ h.name }}" style="width:100%;height:100%;object-fit:contain;display:block;grid-area:1/1;min-height:0;filter:drop-shadow(0 28px 30px rgba(15,40,35,0.22)) drop-shadow(0 6px 8px rgba(15,40,35,0.12))">
+          </button>
+        </sc-for>
+        <div style="position:absolute;inset-inline:0;bottom:0;padding:16px 20px 18px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-top:1px solid rgba(15,79,69,0.1);background:rgba(255,255,255,0.7);backdrop-filter:blur(6px);z-index:3">
+          <div style="min-width:0">
+            <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#7A6E12;font-weight:600;margin-bottom:4px">{{ heroCur.brand }}</div>
+            <div style="font-size:clamp(15px,1.4cqw,18px);font-weight:600;color:#0F4F45;letter-spacing:-0.01em;line-height:1.25">{{ heroCur.name }}</div>
+            <div style="font-size:12.5px;color:#5C6866;margin-top:2px"><bdi>{{ heroCur.size }}</bdi> · <bdi>{{ heroCur.sku }}</bdi></div>
+          </div>
+          <div style="display:flex;gap:6px;flex:none">
+            <button onClick="{{ heroPrev }}" aria-label="Previous" style="width:{{ arrowSz }};height:{{ arrowSz }};border:1px solid rgba(15,79,69,0.25);background:#fff;border-radius:3px;cursor:pointer;color:#0F4F45;font-size:15px;display:grid;place-items:center" style-hover="border-color:#0F4F45">{{ arrowBack }}</button>
+            <button onClick="{{ heroNext }}" aria-label="Next" style="width:{{ arrowSz }};height:{{ arrowSz }};border:0;background:#0F4F45;border-radius:3px;cursor:pointer;color:#fff;font-size:15px;display:grid;place-items:center" style-hover="background:#1B7A6A">{{ arrow }}</button>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat({{ heroTotal }},minmax(0,1fr));gap:6px;margin-top:12px">
+        <sc-for list="{{ heroSlides }}" as="h" hint-placeholder-count="6">
+          <button onClick="{{ h.pick }}" aria-label="{{ h.name }}" style="height:40px;border:0;background:none;padding:18px 0;cursor:pointer;display:block">
+            <span style="display:block;height:3px;background:rgba(15,79,69,0.14);position:relative;overflow:hidden"><span style="position:absolute;inset-block:0;inset-inline-start:0;width:{{ h.bar }};background:{{ h.barColor }};transition:width .4s ease"></span></span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section style="border-top:1px solid rgba(15,79,69,0.14);border-bottom:1px solid rgba(15,79,69,0.14);background:#fff">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4cqw,48px);display:grid;grid-template-columns:{{ cols4 }}">
+      <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+        <div style="padding:clamp(32px,4cqw,56px) clamp(16px,2cqw,28px) clamp(28px,3.4cqw,48px);border-inline-start:1px solid rgba(15,79,69,0.14);border-bottom:1px solid rgba(15,79,69,0.14);margin-bottom:-1px;display:flex;flex-direction:column;justify-content:flex-start;gap:18px">
+          <div style="font-size:clamp(44px,6cqw,96px);white-space:nowrap;font-weight:600;letter-spacing:-0.05em;color:#0F4F45;line-height:0.9">{{ s.v }}</div>
+          <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#5C6866;line-height:1.4"><span style="width:16px;height:1px;background:#B5A422;display:inline-block;flex:none;margin-top:8px"></span>{{ s.l }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Why Rikaz -->
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(56px,7cqw,104px) clamp(20px,4cqw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(32px,5cqw,80px);align-items:start">
+    <div style="position:{{ stickyPos }};top:96px">
+      <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:18px"><span>01</span><span style="width:24px;height:1px;background:#B5A422;display:inline-block"></span>{{ t.apart.kicker }}</div>
+      <h2 style="margin:0 0 18px;font-size:clamp(28px,3.2cqw,44px);line-height:1.08;font-weight:600;letter-spacing:-0.025em;color:#0F4F45">{{ t.apart.title }}</h2>
+      <p style="margin:0;max-width:420px;color:#3E4A48;font-size:16px">{{ t.apart.sub }}</p>
+    </div>
+    <div style="border-top:1px solid rgba(15,79,69,0.14)">
+      <sc-for list="{{ apartItems }}" as="c" hint-placeholder-count="5">
+        <div style="display:grid;grid-template-columns:40px minmax(0,1fr) 40px;gap:16px;padding:22px 0;border-bottom:1px solid rgba(15,79,69,0.14);align-items:start">
+          <span style="font-size:12px;font-weight:600;color:#7A6E12;padding-top:5px">{{ c.idx }}</span>
+          <div><h3 style="margin:0 0 6px;font-size:18px;font-weight:600;color:#0F4F45;letter-spacing:-0.01em">{{ c.title }}</h3><p style="margin:0;font-size:14.5px;color:#5C6866;line-height:1.55;max-width:520px">{{ c.body }}</p></div>
+          <span style="color:#0F4F45;justify-self:end">{{ c.icon }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Brand wall -->
+  <section style="background:#fff;border-top:1px solid rgba(15,79,69,0.14);border-bottom:1px solid rgba(15,79,69,0.14)">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(48px,6cqw,88px) clamp(20px,4cqw,48px)">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:28px">
+        <div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:14px"><span>02</span><span style="width:24px;height:1px;background:#B5A422;display:inline-block"></span>{{ t.featured.kicker }}</div>
+          <h2 style="margin:0;font-size:clamp(26px,2.8cqw,38px);line-height:1.1;font-weight:600;letter-spacing:-0.025em;color:#0F4F45">{{ t.featured.title }}</h2>
+        </div>
+        <button onClick="{{ goBrands }}" style="background:none;border:0;padding:0 0 3px;min-height:{{ linkTap }};cursor:pointer;color:#0F4F45;font-weight:600;font-size:14px;font-family:inherit;display:flex;align-items:center;gap:8px;box-shadow:inset 0 -1px 0 #B5A422;background-clip:content-box" style-hover="color:#7A6E12">{{ t.featured.link }} <span>{{ arrow }}</span></button>
+      </div>
+      <div style="display:grid;grid-template-columns:{{ cols4min2 }};gap:1px;background:rgba(15,79,69,0.14);border:1px solid rgba(15,79,69,0.14)">
+        <sc-for list="{{ featuredBrands }}" as="b" hint-placeholder-count="7">
+          <button onClick="{{ b.open }}" style="aspect-ratio:16/9;background:#fff;border:0;cursor:pointer;display:grid;place-items:center;padding:18px 26px;overflow:hidden;transition:background .15s" style-hover="background:#F7F6F1">
+            <img src="{{ b.logo }}" alt="{{ b.name }}" style="max-width:100%;max-height:56px;width:auto;height:auto;object-fit:contain;display:block">
+          </button>
+        </sc-for>
+        <button onClick="{{ goBrands }}" style="aspect-ratio:16/9;background:#0F4F45;border:0;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding:18px;color:#fff;font-family:inherit;text-align:start;transition:background .15s" style-hover="background:#1B7A6A">
+          <span style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#D8CC63">{{ t.featured.allLabel }}</span>
+          <span style="font-size:15px;font-weight:600;display:flex;gap:8px;align-items:center">{{ t.featured.link }} <span>{{ arrow }}</span></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Market -->
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(56px,7cqw,104px) clamp(20px,4cqw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(32px,5cqw,80px);align-items:center">
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:18px"><span>03</span><span style="width:24px;height:1px;background:#B5A422;display:inline-block"></span>{{ t.market.kicker }}</div>
+      <h2 style="margin:0 0 20px;font-size:clamp(28px,3.2cqw,44px);line-height:1.08;font-weight:600;letter-spacing:-0.025em;color:#0F4F45">{{ t.market.title }}</h2>
+      <p style="margin:0 0 28px;font-size:16px;color:#3E4A48;max-width:480px">{{ t.market.p1 }}</p>
+      <div style="border-top:1px solid rgba(15,79,69,0.14)">
+        <sc-for list="{{ marketFacts }}" as="f" hint-placeholder-count="3">
+          <div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(15,79,69,0.14);font-size:14.5px"><span style="color:#5C6866">{{ f.k }}</span><bdi style="color:#0F4F45;font-weight:600">{{ f.v }}</bdi></div>
+        </sc-for>
+      </div>
+      <button onClick="{{ goMarket }}" style="margin-top:26px;background:none;border:0;padding:0 0 3px;min-height:{{ linkTap }};cursor:pointer;color:#0F4F45;font-weight:600;font-size:14px;font-family:inherit;display:flex;align-items:center;gap:8px;box-shadow:inset 0 -1px 0 #B5A422;background-clip:content-box" style-hover="color:#7A6E12">{{ t.market.link }} <span>{{ arrow }}</span></button>
+    </div>
+    <div style="overflow:hidden;background:#fff;border:1px solid rgba(15,79,69,0.14);aspect-ratio:4/3;position:relative">
+      <iframe src="{{ mapSrc }}" title="Regions served" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+      <div style="position:absolute;inset-inline-start:0;bottom:0;display:flex;gap:16px;font-size:12px;color:#5C6866;background:#fff;padding:8px 12px;border-top:1px solid rgba(15,79,69,0.14);border-inline-end:1px solid rgba(15,79,69,0.14)">
+        <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#B5A422;display:inline-block"></span>{{ t.market.hub }}</span>
+        <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#1B7A6A;display:inline-block"></span>{{ t.market.served }}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statement band -->
+  <section style="background:#0F4F45;color:#fff;position:relative;overflow:hidden">
+    <div style="position:absolute;inset-inline-end:-6%;top:-20%;width:44%;aspect-ratio:1;background:url(assets/mark-white.png) center/contain no-repeat;opacity:0.05"></div>
+    <div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(64px,8cqw,120px) clamp(20px,4cqw,48px);display:grid;grid-template-columns:{{ splitCols }};gap:clamp(24px,4cqw,64px)">
+      <div style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#D8CC63;display:flex;align-items:center;gap:12px;align-self:start;padding-top:10px"><span>04</span><span style="width:24px;height:1px;background:#B5A422;display:inline-block"></span>{{ t.commit.kicker }}</div>
+      <div>
+        <p style="margin:0 0 20px;font-size:clamp(26px,3.4cqw,46px);line-height:1.12;font-weight:600;letter-spacing:-0.025em">{{ t.commit.l2 }}</p>
+        <p style="margin:0;font-size:clamp(16px,1.4cqw,19px);color:rgba(255,255,255,0.72);max-width:560px">{{ t.commit.l1 }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partner -->
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(56px,7cqw,104px) clamp(20px,4cqw,48px)">
+    <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:18px"><span>05</span><span style="width:24px;height:1px;background:#B5A422;display:inline-block"></span>{{ t.partner.kicker }}</div>
+    <h2 style="margin:0 0 36px;font-size:clamp(28px,3.2cqw,44px);line-height:1.08;font-weight:600;letter-spacing:-0.025em;color:#0F4F45;max-width:640px">{{ t.partner.title }}</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:1px;background:rgba(15,79,69,0.14);border:1px solid rgba(15,79,69,0.14)">
+      <sc-for list="{{ partnerCards }}" as="p" hint-placeholder-count="2">
+        <div style="background:#fff;padding:clamp(26px,3cqw,44px);display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><span style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12">{{ p.kicker }}</span><span style="font-size:12px;color:#8A9391">{{ p.idx }}</span></div>
+          <h3 style="margin:0;font-size:clamp(20px,2cqw,26px);font-weight:600;color:#0F4F45;line-height:1.2;letter-spacing:-0.02em">{{ p.title }}</h3>
+          <p style="margin:0;color:#5C6866;font-size:15px;flex:1">{{ p.body }}</p>
+          <button onClick="{{ p.go }}" style="align-self:flex-start;background:none;border:0;padding:0 0 3px;min-height:{{ linkTap }};cursor:pointer;color:#0F4F45;font-weight:600;font-size:14px;font-family:inherit;display:flex;align-items:center;gap:8px;box-shadow:inset 0 -1px 0 #B5A422;background-clip:content-box" style-hover="color:#7A6E12">{{ p.cta }} <span>{{ arrow }}</span></button>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<!-- ============ ABOUT ============ -->
+<sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="About">
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(48px,6cqw,88px) clamp(20px,4cqw,48px) clamp(40px,5cqw,72px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(32px,5cqw,80px);align-items:end">
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:24px"><span style="width:24px;height:1px;background:#B5A422;display:inline-block"></span>{{ t.about.kicker }}</div>
+      <h1 style="margin:0 0 24px;font-size:clamp(34px,4.4cqw,58px);line-height:1.04;font-weight:600;letter-spacing:-0.03em;color:#0F4F45">{{ t.about.title }}</h1>
+      <p style="margin:0 0 14px;font-size:18px;color:#1F2A28;font-weight:500">{{ t.about.p1 }}</p>
+      <p style="margin:0;font-size:16px;color:#3E4A48">{{ t.about.p2 }}</p>
+    </div>
+    <div style="aspect-ratio:4/3;background:#E9EAE3;border:1px solid rgba(15,79,69,0.14);display:grid;place-items:center;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(15,79,69,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(15,79,69,0.08) 1px,transparent 1px);background-size:40px 40px"></div>
+      <span style="position:relative;font-size:12px;color:#5C6866;background:#F7F6F1;padding:6px 10px;border:1px solid rgba(15,79,69,0.14)">{{ t.about.imgLabel }}</span>
+    </div>
+  </section>
+
+  <section style="border-top:1px solid rgba(15,79,69,0.14);border-bottom:1px solid rgba(15,79,69,0.14);background:#fff">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4cqw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))">
+      <div style="padding:clamp(36px,4cqw,64px) clamp(0px,3cqw,48px) clamp(36px,4cqw,64px) 0;border-inline-end:1px solid rgba(15,79,69,0.14)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:16px">{{ t.about.missionLabel }}</div>
+        <p style="margin:0 0 14px;font-size:clamp(19px,1.8cqw,24px);font-weight:600;line-height:1.3;color:#0F4F45;letter-spacing:-0.015em">{{ t.about.mission1 }}</p>
+        <p style="margin:0;font-size:15.5px;color:#5C6866">{{ t.about.mission2 }}</p>
+      </div>
+      <div style="padding:clamp(36px,4cqw,64px) 0 clamp(36px,4cqw,64px) clamp(0px,3cqw,48px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:16px">{{ t.about.visionLabel }}</div>
+        <p style="margin:0;font-size:clamp(19px,1.8cqw,24px);font-weight:600;line-height:1.3;color:#0F4F45;letter-spacing:-0.015em">{{ t.about.vision }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(56px,7cqw,104px) clamp(20px,4cqw,48px)">
+    <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:18px"><span style="width:24px;height:1px;background:#B5A422;display:inline-block"></span>{{ t.values.kicker }}</div>
+    <h2 style="margin:0 0 36px;font-size:clamp(28px,3.2cqw,44px);line-height:1.08;font-weight:600;letter-spacing:-0.025em;color:#0F4F45">{{ t.values.title }}</h2>
+    <div style="display:grid;grid-template-columns:{{ cols5 }};gap:1px;background:rgba(15,79,69,0.14);border:1px solid rgba(15,79,69,0.14)">
+      <sc-for list="{{ valueItems }}" as="v" hint-placeholder-count="5">
+        <div style="background:#F7F6F1;padding:26px 22px 28px;display:flex;flex-direction:column;gap:18px;min-height:220px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;font-weight:600;color:#7A6E12">{{ v.idx }}</span><span style="color:#0F4F45">{{ v.icon }}</span></div>
+          <div style="margin-top:auto"><h3 style="margin:0 0 8px;font-size:18px;font-weight:600;color:#0F4F45;letter-spacing:-0.01em">{{ v.title }}</h3><p style="margin:0;font-size:14px;color:#5C6866;line-height:1.5">{{ v.body }}</p></div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="background:#fff;border-top:1px solid rgba(15,79,69,0.14)">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7cqw,104px) clamp(20px,4cqw,48px)">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:32px">
+        <div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:14px"><span style="width:24px;height:1px;background:#B5A422;display:inline-block"></span>{{ t.team.kicker }}</div>
+          <h2 style="margin:0;font-size:clamp(28px,3.2cqw,44px);line-height:1.08;font-weight:600;letter-spacing:-0.025em;color:#0F4F45">{{ t.team.title }}</h2>
+        </div>
+        <p style="margin:0;max-width:420px;color:#5C6866;font-size:15.5px">{{ t.team.sub }}</p>
+      </div>
+      <div style="display:grid;grid-template-columns:{{ cols4min2 }};gap:1px;background:rgba(15,79,69,0.14);border:1px solid rgba(15,79,69,0.14)">
+        <sc-for list="{{ t.team.people }}" as="m" hint-placeholder-count="4">
+          <div style="background:#fff">
+            <div style="aspect-ratio:4/5;background:#E9EAE3;display:grid;place-items:center;position:relative;overflow:hidden"><div style="position:absolute;inset:0;background-image:linear-gradient(rgba(15,79,69,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(15,79,69,0.08) 1px,transparent 1px);background-size:32px 32px"></div><span style="position:relative;font-size:12px;color:#5C6866">{{ t.team.portrait }}</span></div>
+            <div style="padding:16px 18px;border-top:1px solid rgba(15,79,69,0.14)"><div style="font-weight:600;color:#0F4F45;font-size:15px">{{ m.n }}</div><div style="font-size:13px;color:#5C6866;margin-top:2px">{{ m.r }}</div></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<!-- ============ BRANDS ============ -->
+<sc-if value="{{ isBrands }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Our Brands">
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(48px,6cqw,80px) clamp(20px,4cqw,48px) 0">
+    <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:20px"><span style="width:24px;height:1px;background:#B5A422;display:inline-block"></span>{{ t.brandsPage.kicker }}</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:24px 64px;align-items:end;margin-bottom:36px">
+      <h1 style="margin:0;font-size:clamp(34px,4.4cqw,58px);line-height:1.04;font-weight:600;letter-spacing:-0.03em;color:#0F4F45">{{ t.brandsPage.title }}</h1>
+      <p style="margin:0;font-size:16px;color:#3E4A48;max-width:520px">{{ t.brandsPage.sub }}</p>
+    </div>
+    <div style="border-top:1px solid rgba(15,79,69,0.14);border-bottom:1px solid rgba(15,79,69,0.14);display:flex;flex-wrap:wrap;align-items:stretch">
+      <div style="flex:1 1 260px;display:flex;align-items:center;gap:10px;padding:0 4px;height:52px;border-inline-end:1px solid rgba(15,79,69,0.14)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6866" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
+        <input value="{{ query }}" onChange="{{ setQuery }}" placeholder="{{ t.brandsPage.search }}" style="flex:1;border:0;background:transparent;font-size:16px;outline:none;color:#1F2A28;min-width:0;height:100%">
+      </div>
+      <select value="{{ country }}" onChange="{{ setCountry }}" style="height:52px;border:0;border-inline-end:1px solid rgba(15,79,69,0.14);background:transparent;padding:0 16px;font-size:14px;color:#1F2A28;cursor:pointer;outline:none">
+        <sc-for list="{{ countryOptions }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.l }}</option></sc-for>
+      </select>
+      <button onClick="{{ toggleSort }}" style="height:52px;border:0;background:{{ sortBg }};padding:0 18px;font-size:14px;font-weight:500;color:{{ sortColor }};cursor:pointer;font-family:inherit">{{ t.brandsPage.az }}</button>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;padding:16px 0;border-bottom:1px solid rgba(15,79,69,0.14)">
+      <sc-for list="{{ categoryChips }}" as="c" hint-placeholder-count="9">
+        <button onClick="{{ c.pick }}" style="padding:7px 12px;min-height:{{ chipH }};border-radius:3px;border:1px solid {{ c.border }};background:{{ c.bg }};color:{{ c.color }};font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;transition:all .15s" style-hover="border-color:#0F4F45">{{ c.label }}</button>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:20px clamp(20px,4cqw,48px) clamp(56px,7cqw,104px)">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px;font-size:13px;color:#5C6866">
+      <span>{{ resultCount }} {{ t.brandsPage.results }}</span>
+      <sc-if value="{{ hasFilters }}" hint-placeholder-val="{{ false }}"><button onClick="{{ clearFilters }}" style="background:none;border:0;padding:0 0 2px;color:#0F4F45;font-weight:600;cursor:pointer;font-family:inherit;font-size:13px;box-shadow:inset 0 -1px 0 #B5A422">{{ t.brandsPage.clear }}</button></sc-if>
+    </div>
+    <div style="display:grid;grid-template-columns:{{ cols3 }};gap:1px;background:rgba(15,79,69,0.14);border:1px solid rgba(15,79,69,0.14)">
+      <sc-for list="{{ filteredBrands }}" as="b" hint-placeholder-count="7">
+        <div style="background:#fff;display:flex;flex-direction:column;transition:background .15s" style-hover="background:#FCFBF8">
+          <button onClick="{{ b.open }}" style="border:0;cursor:pointer;height:150px;background:transparent;display:grid;place-items:center;padding:28px 40px;overflow:hidden;border-bottom:1px solid rgba(15,79,69,0.14)">
+            <img src="{{ b.logo }}" alt="{{ b.name }}" style="max-width:100%;max-height:88px;width:auto;height:auto;object-fit:contain;display:block">
+          </button>
+          <div style="padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1">
+            <div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#5C6866;letter-spacing:0.04em"><span style="text-transform:uppercase">{{ b.catLabel }}</span><span>{{ b.countryLabel }}</span></div>
+            <div style="font-size:17px;font-weight:600;color:#0F4F45;letter-spacing:-0.01em">{{ b.name }}</div>
+            <p style="margin:0;font-size:14px;color:#5C6866;flex:1;line-height:1.5">{{ b.desc }}</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:4px">
+              <button onClick="{{ b.open }}" style="background:none;border:0;padding:0 0 2px;min-height:{{ linkTap }};cursor:pointer;color:#0F4F45;font-weight:600;font-size:13.5px;font-family:inherit;display:flex;align-items:center;gap:8px;box-shadow:inset 0 -1px 0 #B5A422" style-hover="color:#7A6E12">{{ t.brandsPage.view }} <span>{{ arrow }}</span></button>
+              <span style="font-size:12px;color:#8A9391">{{ b.count }} {{ t.brandPage.items }}</span>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+      <div style="text-align:center;padding:64px 20px;color:#5C6866;border:1px solid rgba(15,79,69,0.14);border-top:0;background:#fff">{{ t.brandsPage.empty }}</div>
+    </sc-if>
+    <div style="margin-top:clamp(40px,5cqw,64px);background:#0F4F45;color:#fff;padding:clamp(28px,4cqw,48px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px">
+      <div style="max-width:560px">
+        <h2 style="margin:0 0 8px;font-size:clamp(22px,2.4cqw,30px);font-weight:600;letter-spacing:-0.02em">{{ t.brandsPage.catTitle }}</h2>
+        <p style="margin:0;color:rgba(255,255,255,0.75);font-size:15.5px">{{ t.brandsPage.catSub }}</p>
+      </div>
+      <button onClick="{{ goContact }}" style="background:#B5A422;color:#0F4F45;border:0;border-radius:3px;padding:14px 24px;cursor:pointer;font-size:14.5px;font-weight:700;font-family:inherit" style-hover="background:#D8CC63">{{ t.brandsPage.catCta }}</button>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<!-- ============ BRAND DETAIL ============ -->
+<sc-if value="{{ isBrand }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Brand detail">
+  <section style="background:#fff;border-bottom:1px solid rgba(15,79,69,0.14)">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(28px,3.5cqw,48px) clamp(20px,4cqw,48px)">
+      <button onClick="{{ goBrands }}" style="background:none;border:0;padding:0;min-height:{{ linkTap }};cursor:pointer;color:#5C6866;font-weight:500;font-size:13px;font-family:inherit;display:flex;align-items:center;gap:8px;margin-bottom:24px" style-hover="color:#0F4F45"><span>{{ arrowBack }}</span> {{ t.brandPage.back }}</button>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(24px,4cqw,64px);align-items:center">
+        <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:center">
+          <div style="width:200px;height:140px;border:1px solid rgba(15,79,69,0.14);display:grid;place-items:center;flex:none;padding:22px;overflow:hidden;background:#fff"><img src="{{ brand.logo }}" alt="{{ brand.name }}" style="max-width:100%;max-height:96px;width:auto;height:auto;object-fit:contain;display:block"></div>
+          <div style="flex:1 1 240px">
+            <h1 style="margin:0 0 12px;font-size:clamp(30px,3.8cqw,48px);line-height:1.05;font-weight:600;letter-spacing:-0.03em;color:#0F4F45">{{ brand.name }}</h1>
+            <p style="margin:0;font-size:16px;color:#3E4A48;max-width:560px">{{ brand.story }}</p>
+          </div>
+        </div>
+        <div style="border-top:1px solid rgba(15,79,69,0.14)">
+          <sc-for list="{{ brandMeta }}" as="m" hint-placeholder-count="3">
+            <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid rgba(15,79,69,0.14);font-size:14px"><span style="color:#5C6866">{{ m.k }}</span><bdi style="color:#0F4F45;font-weight:600">{{ m.v }}</bdi></div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(36px,4cqw,56px) clamp(20px,4cqw,48px) clamp(56px,7cqw,104px)">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:18px">
+      <h2 style="margin:0;font-size:clamp(22px,2.4cqw,30px);font-weight:600;color:#0F4F45;letter-spacing:-0.02em">{{ t.brandPage.products }}</h2>
+      <span style="font-size:13px;color:#5C6866">{{ brandProductCount }} {{ t.brandPage.items }}</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:1px;background:rgba(15,79,69,0.14);border:1px solid rgba(15,79,69,0.14)">
+      <sc-for list="{{ brandProducts }}" as="p" hint-placeholder-count="6">
+        <button onClick="{{ p.open }}" style="text-align:start;background:#fff;border:0;cursor:pointer;padding:0;display:flex;flex-direction:column;font-family:inherit;transition:background .15s" style-hover="background:#FCFBF8">
+          <div style="width:100%;aspect-ratio:1;display:grid;place-items:center;position:relative;border-bottom:1px solid rgba(15,79,69,0.14);padding:18px;overflow:hidden">
+            <sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ true }}"><img src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:contain;display:block;grid-area:1/1"></sc-if>
+            <sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}"><div style="width:46%;height:70%;background-image:linear-gradient(rgba(15,79,69,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(15,79,69,0.1) 1px,transparent 1px);background-size:12px 12px;border:1px solid rgba(15,79,69,0.14);display:grid;place-items:center"><span style="font-size:10px;color:#5C6866">{{ t.brandPage.pack }}</span></div></sc-if>
+            <span style="position:absolute;top:10px;inset-inline-start:10px;font-size:12px;font-weight:600;padding:3px 8px;border-radius:2px;background:{{ p.badgeBg }};color:{{ p.badgeColor }};letter-spacing:0.04em">{{ p.badge }}</span>
+          </div>
+          <div style="padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;width:100%">
+            <div style="font-weight:600;color:#0F4F45;font-size:14.5px;line-height:1.3">{{ p.name }}</div>
+            <div style="font-size:12.5px;color:#5C6866" dir="{{ dirAlt }}">{{ p.nameAlt }}</div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:#5C6866;margin-top:8px"><bdi>{{ p.size }}</bdi><bdi>{{ p.sku }}</bdi></div>
+          </div>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<!-- ============ PRODUCT DETAIL ============ -->
+<sc-if value="{{ isProduct }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Product detail">
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(24px,3cqw,40px) clamp(20px,4cqw,48px) clamp(56px,7cqw,104px)">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:13px;color:#8A9391;margin-bottom:28px">
+      <button onClick="{{ goBrands }}" style="background:none;border:0;padding:0;min-height:{{ linkTap }};cursor:pointer;color:#5C6866;font-weight:500;font-family:inherit;font-size:13px" style-hover="color:#0F4F45">{{ t.nav.brands }}</button>
+      <span>/</span>
+      <button onClick="{{ openCurrentBrand }}" style="background:none;border:0;padding:0;min-height:{{ linkTap }};cursor:pointer;color:#5C6866;font-weight:500;font-family:inherit;font-size:13px" style-hover="color:#0F4F45">{{ brand.name }}</button>
+      <span>/</span><span style="color:#0F4F45">{{ product.name }}</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(28px,4cqw,72px);align-items:start">
+      <div style="position:{{ stickyPos }};top:92px">
+        <div style="aspect-ratio:1;background:#fff;border:1px solid rgba(15,79,69,0.14);display:grid;place-items:center;position:relative;padding:48px;overflow:hidden">
+          <sc-if value="{{ product.hasImg }}" hint-placeholder-val="{{ true }}"><img src="{{ product.img }}" alt="{{ product.name }}" style="width:100%;height:100%;object-fit:contain;display:block;grid-area:1/1"></sc-if>
+          <sc-if value="{{ product.noImg }}" hint-placeholder-val="{{ false }}"><div style="width:40%;height:72%;background-image:linear-gradient(rgba(15,79,69,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(15,79,69,0.1) 1px,transparent 1px);background-size:14px 14px;border:1px solid rgba(15,79,69,0.14);display:grid;place-items:center"><span style="font-size:11px;color:#5C6866;text-align:center;padding:0 8px">{{ t.productPage.imgLabel }}</span></div></sc-if>
+          <span style="position:absolute;top:16px;inset-inline-start:16px;font-size:12px;font-weight:600;padding:4px 9px;border-radius:2px;background:{{ product.badgeBg }};color:{{ product.badgeColor }};letter-spacing:0.04em">{{ product.badge }}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:12px;margin-top:10px;font-size:12px;color:#8A9391"><bdi>{{ product.sku }}</bdi><bdi>{{ brand.name }}</bdi></div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:14px">{{ brand.catLabel }}</div>
+        <h1 style="margin:0 0 6px;font-size:clamp(28px,3.4cqw,44px);line-height:1.08;font-weight:600;letter-spacing:-0.03em;color:#0F4F45">{{ product.name }}</h1>
+        <div style="font-size:clamp(17px,1.6cqw,20px);color:#5C6866;margin-bottom:20px" dir="{{ dirAlt }}">{{ product.nameAlt }}</div>
+        <p style="margin:0 0 28px;font-size:16px;color:#3E4A48">{{ product.desc }}</p>
+        <div style="border-top:1px solid rgba(15,79,69,0.14);margin-bottom:28px">
+          <sc-for list="{{ specRows }}" as="s" hint-placeholder-count="8">
+            <div style="display:grid;grid-template-columns:minmax(120px,36%) 1fr;gap:12px;padding:11px 0;border-bottom:1px solid rgba(15,79,69,0.14);font-size:14px">
+              <span style="color:#5C6866">{{ s.k }}</span><bdi style="color:#0F4F45;font-weight:500">{{ s.v }}</bdi>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+          <button onClick="{{ enquire }}" style="background:#0F4F45;color:#fff;border:0;border-radius:3px;padding:14px 24px;cursor:pointer;font-size:14.5px;font-weight:600;font-family:inherit" style-hover="background:#1B7A6A">{{ t.productPage.enquire }}</button>
+          <button onClick="{{ goContact }}" style="background:transparent;color:#0F4F45;border:1px solid rgba(15,79,69,0.35);border-radius:3px;padding:14px 22px;cursor:pointer;font-size:14.5px;font-weight:600;font-family:inherit" style-hover="border-color:#0F4F45">{{ t.productPage.priceList }}</button>
+        </div>
+        <sc-if value="{{ enquired }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:16px;padding:14px 18px;border:1px solid #B5A422;background:rgba(181,164,34,0.08);color:#5F560E;font-size:14px;font-weight:500">{{ t.productPage.enquired }}</div>
+        </sc-if>
+        <p style="margin:18px 0 0;font-size:12.5px;color:#8A9391">{{ t.productPage.note }}</p>
+      </div>
+    </div>
+    <div style="margin-top:clamp(48px,6cqw,88px)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:18px;border-top:1px solid rgba(15,79,69,0.14);padding-top:24px">
+        <h2 style="margin:0;font-size:clamp(20px,2.2cqw,28px);font-weight:600;color:#0F4F45;letter-spacing:-0.02em">{{ t.productPage.related }}</h2>
+        <button onClick="{{ openCurrentBrand }}" style="background:none;border:0;padding:0 0 2px;min-height:{{ linkTap }};cursor:pointer;color:#0F4F45;font-weight:600;font-size:13.5px;font-family:inherit;box-shadow:inset 0 -1px 0 #B5A422" style-hover="color:#7A6E12">{{ t.brandPage.products }} {{ arrow }}</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:1px;background:rgba(15,79,69,0.14);border:1px solid rgba(15,79,69,0.14)">
+        <sc-for list="{{ relatedProducts }}" as="p" hint-placeholder-count="4">
+          <button onClick="{{ p.open }}" style="text-align:start;background:#fff;border:0;cursor:pointer;padding:0;display:flex;flex-direction:column;font-family:inherit;transition:background .15s" style-hover="background:#FCFBF8">
+            <div style="width:100%;aspect-ratio:4/3;display:grid;place-items:center;position:relative;border-bottom:1px solid rgba(15,79,69,0.14);padding:14px;overflow:hidden">
+              <sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ true }}"><img src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:contain;display:block;grid-area:1/1"></sc-if>
+              <sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}"><div style="width:36%;height:70%;border:1px solid rgba(15,79,69,0.14);background-image:linear-gradient(rgba(15,79,69,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(15,79,69,0.1) 1px,transparent 1px);background-size:12px 12px"></div></sc-if>
+            </div>
+            <div style="padding:12px 14px 14px;width:100%"><div style="font-weight:600;color:#0F4F45;font-size:14px;line-height:1.3">{{ p.name }}</div><div style="font-size:12px;color:#5C6866;margin-top:4px"><bdi>{{ p.size }}</bdi></div></div>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+
+<!-- ============ OUR MARKET ============ -->
+<sc-if value="{{ isMarket }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Our Market">
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(48px,6cqw,88px) clamp(20px,4cqw,48px) clamp(32px,4cqw,56px)">
+    <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:20px"><span style="width:24px;height:1px;background:#B5A422;display:inline-block"></span>{{ t.marketPage.kicker }}</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:24px 64px;align-items:end">
+      <h1 style="margin:0;font-size:clamp(34px,4.4cqw,58px);line-height:1.04;font-weight:600;letter-spacing:-0.03em;color:#0F4F45">{{ t.marketPage.title }}</h1>
+      <p style="margin:0;font-size:16px;color:#3E4A48;max-width:520px">{{ t.marketPage.sub }}</p>
+    </div>
+  </section>
+  <section style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4cqw,48px)">
+    <div style="background:#fff;border:1px solid rgba(15,79,69,0.14);aspect-ratio:{{ mapRatio }};position:relative;overflow:hidden">
+      <iframe src="{{ mapSrc }}" title="Regions served" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+      <div style="position:absolute;inset-inline-start:0;bottom:0;display:flex;gap:16px;font-size:12px;color:#5C6866;background:#fff;padding:8px 12px;border-top:1px solid rgba(15,79,69,0.14);border-inline-end:1px solid rgba(15,79,69,0.14)">
+        <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#B5A422;display:inline-block"></span>{{ t.market.hub }}</span>
+        <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#1B7A6A;display:inline-block"></span>{{ t.market.served }}</span>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:{{ cols4 }};border:1px solid rgba(15,79,69,0.14);border-top:0;background:#fff">
+      <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+        <div style="padding:22px 24px;border-inline-end:1px solid rgba(15,79,69,0.14)">
+          <div style="font-size:clamp(26px,2.6cqw,36px);font-weight:600;letter-spacing:-0.03em;color:#0F4F45;line-height:1">{{ s.v }}</div>
+          <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#5C6866;margin-top:8px">{{ s.l }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(56px,7cqw,104px) clamp(20px,4cqw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(32px,5cqw,80px);align-items:start">
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:18px"><span>01</span><span style="width:24px;height:1px;background:#B5A422;display:inline-block"></span>{{ t.marketPage.channelsKicker }}</div>
+      <h2 style="margin:0 0 18px;font-size:clamp(28px,3.2cqw,44px);line-height:1.08;font-weight:600;letter-spacing:-0.025em;color:#0F4F45">{{ t.marketPage.channelsTitle }}</h2>
+      <p style="margin:0;max-width:440px;color:#3E4A48;font-size:16px">{{ t.marketPage.channelsSub }}</p>
+    </div>
+    <div style="border-top:1px solid rgba(15,79,69,0.14)">
+      <sc-for list="{{ channelRows }}" as="c" hint-placeholder-count="3">
+        <div style="padding:22px 0;border-bottom:1px solid rgba(15,79,69,0.14)">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px">
+            <span style="font-size:17px;font-weight:600;color:#0F4F45">{{ c.name }}</span>
+            <span style="font-size:22px;font-weight:600;color:#0F4F45;letter-spacing:-0.02em">{{ c.pctLabel }}</span>
+          </div>
+          <div style="height:6px;background:rgba(15,79,69,0.1);position:relative"><div style="position:absolute;inset-block:0;inset-inline-start:0;width:{{ c.width }};background:{{ c.color }}"></div></div>
+          <p style="margin:12px 0 0;font-size:14px;color:#5C6866;max-width:520px">{{ c.desc }}</p>
+        </div>
+      </sc-for>
+      <p style="margin:12px 0 0;font-size:12px;color:#8A9391">{{ t.marketPage.channelsNote }}</p>
+    </div>
+  </section>
+
+  <section style="background:#fff;border-top:1px solid rgba(15,79,69,0.14);border-bottom:1px solid rgba(15,79,69,0.14)">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7cqw,104px) clamp(20px,4cqw,48px)">
+      <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:18px"><span>02</span><span style="width:24px;height:1px;background:#B5A422;display:inline-block"></span>{{ t.marketPage.logisticsKicker }}</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:24px 64px;align-items:end;margin-bottom:36px">
+        <h2 style="margin:0;font-size:clamp(28px,3.2cqw,44px);line-height:1.08;font-weight:600;letter-spacing:-0.025em;color:#0F4F45">{{ t.marketPage.logisticsTitle }}</h2>
+        <p style="margin:0;color:#3E4A48;font-size:16px;max-width:520px">{{ t.marketPage.logisticsSub }}</p>
+      </div>
+      <div style="display:grid;grid-template-columns:{{ cols4 }};gap:1px;background:rgba(15,79,69,0.14);border:1px solid rgba(15,79,69,0.14)">
+        <sc-for list="{{ logisticsRows }}" as="l" hint-placeholder-count="4">
+          <div style="background:#F7F6F1;padding:24px 22px 26px;min-height:190px;display:flex;flex-direction:column;justify-content:space-between;gap:20px">
+            <span style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#5C6866">{{ l.k }}</span>
+            <div><div style="font-size:clamp(24px,2.4cqw,32px);font-weight:600;color:#0F4F45;letter-spacing:-0.025em;line-height:1.1">{{ l.v }}</div><div style="font-size:13.5px;color:#5C6866;margin-top:8px">{{ l.d }}</div></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(56px,7cqw,104px) clamp(20px,4cqw,48px)">
+    <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:18px"><span>03</span><span style="width:24px;height:1px;background:#B5A422;display:inline-block"></span>{{ t.marketPage.coverageKicker }}</div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:28px">
+      <h2 style="margin:0;font-size:clamp(28px,3.2cqw,44px);line-height:1.08;font-weight:600;letter-spacing:-0.025em;color:#0F4F45">{{ t.marketPage.coverageTitle }}</h2>
+      <span style="font-size:13px;color:#5C6866">{{ t.marketPage.coverageUpdated }}</span>
+    </div>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+    <div style="overflow-x:auto;border:1px solid rgba(15,79,69,0.14);background:#fff">
+      <div style="min-width:640px">
+        <div style="display:grid;grid-template-columns:1.2fr 1fr 1.4fr 0.8fr 0.9fr;gap:12px;padding:12px 20px;border-bottom:1px solid rgba(15,79,69,0.14);font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:#5C6866;background:#F7F6F1">
+          <span>{{ t.marketPage.cols.city }}</span><span>{{ t.marketPage.cols.region }}</span><span>{{ t.marketPage.cols.channels }}</span><span>{{ t.marketPage.cols.lead }}</span><span>{{ t.marketPage.cols.status }}</span>
+        </div>
+        <sc-for list="{{ coverageRows }}" as="r" hint-placeholder-count="10">
+          <div style="display:grid;grid-template-columns:1.2fr 1fr 1.4fr 0.8fr 0.9fr;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(15,79,69,0.1);font-size:14px;align-items:center;transition:background .15s" style-hover="background:#FCFBF8">
+            <span style="font-weight:600;color:#0F4F45">{{ r.city }}</span><span style="color:#3E4A48">{{ r.region }}</span><span style="color:#3E4A48">{{ r.channels }}</span><bdi style="color:#3E4A48">{{ r.lead }}</bdi>
+            <span style="display:flex;align-items:center;gap:8px;color:#3E4A48"><span style="width:8px;height:8px;border-radius:50%;background:{{ r.dot }};display:inline-block"></span>{{ r.status }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top:1px solid rgba(15,79,69,0.14)">
+        <sc-for list="{{ coverageRows }}" as="r" hint-placeholder-count="10">
+          <div style="padding:16px 0;border-bottom:1px solid rgba(15,79,69,0.14);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:baseline">
+            <span style="font-size:16px;font-weight:600;color:#0F4F45">{{ r.city }}</span>
+            <span style="display:flex;align-items:center;gap:7px;font-size:13px;color:#3E4A48"><span style="width:8px;height:8px;border-radius:50%;background:{{ r.dot }};display:inline-block"></span>{{ r.status }}</span>
+            <span style="font-size:13.5px;color:#5C6866">{{ r.region }} · {{ r.channels }}</span>
+            <bdi style="font-size:13.5px;color:#0F4F45;font-weight:500">{{ r.lead }}</bdi>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+  </section>
+</main>
+</sc-if>
+
+<!-- ============ PARTNER ============ -->
+<sc-if value="{{ isPartner }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Partner With Us">
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(48px,6cqw,88px) clamp(20px,4cqw,48px) 0">
+    <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:20px"><span style="width:24px;height:1px;background:#B5A422;display:inline-block"></span>{{ t.partnerPage.kicker }}</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:24px 64px;align-items:end;margin-bottom:40px">
+      <h1 style="margin:0;font-size:clamp(34px,4.4cqw,58px);line-height:1.04;font-weight:600;letter-spacing:-0.03em;color:#0F4F45">{{ t.partnerPage.title }}</h1>
+      <p style="margin:0;font-size:16px;color:#3E4A48;max-width:520px">{{ t.partnerPage.sub }}</p>
+    </div>
+    <div style="display:flex;border-top:1px solid rgba(15,79,69,0.14);border-bottom:1px solid rgba(15,79,69,0.14)">
+      <sc-for list="{{ partnerTabs }}" as="tb" hint-placeholder-count="2">
+        <button onClick="{{ tb.pick }}" style="flex:1;background:{{ tb.bg }};color:{{ tb.color }};border:0;border-inline-end:1px solid rgba(15,79,69,0.14);padding:18px 20px;cursor:pointer;font-family:inherit;text-align:start;display:flex;flex-direction:column;gap:4px;transition:background .15s">
+          <span style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;opacity:0.7">{{ tb.idx }}</span>
+          <span style="font-size:clamp(15px,1.5cqw,18px);font-weight:600;letter-spacing:-0.01em">{{ tb.label }}</span>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(40px,5cqw,72px) clamp(20px,4cqw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(32px,5cqw,80px);align-items:start">
+    <div>
+      <h2 style="margin:0 0 18px;font-size:clamp(26px,3cqw,40px);line-height:1.1;font-weight:600;letter-spacing:-0.025em;color:#0F4F45">{{ pc.title }}</h2>
+      <p style="margin:0 0 28px;font-size:16px;color:#3E4A48;max-width:480px">{{ pc.intro }}</p>
+      <button onClick="{{ pc.go }}" style="background:#0F4F45;color:#fff;border:0;border-radius:3px;padding:14px 24px;cursor:pointer;font-size:14.5px;font-weight:600;font-family:inherit" style-hover="background:#1B7A6A">{{ pc.cta }}</button>
+    </div>
+    <div>
+      <div style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:6px">{{ t.partnerPage.offerLabel }}</div>
+      <div style="border-top:1px solid rgba(15,79,69,0.14)">
+        <sc-for list="{{ pc.offers }}" as="o" hint-placeholder-count="5">
+          <div style="display:grid;grid-template-columns:32px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid rgba(15,79,69,0.14)">
+            <span style="font-size:12px;font-weight:600;color:#7A6E12;padding-top:3px">{{ o.idx }}</span>
+            <div><div style="font-size:15.5px;font-weight:600;color:#0F4F45">{{ o.t }}</div><div style="font-size:14px;color:#5C6866;margin-top:3px">{{ o.d }}</div></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#fff;border-top:1px solid rgba(15,79,69,0.14)">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7cqw,104px) clamp(20px,4cqw,48px)">
+      <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:18px"><span style="width:24px;height:1px;background:#B5A422;display:inline-block"></span>{{ t.partnerPage.processLabel }}</div>
+      <h2 style="margin:0 0 36px;font-size:clamp(26px,3cqw,40px);line-height:1.1;font-weight:600;letter-spacing:-0.025em;color:#0F4F45">{{ t.partnerPage.processTitle }}</h2>
+      <div style="display:grid;grid-template-columns:{{ cols4 }};gap:1px;background:rgba(15,79,69,0.14);border:1px solid rgba(15,79,69,0.14)">
+        <sc-for list="{{ pc.steps }}" as="st" hint-placeholder-count="4">
+          <div style="background:#F7F6F1;padding:24px 22px 28px;min-height:200px;display:flex;flex-direction:column;gap:22px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:clamp(26px,2.6cqw,34px);font-weight:600;color:#0F4F45;letter-spacing:-0.03em;line-height:1">{{ st.idx }}</span><span style="font-size:12px;color:#8A9391">{{ st.time }}</span></div>
+            <div style="margin-top:auto"><div style="font-size:16px;font-weight:600;color:#0F4F45">{{ st.t }}</div><div style="font-size:14px;color:#5C6866;margin-top:6px">{{ st.d }}</div></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#0F4F45;color:#fff">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(48px,6cqw,80px) clamp(20px,4cqw,48px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px">
+      <div style="max-width:600px"><h2 style="margin:0 0 8px;font-size:clamp(24px,2.8cqw,36px);font-weight:600;letter-spacing:-0.025em;line-height:1.1">{{ t.partnerPage.ctaTitle }}</h2><p style="margin:0;color:rgba(255,255,255,0.75);font-size:16px">{{ t.partnerPage.ctaSub }}</p></div>
+      <button onClick="{{ pc.go }}" style="background:#B5A422;color:#0F4F45;border:0;border-radius:3px;padding:15px 26px;cursor:pointer;font-size:14.5px;font-weight:700;font-family:inherit" style-hover="background:#D8CC63">{{ pc.cta }}</button>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<!-- ============ CONTACT ============ -->
+<sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Contact">
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(48px,6cqw,88px) clamp(20px,4cqw,48px) clamp(40px,5cqw,64px)">
+    <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#7A6E12;margin-bottom:20px"><span style="width:24px;height:1px;background:#B5A422;display:inline-block"></span>{{ t.contactPage.kicker }}</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:24px 64px;align-items:end">
+      <h1 style="margin:0;font-size:clamp(34px,4.4cqw,58px);line-height:1.04;font-weight:600;letter-spacing:-0.03em;color:#0F4F45">{{ t.contactPage.title }}</h1>
+      <p style="margin:0;font-size:16px;color:#3E4A48;max-width:520px">{{ t.contactPage.sub }}</p>
+    </div>
+  </section>
+  <section style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4cqw,48px) clamp(56px,7cqw,104px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:1px;background:rgba(15,79,69,0.14);border:1px solid rgba(15,79,69,0.14)">
+    <div style="background:#fff;padding:clamp(24px,3cqw,44px)">
+      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:18px">
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#5C6866"><span>{{ t.contactPage.f.name }}</span><input value="{{ form.name }}" onChange="{{ setName }}" style="height:46px;border:1px solid rgba(15,79,69,0.2);border-radius:3px;padding:0 12px;font-size:16px;color:#1F2A28;background:#F7F6F1;outline:none;text-transform:none;letter-spacing:0" style-focus="border-color:#0F4F45"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#5C6866"><span>{{ t.contactPage.f.company }}</span><input value="{{ form.company }}" onChange="{{ setCompany }}" style="height:46px;border:1px solid rgba(15,79,69,0.2);border-radius:3px;padding:0 12px;font-size:16px;color:#1F2A28;background:#F7F6F1;outline:none;text-transform:none;letter-spacing:0" style-focus="border-color:#0F4F45"></label>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:18px">
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#5C6866"><span>{{ t.contactPage.f.email }}</span><input value="{{ form.email }}" onChange="{{ setEmail }}" type="email" style="height:46px;border:1px solid rgba(15,79,69,0.2);border-radius:3px;padding:0 12px;font-size:16px;color:#1F2A28;background:#F7F6F1;outline:none;text-transform:none;letter-spacing:0" style-focus="border-color:#0F4F45"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#5C6866"><span>{{ t.contactPage.f.type }}</span>
+              <select value="{{ form.type }}" onChange="{{ setType }}" style="height:46px;border:1px solid rgba(15,79,69,0.2);border-radius:3px;padding:0 12px;font-size:16px;color:#1F2A28;background:#F7F6F1;outline:none;text-transform:none;letter-spacing:0;cursor:pointer">
+                <sc-for list="{{ typeOptions }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.l }}</option></sc-for>
+              </select>
+            </label>
+          </div>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#5C6866"><span>{{ t.contactPage.f.message }}</span><textarea value="{{ form.message }}" onChange="{{ setMessage }}" rows="5" style="border:1px solid rgba(15,79,69,0.2);border-radius:3px;padding:12px;font-size:15px;color:#1F2A28;background:#F7F6F1;outline:none;resize:vertical;font-size:16px;text-transform:none;letter-spacing:0;line-height:1.5" style-focus="border-color:#0F4F45"></textarea></label>
+          <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between">
+            <button onClick="{{ submit }}" style="background:#0F4F45;color:#fff;border:0;border-radius:3px;padding:14px 26px;cursor:pointer;font-size:14.5px;font-weight:600;font-family:inherit" style-hover="background:#1B7A6A">{{ t.contactPage.f.submit }}</button>
+            <span style="font-size:12.5px;color:#8A9391">{{ t.contactPage.f.note }}</span>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="min-height:360px;display:flex;flex-direction:column;justify-content:center;gap:12px">
+          <span style="width:40px;height:1px;background:#B5A422;display:block"></span>
+          <h2 style="margin:0;font-size:clamp(24px,2.6cqw,34px);font-weight:600;color:#0F4F45;letter-spacing:-0.025em">{{ t.contactPage.sentTitle }}</h2>
+          <p style="margin:0;color:#3E4A48;font-size:16px;max-width:460px">{{ t.contactPage.sentBody }}</p>
+          <button onClick="{{ resetForm }}" style="align-self:flex-start;margin-top:8px;background:none;border:0;padding:0 0 2px;cursor:pointer;color:#0F4F45;font-weight:600;font-size:14px;font-family:inherit;box-shadow:inset 0 -1px 0 #B5A422">{{ t.contactPage.sentAgain }}</button>
+        </div>
+      </sc-if>
+    </div>
+    <div style="background:#F7F6F1;display:flex;flex-direction:column">
+      <div style="padding:clamp(24px,3cqw,36px);display:flex;flex-direction:column;gap:22px;border-bottom:1px solid rgba(15,79,69,0.14)">
+        <div>
+          <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#5C6866;margin-bottom:6px">{{ t.contactPage.office }}</div>
+          <div style="font-size:16px;font-weight:600;color:#0F4F45">{{ t.contactPage.address1 }}</div>
+          <div style="font-size:14.5px;color:#3E4A48">{{ t.contactPage.address2 }}</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px">
+          <div><div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#5C6866;margin-bottom:6px">{{ t.contactPage.phone }}</div><a href="tel:+218910000000" dir="ltr" style="font-size:15px;font-weight:600;color:#0F4F45;text-align:start;display:flex;align-items:center;min-height:{{ linkTap }}">+218 91 000 0000</a></div>
+          <div><div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#5C6866;margin-bottom:6px">{{ t.contactPage.email }}</div><a href="mailto:info@rikaz.ly" style="font-size:15px;font-weight:600;color:#0F4F45;display:flex;align-items:center;min-height:{{ linkTap }}">info@rikaz.ly</a></div>
+        </div>
+        <div>
+          <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#5C6866;margin-bottom:8px">{{ t.contactPage.hours }}</div>
+          <div style="border-top:1px solid rgba(15,79,69,0.14)">
+            <sc-for list="{{ t.contactPage.hourRows }}" as="h" hint-placeholder-count="3">
+              <div style="display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(15,79,69,0.14);font-size:14px"><span style="color:#3E4A48">{{ h.d }}</span><span style="color:#0F4F45;font-weight:600">{{ h.h }}</span></div>
+            </sc-for>
+          </div>
+        </div>
+        <a href="https://wa.me/218910000000" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:10px;background:#0F4F45;color:#fff;border-radius:3px;padding:14px 20px;font-size:14.5px;font-weight:600;transition:background .15s" style-hover="background:#1B7A6A;color:#fff">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8.5 8.5 0 1 1 8.4 19L4 20z"></path><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .7a4 4 0 0 1-1.7-1.7l.7-1-1-2L9 9.5z"></path></svg>
+          {{ t.contactPage.whatsapp }}
+        </a>
+      </div>
+      <div style="flex:1;min-height:240px;position:relative;background:#E9EAE3;overflow:hidden">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=13.14%2C32.87%2C13.24%2C32.92&amp;layer=mapnik&amp;marker=32.8952%2C13.1900" title="Office map" style="position:absolute;inset:0;width:100%;height:100%;border:0;filter:grayscale(1) contrast(0.95)"></iframe>
+        <div style="position:absolute;inset-inline-start:0;bottom:0;font-size:12px;color:#5C6866;background:#fff;padding:8px 12px;border-top:1px solid rgba(15,79,69,0.14);border-inline-end:1px solid rgba(15,79,69,0.14)">{{ t.contactPage.mapLabel }}</div>
+      </div>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+
+<!-- FOOTER -->
+<footer style="background:#0F4F45;color:#fff;border-top:1px solid rgba(255,255,255,0.1);padding-bottom:{{ footerPadB }}">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(48px,6cqw,72px) clamp(20px,4cqw,48px) 40px;display:grid;grid-template-columns:{{ footerCols }};gap:40px 32px">
+    <div>
+      <img src="assets/logo-horizontal-white.png" alt="Rikaz" style="height:40px;display:block;margin-bottom:18px">
+      <p style="margin:0;font-size:14px;line-height:1.6;color:rgba(255,255,255,0.72);max-width:300px">{{ t.footer.tagline }}</p>
+    </div>
+    <div>
+      <div style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#D8CC63;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.14)">{{ t.footer.quick }}</div>
+      <div style="display:flex;flex-direction:column;gap:{{ fGap }}">
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6"><button onClick="{{ n.go }}" style="text-align:start;background:none;border:0;padding:0;min-height:{{ fTap }};cursor:pointer;color:rgba(255,255,255,0.85);font-size:14px;font-family:inherit" style-hover="color:#D8CC63">{{ n.label }}</button></sc-for>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#D8CC63;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.14)">{{ t.footer.brands }}</div>
+      <div style="display:flex;flex-direction:column;gap:{{ fGap }}">
+        <sc-for list="{{ featuredBrands }}" as="b" hint-placeholder-count="7"><button onClick="{{ b.open }}" style="text-align:start;background:none;border:0;padding:0;min-height:{{ fTap }};cursor:pointer;color:rgba(255,255,255,0.85);font-size:14px;font-family:inherit" style-hover="color:#D8CC63">{{ b.name }}</button></sc-for>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#D8CC63;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.14)">{{ t.footer.contact }}</div>
+      <div style="display:flex;flex-direction:column;gap:9px;font-size:14px;color:rgba(255,255,255,0.85)">
+        <span>{{ t.footer.address }}</span><a href="tel:+218910000000" dir="ltr" style="color:rgba(255,255,255,0.85);text-align:start;min-height:{{ fTap }};display:flex;align-items:center" style-hover="color:#D8CC63">+218 91 000 0000</a><a href="mailto:info@rikaz.ly" style="color:rgba(255,255,255,0.85);min-height:{{ fTap }};display:flex;align-items:center" style-hover="color:#D8CC63">info@rikaz.ly</a><span>{{ t.footer.hours }}</span>
+      </div>
+      <div style="display:inline-flex;margin-top:20px;border:1px solid rgba(255,255,255,0.3);border-radius:3px;overflow:hidden;font-size:13px;font-weight:600">
+        <button onClick="{{ setEn }}" style="border:0;padding:0 16px;min-height:{{ fTap }};cursor:pointer;background:{{ fEnBg }};color:{{ fEnColor }};font-family:inherit">English</button>
+        <button onClick="{{ setAr }}" style="border:0;border-inline-start:1px solid rgba(255,255,255,0.3);padding:0 16px;min-height:{{ fTap }};cursor:pointer;background:{{ fArBg }};color:{{ fArColor }};font-family:inherit">العربية</button>
+      </div>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,0.14)">
+    <div style="max-width:1280px;margin:0 auto;padding:18px clamp(20px,4cqw,48px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:12.5px;color:rgba(255,255,255,0.6)">
+      <span>{{ t.footer.copy }}</span><span>{{ t.footer.arTagline }}</span>
+    </div>
+  </div>
+</footer>
+</div>
+
+<!-- MOBILE DRAWER -->
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:60;background:#F7F6F1;display:flex;flex-direction:column;overflow:auto">
+    <div style="height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid rgba(15,79,69,0.14)">
+      <img src="assets/logo-full-horizontal.png" alt="Rikaz" style="height:42px;width:auto;display:block">
+      <button onClick="{{ toggleMenu }}" aria-label="Close" style="width:44px;height:44px;border-radius:3px;border:1px solid rgba(15,79,69,0.2);background:#fff;cursor:pointer;display:grid;place-items:center;font-size:20px;color:#0F4F45;line-height:1">×</button>
+    </div>
+    <nav style="display:flex;flex-direction:column;padding:8px 20px">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
+        <button onClick="{{ n.go }}" style="display:flex;align-items:baseline;gap:16px;text-align:start;background:none;border:0;padding:18px 0;cursor:pointer;border-bottom:1px solid rgba(15,79,69,0.12);font-family:inherit;color:{{ n.color }}">
+          <span style="font-size:12px;font-weight:600;color:#7A6E12;min-width:22px">{{ n.idx }}</span>
+          <span style="font-size:26px;font-weight:600;letter-spacing:-0.02em;line-height:1.1">{{ n.label }}</span>
+        </button>
+      </sc-for>
+    </nav>
+    <div style="margin-top:auto;padding:20px;display:flex;flex-direction:column;gap:14px;border-top:1px solid rgba(15,79,69,0.14)">
+      <div style="display:flex;border:1px solid rgba(15,79,69,0.2);border-radius:3px;overflow:hidden;font-size:13px;font-weight:600;align-self:flex-start">
+        <button onClick="{{ setEn }}" style="border:0;padding:10px 18px;cursor:pointer;background:{{ enBg }};color:{{ enColor }};font-family:inherit">English</button>
+        <button onClick="{{ setAr }}" style="border:0;border-inline-start:1px solid rgba(15,79,69,0.2);padding:10px 18px;cursor:pointer;background:{{ arBg }};color:{{ arColor }};font-family:inherit">العربية</button>
+      </div>
+      <button onClick="{{ goPartner }}" style="background:#0F4F45;color:#fff;border:0;border-radius:3px;padding:16px 18px;cursor:pointer;font-size:15px;font-weight:600;font-family:inherit">{{ t.nav.partner }}</button>
+      <div style="font-size:12.5px;color:#5C6866;display:flex;flex-direction:column;gap:2px"><span>{{ t.footer.address }}</span><span dir="ltr" style="text-align:start">+218 91 000 0000</span><span>info@rikaz.ly</span></div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ showMobileBar }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset-inline:0;bottom:0;z-index:40;background:rgba(255,255,255,0.96);backdrop-filter:blur(10px);border-top:1px solid rgba(15,79,69,0.14);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;gap:10px;align-items:center">
+    <div style="flex:1;min-width:0"><div style="font-size:13.5px;font-weight:600;color:#0F4F45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ product.name }}</div><div style="font-size:12px;color:#5C6866"><bdi>{{ product.size }}</bdi> · <bdi>{{ product.sku }}</bdi></div></div>
+    <button onClick="{{ enquire }}" style="flex:none;min-height:48px;background:#0F4F45;color:#fff;border:0;border-radius:3px;padding:0 18px;cursor:pointer;font-size:14.5px;font-weight:600;font-family:inherit">{{ t.productPage.enquireShort }}</button>
+  </div>
+</sc-if>
+
+<sc-if value="{{ showWa }}" hint-placeholder-val="{{ false }}">
+  <a href="https://wa.me/218910000000" target="_blank" rel="noopener" aria-label="WhatsApp" style="position:fixed;inset-inline-end:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:40;width:56px;height:56px;border-radius:50%;background:#0F4F45;color:#fff;display:grid;place-items:center;box-shadow:0 10px 24px -6px rgba(15,40,35,0.4)">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8.5 8.5 0 1 1 8.4 19L4 20z"></path><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .7a4 4 0 0 1-1.7-1.7l.7-1-1-2L9 9.5z"></path></svg>
+  </a>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;page&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;home&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;about&quot;,&quot;brands&quot;,&quot;brand&quot;,&quot;product&quot;,&quot;market&quot;,&quot;partner&quot;,&quot;contact&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Navigation&quot;},&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;en&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;ar&quot;],&quot;tsType&quot;:&quot;'en'|'ar'&quot;,&quot;section&quot;:&quot;Navigation&quot;},&quot;arabicFont&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Readex Pro&quot;,&quot;options&quot;:[&quot;Readex Pro&quot;,&quot;Noto Kufi Arabic&quot;,&quot;Alexandria&quot;,&quot;IBM Plex Sans Arabic&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Typography&quot;}}">
+const I = (children) => React.createElement('svg', {width:20,height:20,viewBox:'0 0 24 24',fill:'none',stroke:'currentColor',strokeWidth:1.5,strokeLinecap:'round',strokeLinejoin:'round'}, ...children);
+const C = (cx,cy,r) => React.createElement('circle',{key:cx+'-'+cy+'-'+r,cx,cy,r});
+const L = (x1,y1,x2,y2) => React.createElement('line',{key:[x1,y1,x2,y2].join(),x1,y1,x2,y2});
+const P = (d) => React.createElement('path',{key:d,d});
+const ICONS = {
+  network: I([C(12,5,2.5),C(5,18,2.5),C(19,18,2.5),L(10.5,7,6.5,16),L(13.5,7,17.5,16),L(7.5,18,16.5,18)]),
+  distribution: I([C(4,12,2.2),C(20,12,2.2),L(6.2,12,17.8,12),P('M14 8.5 17.5 12 14 15.5')]),
+  growth: I([P('M3 17 9 11 13 15 21 7'),P('M15 7h6v6')]),
+  selection: I([C(12,12,9),P('M8 12.5 11 15.5 16.5 9.5')]),
+  team: I([C(9,8,3),C(17,9,2.4),P('M3 19c0-3.3 2.7-6 6-6s6 2.7 6 6'),P('M15.5 13.5c2.9.3 5.5 2.5 5.5 5.5')]),
+  quality: I([C(12,12,9),P('M8 12.5 11 15.5 16.5 9.5')]),
+  integrity: I([P('M12 3 20 7v5c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V7l8-4z')]),
+  commitment: I([C(12,12,9),C(12,12,3)]),
+  partnership: I([C(9,12,5.5),C(15,12,5.5)]),
+  continuous: I([P('M4 12a8 8 0 0 1 13.7-5.6L20 8'),P('M20 4v4h-4'),P('M20 12a8 8 0 0 1-13.7 5.6L4 16'),P('M4 20v-4h4')]),
+};
+const CATS = {
+  snacks:{en:'Snacks & Confectionery',ar:'وجبات خفيفة وحلويات'}, beverages:{en:'Beverages',ar:'مشروبات'}, dairy:{en:'Dairy',ar:'ألبان'},
+  canned:{en:'Canned & Preserved',ar:'معلبات ومحفوظات'}, grains:{en:'Grains & Pasta',ar:'حبوب ومعكرونة'}, oils:{en:'Oils & Condiments',ar:'زيوت وتوابل'},
+  frozen:{en:'Frozen',ar:'مجمدات'}, household:{en:'Household',ar:'منزلية'},
+};
+const COUNTRIES = { TR:{en:'Türkiye',ar:'تركيا'}, IT:{en:'Italy',ar:'إيطاليا'}, DE:{en:'Germany',ar:'ألمانيا'}, EG:{en:'Egypt',ar:'مصر'}, ES:{en:'Spain',ar:'إسبانيا'}, NL:{en:'Netherlands',ar:'هولندا'}, TN:{en:'Tunisia',ar:'تونس'}, BE:{en:'Belgium',ar:'بلجيكا'}, IN:{en:'India',ar:'الهند'} };
+const BRANDS = [
+  {id:'antat',name:'Antat',logo:'assets/brands/antat-logo.png',cat:'snacks',country:'TR',desc:{en:'Chocolate, candy and jelly confectionery, plus the Verona de luxe praline range.',ar:'شوكولاتة وحلوى وجيلي، إضافةً إلى تشكيلة برالين فيرونا الفاخرة.'},story:{en:'Antat is a Turkish confectionery house producing wrapped candies, jellies and boxed chocolate pralines for export markets across MENA. Rikaz distributes the full Antat range in Libya through retail and wholesale channels.',ar:'أنتات دار حلويات تركية تنتج الحلوى المغلفة والجيلي وبرالين الشوكولاتة المعلّبة لأسواق التصدير في المنطقة. توزّع رِكاز تشكيلة أنتات الكاملة في ليبيا عبر قنوات التجزئة والجملة.'}},
+  {id:'mymotto',name:'My Motto',logo:'assets/brands/mymotto-logo.png',cat:'snacks',country:'TR',desc:{en:'Crispy wafer bars in five flavours — no palm oil, no artificial colourings.',ar:'ألواح ويفر مقرمشة بخمس نكهات — بدون زيت نخيل وبدون ألوان صناعية.'},story:{en:'My Motto crispy wafers combine layered wafer with cream fillings and a source of fibre, in impulse-friendly single bars.',ar:'ويفر ماي موتو المقرمش يجمع طبقات الويفر بحشوات الكريمة ومصدر للألياف، في ألواح فردية مناسبة للشراء الفوري.'}},
+  {id:'sweetsmil',name:'Sweet Smil',logo:'assets/brands/sweetsmile-logo.png',cat:'snacks',country:'TR',desc:{en:'Assorted chocolate pralines in gift tins.',ar:'برالين شوكولاتة متنوّعة في علب هدايا معدنية.'},story:{en:'Sweet Smil offers filled chocolates in tall display tins — a gifting and seasonal line for supermarkets and sweet shops.',ar:'تقدّم سويت سميل شوكولاتة محشوة في علب معدنية طويلة للعرض — خط للهدايا والمواسم للمتاجر الكبرى ومحلات الحلويات.'}},
+  {id:'maretti',name:'Maretti',logo:'assets/brands/maretti-logo.png',cat:'snacks',country:'IT',desc:{en:'Oven-baked Italian-style bruschette chips.',ar:'رقائق بروسكيتا إيطالية الطابع مخبوزة بالفرن.'},story:{en:'Maretti bruschette are baked bread chips in savoury flavours, a premium salty snack for retail and HoReCa.',ar:'بروسكيتا ماريتي رقائق خبز مخبوزة بنكهات مالحة، وجبة خفيفة فاخرة للتجزئة وقطاع الضيافة.'}},
+  {id:'spuds',name:'Spuds',logo:'assets/brands/spuds-logo.png',cat:'snacks',country:'TR',desc:{en:'Craft-cooked kettle potato chips.',ar:'رقائق بطاطس مطبوخة بطريقة الحرفيين.'},story:{en:'Spuds Craft Cooked chips are slow-cooked in small batches for a thicker, crunchier bite.',ar:'رقائق سبادز تُطبخ ببطء على دفعات صغيرة لقرمشة أكثف.'}},
+  {id:'bonucci',name:'Bonucci',logo:'assets/brands/bonici-logo.png',cat:'snacks',country:'TR',desc:{en:'Biscuits and chocolate-coated treats.',ar:'بسكويت وحلويات مغطاة بالشوكولاتة.'},story:{en:'Bonucci is a value confectionery and biscuit line for the modern and traditional trade.',ar:'بونوتشي خط حلويات وبسكويت بقيمة مناسبة للتجارة الحديثة والتقليدية.'}},
+  {id:'uber',name:'Uber Energy Drink',logo:'assets/brands/uber-logo.png',cat:'beverages',country:'TR',desc:{en:'Carbonated energy drink in 250 ml cans.',ar:'مشروب طاقة غازي في عبوات 250 مل.'},story:{en:'Uber Energy Drink targets the fast-growing energy segment with a bold dragon identity and competitive pricing.',ar:'يستهدف مشروب أوبر للطاقة قطاع مشروبات الطاقة سريع النمو بهوية تنين جريئة وتسعير تنافسي.'}},
+];
+const PRODUCTS = [
+  {id:'an1',brand:'antat',img:'assets/brands/antat-product-1.png',name:'Assorted Candy Mix',nameAr:'حلوى مشكّلة',size:'1 kg',sku:'ANT-0101',status:'stock',shelf:'18 months',pack:{en:'Pillow bag',ar:'كيس'},caseQty:'10 × 1 kg',desc:{en:'Chocolate, candy and jelly assortment in individually wrapped pieces.',ar:'تشكيلة شوكولاتة وحلوى وجيلي بقطع مغلفة فردياً.'}},
+  {id:'an2',brand:'antat',img:'assets/brands/antat-product-2.png',name:'Fruit Jelly & Candy Mix',nameAr:'جيلي وحلوى بالفواكه',size:'1 kg',sku:'ANT-0102',status:'stock',shelf:'18 months',pack:{en:'Pillow bag',ar:'كيس'},caseQty:'10 × 1 kg',desc:{en:'Soft fruit jellies and hard candies, mixed pack.',ar:'جيلي فواكه طري وحلوى صلبة في عبوة مشكّلة.'}},
+  {id:'an3',brand:'antat',img:'assets/brands/antat-product-3.png',name:'Verona de luxe — Gold',nameAr:'فيرونا الفاخرة — ذهبي',size:'1 kg',sku:'ANT-0301',status:'stock',shelf:'12 months',pack:{en:'Clear gift box',ar:'علبة هدايا شفافة'},caseQty:'6 × 1 kg',desc:{en:'Milk chocolate pralines with hazelnut cream in gold wrap.',ar:'برالين شوكولاتة بالحليب بكريمة البندق بغلاف ذهبي.'}},
+  {id:'an4',brand:'antat',img:'assets/brands/antat-product-4.png',name:'Verona de luxe — Red',nameAr:'فيرونا الفاخرة — أحمر',size:'1 kg',sku:'ANT-0302',status:'stock',shelf:'12 months',pack:{en:'Clear gift box',ar:'علبة هدايا شفافة'},caseQty:'6 × 1 kg',desc:{en:'Chocolate pralines with strawberry cream filling.',ar:'برالين شوكولاتة بحشوة كريمة الفراولة.'}},
+  {id:'an5',brand:'antat',img:'assets/brands/antat-product-5.png',name:'Verona de luxe — Blue',nameAr:'فيرونا الفاخرة — أزرق',size:'1 kg',sku:'ANT-0303',status:'new',shelf:'12 months',pack:{en:'Clear gift box',ar:'علبة هدايا شفافة'},caseQty:'6 × 1 kg',desc:{en:'Dark and milk chocolate pralines with coconut cream.',ar:'برالين شوكولاتة داكنة وبالحليب بكريمة جوز الهند.'}},
+  {id:'an6',brand:'antat',img:'assets/brands/antat-product-6.png',name:'Verona de luxe — Dark',nameAr:'فيرونا الفاخرة — داكن',size:'1 kg',sku:'ANT-0304',status:'stock',shelf:'12 months',pack:{en:'Clear gift box',ar:'علبة هدايا شفافة'},caseQty:'6 × 1 kg',desc:{en:'Dark chocolate pralines with hazelnut and cocoa cream.',ar:'برالين شوكولاتة داكنة بكريمة البندق والكاكاو.'}},
+  {id:'mm1',brand:'mymotto',img:'assets/brands/mymotto-product-1.png',name:'Crispy Wafer — Strawberries & Cream',nameAr:'ويفر مقرمش — فراولة وكريمة',size:'40 g',sku:'MYM-0201',status:'stock',shelf:'12 months',pack:{en:'Flow-wrap',ar:'غلاف ملفوف'},caseQty:'24 × 40 g',desc:{en:'Layered wafer with strawberry cream. No palm oil, source of fibre.',ar:'ويفر طبقات بكريمة الفراولة. بدون زيت نخيل، مصدر للألياف.'}},
+  {id:'mm2',brand:'mymotto',img:'assets/brands/mymotto-product-2.png',name:'Crispy Wafer — Tiramisu',nameAr:'ويفر مقرمش — تيراميسو',size:'40 g',sku:'MYM-0202',status:'stock',shelf:'12 months',pack:{en:'Flow-wrap',ar:'غلاف ملفوف'},caseQty:'24 × 40 g',desc:{en:'Coffee-cream wafer inspired by tiramisu.',ar:'ويفر بكريمة القهوة مستوحى من التيراميسو.'}},
+  {id:'mm3',brand:'mymotto',img:'assets/brands/mymotto-product-3.png',name:'Crispy Wafer — Cocoa & Cocoa',nameAr:'ويفر مقرمش — كاكاو وكاكاو',size:'40 g',sku:'MYM-0203',status:'stock',shelf:'12 months',pack:{en:'Flow-wrap',ar:'غلاف ملفوف'},caseQty:'24 × 40 g',desc:{en:'Cocoa wafer with cocoa cream, chocolate coated.',ar:'ويفر كاكاو بكريمة الكاكاو مغطى بالشوكولاتة.'}},
+  {id:'mm4',brand:'mymotto',img:'assets/brands/mymotto-product-4.png',name:'Crispy Wafer — Vanilla Mousse',nameAr:'ويفر مقرمش — موس الفانيليا',size:'40 g',sku:'MYM-0204',status:'stock',shelf:'12 months',pack:{en:'Flow-wrap',ar:'غلاف ملفوف'},caseQty:'24 × 40 g',desc:{en:'Light vanilla mousse cream between crisp wafer layers.',ar:'كريمة موس فانيليا خفيفة بين طبقات ويفر مقرمشة.'}},
+  {id:'mm5',brand:'mymotto',img:'assets/brands/mymotto-product-5.png',name:'Crispy Wafer — Hazelnut & Cocoa',nameAr:'ويفر مقرمش — بندق وكاكاو',size:'40 g',sku:'MYM-0205',status:'new',shelf:'12 months',pack:{en:'Flow-wrap',ar:'غلاف ملفوف'},caseQty:'24 × 40 g',desc:{en:'Hazelnut-cocoa cream wafer, chocolate coated.',ar:'ويفر بكريمة البندق والكاكاو مغطى بالشوكولاتة.'}},
+  {id:'ss1',brand:'sweetsmil',img:'assets/brands/sweetsmile-product-1.png',name:'Praline Tin — Classic',nameAr:'علبة برالين — كلاسيك',size:'300 g',sku:'SWS-0401',status:'stock',shelf:'12 months',pack:{en:'Display tin',ar:'علبة معدنية'},caseQty:'12 × 300 g',desc:{en:'Assorted milk chocolate pralines in a tall gift tin.',ar:'برالين شوكولاتة بالحليب متنوّعة في علبة هدايا معدنية طويلة.'}},
+  {id:'ss2',brand:'sweetsmil',img:'assets/brands/sweetsmile-product-2.png',name:'Praline Tin — Gold',nameAr:'علبة برالين — ذهبي',size:'300 g',sku:'SWS-0402',status:'stock',shelf:'12 months',pack:{en:'Display tin',ar:'علبة معدنية'},caseQty:'12 × 300 g',desc:{en:'Hazelnut pralines in gold wrap.',ar:'برالين بالبندق بغلاف ذهبي.'}},
+  {id:'ss3',brand:'sweetsmil',img:'assets/brands/sweetsmile-product-3.png',name:'Praline Tin — Ruby',nameAr:'علبة برالين — روبي',size:'300 g',sku:'SWS-0403',status:'stock',shelf:'12 months',pack:{en:'Display tin',ar:'علبة معدنية'},caseQty:'12 × 300 g',desc:{en:'Strawberry-cream pralines in red wrap.',ar:'برالين بكريمة الفراولة بغلاف أحمر.'}},
+  {id:'ss4',brand:'sweetsmil',img:'assets/brands/sweetsmile-product-4.png',name:'Praline Tin — Blue',nameAr:'علبة برالين — أزرق',size:'300 g',sku:'SWS-0404',status:'soon',shelf:'12 months',pack:{en:'Display tin',ar:'علبة معدنية'},caseQty:'12 × 300 g',desc:{en:'Coconut-cream pralines in blue wrap.',ar:'برالين بكريمة جوز الهند بغلاف أزرق.'}},
+  {id:'ma1',brand:'maretti',name:'Bruschette — Tomato, Olives & Oregano',nameAr:'بروسكيتا — طماطم وزيتون وأوريغانو',size:'70 g',sku:'MAR-0501',status:'stock',shelf:'12 months',pack:{en:'Pillow bag',ar:'كيس'},caseQty:'18 × 70 g',desc:{en:'Oven-baked bread chips, Mediterranean seasoning.',ar:'رقائق خبز مخبوزة بتتبيلة متوسطية.'}},
+  {id:'ma2',brand:'maretti',name:'Bruschette — Mixed Cheese',nameAr:'بروسكيتا — أجبان مشكّلة',size:'70 g',sku:'MAR-0502',status:'stock',shelf:'12 months',pack:{en:'Pillow bag',ar:'كيس'},caseQty:'18 × 70 g',desc:{en:'Baked bread chips with a four-cheese seasoning.',ar:'رقائق خبز مخبوزة بتتبيلة أربعة أجبان.'}},
+  {id:'sp1',brand:'spuds',name:'Craft Cooked — Sea Salt',nameAr:'مطبوخة حرفياً — ملح بحري',size:'150 g',sku:'SPD-0601',status:'stock',shelf:'9 months',pack:{en:'Pillow bag',ar:'كيس'},caseQty:'12 × 150 g',desc:{en:'Kettle-cooked thick-cut chips with sea salt.',ar:'رقائق سميكة مطبوخة بالقدر مع ملح البحر.'}},
+  {id:'bo1',brand:'bonucci',name:'Chocolate Coated Biscuit',nameAr:'بسكويت مغطى بالشوكولاتة',size:'50 g',sku:'BON-0701',status:'stock',shelf:'12 months',pack:{en:'Flow-wrap',ar:'غلاف ملفوف'},caseQty:'24 × 50 g',desc:{en:'Crunchy biscuit coated in milk chocolate.',ar:'بسكويت مقرمش مغطى بشوكولاتة الحليب.'}},
+  {id:'ub1',brand:'uber',name:'Uber Energy Drink',nameAr:'مشروب أوبر للطاقة',size:'250 ml',sku:'UBR-0801',status:'stock',shelf:'18 months',pack:{en:'Aluminium can',ar:'عبوة ألمنيوم'},caseQty:'24 × 250 ml',desc:{en:'Classic taurine and caffeine energy drink.',ar:'مشروب طاقة كلاسيكي بالتورين والكافيين.'}},
+];
+const CITIES = [
+  {city:{en:'Tripoli',ar:'طرابلس'},region:{en:'Tripolitania',ar:'طرابلس'},ch:['retail','wholesale','horeca'],lead:'24 h',status:'hub'},
+  {city:{en:'Benghazi',ar:'بنغازي'},region:{en:'Cyrenaica',ar:'برقة'},ch:['retail','wholesale','horeca'],lead:'48 h',status:'hub'},
+  {city:{en:'Misrata',ar:'مصراتة'},region:{en:'Tripolitania',ar:'طرابلس'},ch:['retail','wholesale'],lead:'24 h',status:'served'},
+  {city:{en:'Zawiya',ar:'الزاوية'},region:{en:'Tripolitania',ar:'طرابلس'},ch:['retail','wholesale'],lead:'24 h',status:'served'},
+  {city:{en:'Al Khums',ar:'الخمس'},region:{en:'Tripolitania',ar:'طرابلس'},ch:['retail'],lead:'24 h',status:'served'},
+  {city:{en:'Zliten',ar:'زليتن'},region:{en:'Tripolitania',ar:'طرابلس'},ch:['retail'],lead:'48 h',status:'served'},
+  {city:{en:'Al Bayda',ar:'البيضاء'},region:{en:'Cyrenaica',ar:'برقة'},ch:['retail','wholesale'],lead:'72 h',status:'served'},
+  {city:{en:'Tobruk',ar:'طبرق'},region:{en:'Cyrenaica',ar:'برقة'},ch:['wholesale'],lead:'72 h',status:'served'},
+  {city:{en:'Sabha',ar:'سبها'},region:{en:'Fezzan',ar:'فزان'},ch:['wholesale'],lead:'5 d',status:'served'},
+  {city:{en:'Sirte',ar:'سرت'},region:{en:'Tripolitania',ar:'طرابلس'},ch:['retail'],lead:'—',status:'soon'},
+];
+const T = {
+ en:{
+  arrow:'→', arrowBack:'←',
+  nav:{home:'Home',about:'About Us',brands:'Our Brands',market:'Our Market',partner:'Partner With Us',contact:'Contact'},
+  hero:{kicker:'Food import & distribution · Libya',title:'Bringing quality food brands to the Libyan market.',sub:'Through strong market relationships, efficient distribution, and a dedicated team, we connect trusted products with retailers and consumers across Libya.',cta1:'Explore our brands',cta2:'Partner with us',tileLabel:'SKUs in portfolio',caption:'',brandsWord:'brands represented'},
+  stats:{brands:'Brands represented',skus:'Active SKUs',regions:'Regions covered',partners:'Retail partners'},
+  apart:{kicker:'Why Rikaz',title:'What sets us apart',sub:'We combine market knowledge with strategic distribution and marketing to create sustainable growth for the brands we represent.',items:[
+    {title:'Strong market network',body:'Established relationships with wholesalers, retailers, and key players across the Libyan market.'},
+    {title:'Efficient distribution',body:'A growing distribution network designed to move products efficiently and reliably across different regions.'},
+    {title:'Market development',body:'We support the products we represent through strategic marketing, market activation, and strong commercial execution.'},
+    {title:'Product selection',body:'We focus on bringing products that combine quality, consumer appeal, and market potential.'},
+    {title:'Experienced, dedicated team',body:'Our people bring determination, market knowledge, and a hands-on approach to every part of the business.'}]},
+  featured:{kicker:'Portfolio',title:'Brands we represent',link:'View all brands',allLabel:'Full portfolio'},
+  market:{kicker:'Our Market',title:'Growing coverage across Libya.',p1:'Rikaz operates within the Libyan food market, serving retailers, wholesalers, and business partners across multiple regions.',link:'See our distribution',hub:'Distribution hub',served:'Served city',facts:{hubs:'Distribution hubs',cities:'Cities served',lead:'Lead time from Tripoli'}},
+  commit:{kicker:'Our approach',l1:'At Rikaz, distribution is more than delivering products.',l2:'It is about building brands, strengthening partnerships, and creating lasting value in the market.'},
+  partner:{kicker:'Partner With Us',title:'Two ways to work with Rikaz.',cards:[
+    {kicker:'For suppliers & brands',title:'Enter the Libyan market with a partner who knows it.',body:'Import licensing, warehousing, nationwide distribution, and market activation — one accountable partner from port to shelf.',cta:'Become a supplier'},
+    {kicker:'For retailers & wholesalers',title:'Reliable supply of brands your customers ask for.',body:'Consistent availability, fair trade terms, and merchandising support for supermarkets, minimarkets and wholesale depots.',cta:'Become a customer'}]},
+  about:{kicker:'About Us',title:'A food distribution company focused on the Libyan market.',p1:'Rikaz is a food distribution company focused on bringing quality food products to the Libyan market.',p2:'Through strong market relationships, efficient distribution, and a dedicated team, we connect trusted products with retailers and consumers across Libya. We combine market knowledge with strategic distribution and marketing to create sustainable growth for the brands we represent.',imgLabel:'Photo: team at the warehouse',missionLabel:'Mission',mission1:'To connect quality food brands with the Libyan market through efficient distribution, strong partnerships, and professional market development.',mission2:'We strive to create value for our suppliers, retailers, and customers at every stage of the supply chain.',visionLabel:'Vision',vision:'To build a nationwide food distribution network recognized for trust, efficiency, and strong market presence — becoming a preferred partner for leading food brands and retailers throughout Libya.'},
+  values:{kicker:'Core values',title:'What we stand for',items:[
+    {title:'Quality',body:'We carefully select the products and brands we bring to the market.'},
+    {title:'Integrity',body:'We build our business on transparency, responsibility, and trust.'},
+    {title:'Commitment',body:'We take responsibility for our work and remain dedicated to delivering on our promises.'},
+    {title:'Partnership',body:'We develop long-term relationships with suppliers, wholesalers, retailers, and other business partners.'},
+    {title:'Continuous growth',body:'We continuously improve our operations, expand our reach, and seek new opportunities.'}]},
+  team:{kicker:'Our team',title:'People who know the market.',sub:'Determination, market knowledge, and a hands-on approach to every part of the business.',portrait:'Portrait',people:[{n:'Name Surname',r:'General Manager'},{n:'Name Surname',r:'Commercial Director'},{n:'Name Surname',r:'Supply Chain Lead'},{n:'Name Surname',r:'Marketing & Activation'}]},
+  brandsPage:{kicker:'Our Brands',title:'Brands and products we distribute.',sub:'A curated portfolio of food brands selected for quality, consumer appeal, and market potential.',search:'Search brands or products',allCountries:'All countries',all:'All categories',az:'A – Z',results:'brands',clear:'Clear filters',view:'View products',empty:'No brands match these filters.',catTitle:'Need the full price list?',catSub:'Wholesalers and retailers can request our complete catalogue and current trade price list as a PDF.',catCta:'Request catalogue'},
+  brandPage:{back:'All brands',products:'Products',items:'items',pack:'Pack shot',meta:{cat:'Category',origin:'Country of origin',range:'Products in range',since:'Distributed since'}},
+  productPage:{imgLabel:'Product shot on clean background',enquire:'Enquire about this product',enquireShort:'Enquire',priceList:'Request price list',enquired:'Thank you — our sales team will contact you within one working day.',note:'B2B catalogue. Prices and minimum order quantities are provided on request.',related:'More from this brand',specs:{size:'Pack size',sku:'SKU',category:'Category',origin:'Country of origin',shelf:'Shelf life',pack:'Packaging',caseQty:'Case configuration',status:'Availability'}},
+  badges:{stock:'In stock',new:'New',soon:'Coming soon'},
+  marketPage:{kicker:'Our Market',title:'Where we sell, and how.',sub:'Coverage, channels and logistics for the Libyan food trade — from the Tripoli hub to wholesale depots in the south.',channelsKicker:'Channels',channelsTitle:'Three routes to the consumer.',channelsSub:'We balance modern retail, traditional wholesale and food service so brands reach every shelf that matters.',channelsNote:'Share of volume, last 12 months. Indicative figures.',channels:{retail:{n:'Retail',d:'Supermarkets, minimarkets and convenience stores in the major cities.'},wholesale:{n:'Wholesale',d:'Regional depots that supply traditional trade across the country.'},horeca:{n:'HoReCa',d:'Hotels, restaurants, cafés and catering in Tripoli and Benghazi.'}},
+    logisticsKicker:'Logistics & warehousing',logisticsTitle:'Built to keep shelves stocked.',logisticsSub:'Ambient and temperature-controlled storage, our own fleet, and a replenishment cycle designed for the Libyan road network.',logistics:[{k:'Warehousing',v:'4,200 m²',d:'Ambient storage at the Tripoli hub, racked and inventory-tracked.'},{k:'Cold chain',v:'600 m²',d:'Chilled and frozen capacity for dairy and frozen lines.'},{k:'Fleet',v:'18 vehicles',d:'Own delivery vans and trucks, plus contracted long-haul.'},{k:'Replenishment',v:'Weekly',d:'Standard route cycle for key accounts; 48 h on urgent orders.'}],
+    coverageKicker:'Coverage',coverageTitle:'Coverage by city',coverageUpdated:'Updated Q3 2026',cols:{city:'City',region:'Region',channels:'Channels',lead:'Lead time',status:'Status'},status:{hub:'Hub',served:'Served',soon:'Planned'},chNames:{retail:'Retail',wholesale:'Wholesale',horeca:'HoReCa'}},
+  partnerPage:{kicker:'Partner With Us',title:'One partner from port to shelf.',sub:'Whether you are a brand looking for a Libyan distributor or a retailer looking for reliable supply, we work on clear terms and a defined process.',offerLabel:'What we take on',processLabel:'How it works',processTitle:'A defined process, start to finish.',ctaTitle:'Ready to talk?',ctaSub:'Send us a short brief and our commercial team will respond within two working days.',
+    suppliers:{tab:'For suppliers & brands',title:'Enter the Libyan market with a partner who knows it.',intro:'We take full responsibility for your brand in Libya: import, storage, distribution, and the commercial work that builds rotation.',cta:'Start a supplier enquiry',offers:[{t:'Import & registration',d:'Licensing, customs clearance and product registration handled end to end.'},{t:'Warehousing',d:'Ambient and cold storage at the Tripoli hub with inventory reporting.'},{t:'Nationwide distribution',d:'Retail, wholesale and HoReCa coverage across ten regions.'},{t:'Market activation',d:'Listings, in-store visibility, sampling and trade promotions.'},{t:'Reporting',d:'Monthly sell-in / sell-out reports and stock positions.'}],steps:[{t:'Intro call',d:'We review your range, pricing and target channels.',time:'Week 1'},{t:'Market assessment',d:'Shelf checks, competitor pricing and volume forecast.',time:'Weeks 2–3'},{t:'Terms & registration',d:'Distribution agreement, product registration, first order.',time:'Weeks 4–8'},{t:'Launch',d:'First shipment lands, listings go live, activation begins.',time:'Week 10+'}]},
+    retailers:{tab:'For retailers & wholesalers',title:'Reliable supply of brands your customers ask for.',intro:'Open a trade account for consistent availability, fair terms and merchandising support — whether you run one store or a regional depot.',cta:'Open a trade account',offers:[{t:'Trade account',d:'Simple onboarding with clear credit and payment terms.'},{t:'Weekly replenishment',d:'Scheduled routes for key accounts; 48-hour urgent delivery.'},{t:'Merchandising support',d:'Planograms, shelf-ready displays and point-of-sale material.'},{t:'Promotions calendar',d:'Seasonal offers and launch pricing shared in advance.'},{t:'Dedicated account manager',d:'One contact for orders, returns and questions.'}],steps:[{t:'Enquiry',d:'Tell us your store type, location and volumes.',time:'Day 1'},{t:'Account setup',d:'Trade terms agreed, account opened.',time:'Days 2–5'},{t:'First order',d:'Range recommendation and first delivery.',time:'Week 2'},{t:'Ongoing supply',d:'Scheduled replenishment and account reviews.',time:'Monthly'}]}},
+  contactPage:{kicker:'Contact',title:'Talk to our commercial team.',sub:'Product enquiries, trade accounts, supplier proposals — send a short message and we will route it to the right person.',f:{name:'Your name',company:'Company',email:'Email',type:'I am a…',message:'Message',submit:'Send message',note:'We reply within two working days.'},types:{supplier:'Supplier / brand owner',retailer:'Retailer / wholesaler',other:'Other'},sentTitle:'Message received.',sentBody:'Thank you. A member of our commercial team will reply within two working days.',sentAgain:'Send another message',office:'Head office',address1:'Rikaz Food Distribution',address2:'Al Serraj, Tripoli, Libya',phone:'Phone',email:'Email',hours:'Working hours',hourRows:[{d:'Sunday – Thursday',h:'08:00 – 17:00'},{d:'Saturday',h:'09:00 – 14:00'},{d:'Friday',h:'Closed'}],whatsapp:'Message us on WhatsApp',mapLabel:'Head office · Tripoli'},
+  footer:{tagline:'Bringing quality food brands to the Libyan market through efficient distribution, strong partnerships, and professional market development.',quick:'Company',brands:'Brands',contact:'Contact',address:'Al Serraj, Tripoli, Libya',hours:'Sun – Thu, 08:00 – 17:00',copy:'© 2026 Rikaz. All rights reserved.',arTagline:'رِكَازٌ — لاستيراد وتوزيع المواد الغذائية'},
+ },
+ ar:{
+  arrow:'←', arrowBack:'→',
+  nav:{home:'الرئيسية',about:'من نحن',brands:'علاماتنا التجارية',market:'سوقنا',partner:'شاركنا',contact:'اتصل بنا'},
+  hero:{kicker:'استيراد وتوزيع المواد الغذائية · ليبيا',title:'نُقدّم علامات غذائية عالية الجودة إلى السوق الليبي.',sub:'من خلال علاقات قوية في السوق وتوزيع فعّال وفريق متفانٍ، نربط المنتجات الموثوقة بتجار التجزئة والمستهلكين في جميع أنحاء ليبيا.',cta1:'استكشف علاماتنا',cta2:'شاركنا',tileLabel:'منتج في المحفظة',caption:'صور عبوات مختارة من الكتالوج الحالي',brandsWord:'علامات نمثّلها'},
+  stats:{brands:'علامة تجارية نمثّلها',skus:'منتج نشط',regions:'مناطق نغطيها',partners:'شريك تجزئة'},
+  apart:{kicker:'لماذا رِكاز',title:'ما يميّزنا',sub:'نجمع بين معرفة السوق والتوزيع الاستراتيجي والتسويق لتحقيق نمو مستدام للعلامات التي نمثّلها.',items:[
+    {title:'شبكة سوقية قوية',body:'علاقات راسخة مع تجار الجملة والتجزئة والجهات الرئيسية في السوق الليبي.'},
+    {title:'توزيع فعّال',body:'شبكة توزيع متنامية مصمّمة لنقل المنتجات بكفاءة وموثوقية عبر مختلف المناطق.'},
+    {title:'تطوير السوق',body:'ندعم المنتجات التي نمثّلها من خلال التسويق الاستراتيجي وتنشيط السوق والتنفيذ التجاري القوي.'},
+    {title:'اختيار المنتجات',body:'نركّز على تقديم منتجات تجمع بين الجودة وجاذبية المستهلك وإمكانات السوق.'},
+    {title:'فريق خبير ومتفانٍ',body:'يجلب فريقنا العزيمة ومعرفة السوق ونهجاً عملياً إلى كل جزء من أعمالنا.'}]},
+  featured:{kicker:'المحفظة',title:'العلامات التي نمثّلها',link:'عرض جميع العلامات',allLabel:'المحفظة الكاملة'},
+  market:{kicker:'سوقنا',title:'تغطية متنامية عبر ليبيا.',p1:'تعمل رِكاز في سوق المواد الغذائية الليبي، وتخدم تجار التجزئة والجملة وشركاء الأعمال عبر مناطق متعددة.',link:'تعرّف على توزيعنا',hub:'مركز توزيع',served:'مدينة مخدومة',facts:{hubs:'مراكز التوزيع',cities:'مدن مخدومة',lead:'مدة التوصيل من طرابلس'}},
+  commit:{kicker:'نهجنا',l1:'في رِكاز، التوزيع أكثر من مجرد توصيل المنتجات.',l2:'إنه بناء العلامات التجارية، وتعزيز الشراكات، وخلق قيمة دائمة في السوق.'},
+  partner:{kicker:'شاركنا',title:'طريقتان للعمل مع رِكاز.',cards:[
+    {kicker:'للمورّدين والعلامات التجارية',title:'ادخل السوق الليبي مع شريك يعرفه جيداً.',body:'ترخيص الاستيراد، التخزين، التوزيع على مستوى البلاد، وتنشيط السوق — شريك واحد مسؤول من الميناء إلى الرف.',cta:'كن مورّداً'},
+    {kicker:'لتجار التجزئة والجملة',title:'إمداد موثوق بالعلامات التي يطلبها عملاؤك.',body:'توافر مستمر، شروط تجارية عادلة، ودعم في العرض للمتاجر الكبرى والصغرى ومستودعات الجملة.',cta:'كن عميلاً'}]},
+  about:{kicker:'من نحن',title:'شركة توزيع مواد غذائية تركّز على السوق الليبي.',p1:'رِكاز شركة توزيع مواد غذائية تركّز على تقديم منتجات غذائية عالية الجودة إلى السوق الليبي.',p2:'من خلال علاقات قوية في السوق وتوزيع فعّال وفريق متفانٍ، نربط المنتجات الموثوقة بتجار التجزئة والمستهلكين في جميع أنحاء ليبيا. نجمع بين معرفة السوق والتوزيع الاستراتيجي والتسويق لتحقيق نمو مستدام للعلامات التي نمثّلها.',imgLabel:'صورة: الفريق في المستودع',missionLabel:'رسالتنا',mission1:'ربط العلامات الغذائية عالية الجودة بالسوق الليبي من خلال التوزيع الفعّال والشراكات القوية وتطوير السوق المهني.',mission2:'نسعى لخلق قيمة لمورّدينا وتجار التجزئة وعملائنا في كل مرحلة من سلسلة الإمداد.',visionLabel:'رؤيتنا',vision:'بناء شبكة توزيع غذائي على مستوى البلاد معروفة بالثقة والكفاءة والحضور القوي في السوق — لنصبح الشريك المفضّل للعلامات الغذائية الرائدة وتجار التجزئة في جميع أنحاء ليبيا.'},
+  values:{kicker:'قيمنا الأساسية',title:'ما نؤمن به',items:[
+    {title:'الجودة',body:'نختار بعناية المنتجات والعلامات التي نقدّمها إلى السوق.'},
+    {title:'النزاهة',body:'نبني أعمالنا على الشفافية والمسؤولية والثقة.'},
+    {title:'الالتزام',body:'نتحمّل مسؤولية عملنا ونبقى ملتزمين بالوفاء بوعودنا.'},
+    {title:'الشراكة',body:'نطوّر علاقات طويلة الأمد مع المورّدين وتجار الجملة والتجزئة وشركاء الأعمال الآخرين.'},
+    {title:'النمو المستمر',body:'نحسّن عملياتنا باستمرار، ونوسّع نطاق وصولنا، ونبحث عن فرص جديدة.'}]},
+  team:{kicker:'فريقنا',title:'أشخاص يعرفون السوق.',sub:'العزيمة ومعرفة السوق ونهج عملي في كل جزء من أعمالنا.',portrait:'صورة شخصية',people:[{n:'الاسم الكامل',r:'المدير العام'},{n:'الاسم الكامل',r:'المدير التجاري'},{n:'الاسم الكامل',r:'مسؤول سلسلة الإمداد'},{n:'الاسم الكامل',r:'التسويق وتنشيط السوق'}]},
+  brandsPage:{kicker:'علاماتنا التجارية',title:'العلامات والمنتجات التي نوزّعها.',sub:'محفظة مختارة من العلامات الغذائية، اختيرت لجودتها وجاذبيتها للمستهلك وإمكاناتها في السوق.',search:'ابحث عن علامة أو منتج',allCountries:'كل البلدان',all:'كل الفئات',az:'أ – ي',results:'علامة تجارية',clear:'مسح الفلاتر',view:'عرض المنتجات',empty:'لا توجد علامات تطابق هذه الفلاتر.',catTitle:'تحتاج قائمة الأسعار الكاملة؟',catSub:'يمكن لتجار الجملة والتجزئة طلب الكتالوج الكامل وقائمة الأسعار التجارية الحالية بصيغة PDF.',catCta:'اطلب الكتالوج'},
+  brandPage:{back:'كل العلامات',products:'المنتجات',items:'منتج',pack:'صورة العبوة',meta:{cat:'الفئة',origin:'بلد المنشأ',range:'منتجات التشكيلة',since:'نوزّعها منذ'}},
+  productPage:{imgLabel:'صورة المنتج على خلفية نقية',enquire:'استفسر عن هذا المنتج',enquireShort:'استفسر',priceList:'اطلب قائمة الأسعار',enquired:'شكراً لك — سيتواصل معك فريق المبيعات خلال يوم عمل واحد.',note:'كتالوج للأعمال. تُقدّم الأسعار والحد الأدنى للطلب عند الاستفسار.',related:'المزيد من هذه العلامة',specs:{size:'حجم العبوة',sku:'رمز المنتج',category:'الفئة',origin:'بلد المنشأ',shelf:'مدة الصلاحية',pack:'التغليف',caseQty:'تكوين الكرتونة',status:'التوافر'}},
+  badges:{stock:'متوفر',new:'جديد',soon:'قريباً'},
+  marketPage:{kicker:'سوقنا',title:'أين نبيع، وكيف.',sub:'التغطية والقنوات والخدمات اللوجستية لتجارة المواد الغذائية في ليبيا — من مركز طرابلس إلى مستودعات الجملة في الجنوب.',channelsKicker:'القنوات',channelsTitle:'ثلاثة مسارات إلى المستهلك.',channelsSub:'نوازن بين التجزئة الحديثة والجملة التقليدية وقطاع الضيافة لتصل العلامات إلى كل رفٍّ مهم.',channelsNote:'حصة الحجم خلال 12 شهراً. أرقام تقريبية.',channels:{retail:{n:'التجزئة',d:'المتاجر الكبرى والصغرى ومتاجر الخدمة السريعة في المدن الرئيسية.'},wholesale:{n:'الجملة',d:'مستودعات إقليمية تزوّد التجارة التقليدية عبر البلاد.'},horeca:{n:'الضيافة',d:'الفنادق والمطاعم والمقاهي وخدمات التموين في طرابلس وبنغازي.'}},
+    logisticsKicker:'اللوجستيات والتخزين',logisticsTitle:'مُصمّمة لإبقاء الرفوف ممتلئة.',logisticsSub:'تخزين عادي ومبرّد، أسطول خاص، ودورة تجديد مخزون مصمّمة لشبكة الطرق الليبية.',logistics:[{k:'التخزين',v:'4,200 م²',d:'تخزين عادي في مركز طرابلس، مرفوف ومتابَع بنظام مخزون.'},{k:'سلسلة التبريد',v:'600 م²',d:'سعة مبرّدة ومجمّدة لخطوط الألبان والمجمدات.'},{k:'الأسطول',v:'18 مركبة',d:'شاحنات وسيارات توصيل خاصة، إضافةً إلى نقل تعاقدي بعيد المدى.'},{k:'تجديد المخزون',v:'أسبوعياً',d:'دورة مسار قياسية للحسابات الرئيسية؛ 48 ساعة للطلبات العاجلة.'}],
+    coverageKicker:'التغطية',coverageTitle:'التغطية حسب المدينة',coverageUpdated:'تحديث الربع الثالث 2026',cols:{city:'المدينة',region:'المنطقة',channels:'القنوات',lead:'مدة التوصيل',status:'الحالة'},status:{hub:'مركز',served:'مخدومة',soon:'مخطّطة'},chNames:{retail:'تجزئة',wholesale:'جملة',horeca:'ضيافة'}},
+  partnerPage:{kicker:'شاركنا',title:'شريك واحد من الميناء إلى الرف.',sub:'سواء كنت علامة تبحث عن موزّع في ليبيا أو تاجر تجزئة يبحث عن إمداد موثوق، نعمل بشروط واضحة وعملية محدّدة.',offerLabel:'ما نتولّاه',processLabel:'كيف نعمل',processTitle:'عملية محدّدة من البداية إلى النهاية.',ctaTitle:'مستعد للحديث؟',ctaSub:'أرسل لنا نبذة قصيرة وسيردّ فريقنا التجاري خلال يومي عمل.',
+    suppliers:{tab:'للمورّدين والعلامات التجارية',title:'ادخل السوق الليبي مع شريك يعرفه جيداً.',intro:'نتحمّل المسؤولية الكاملة عن علامتك في ليبيا: الاستيراد والتخزين والتوزيع والعمل التجاري الذي يبني الدوران.',cta:'ابدأ استفسار مورّد',offers:[{t:'الاستيراد والتسجيل',d:'الترخيص والتخليص الجمركي وتسجيل المنتجات من البداية إلى النهاية.'},{t:'التخزين',d:'تخزين عادي ومبرّد في مركز طرابلس مع تقارير مخزون.'},{t:'التوزيع على مستوى البلاد',d:'تغطية التجزئة والجملة والضيافة عبر عشر مناطق.'},{t:'تنشيط السوق',d:'الإدراج والظهور داخل المتاجر والعيّنات والعروض التجارية.'},{t:'التقارير',d:'تقارير شهرية للبيع الداخلي والخارجي ومواقف المخزون.'}],steps:[{t:'مكالمة تعريفية',d:'نراجع تشكيلتك وأسعارك وقنواتك المستهدفة.',time:'الأسبوع 1'},{t:'تقييم السوق',d:'فحص الرفوف وأسعار المنافسين وتوقّع الحجم.',time:'الأسبوعان 2–3'},{t:'الشروط والتسجيل',d:'اتفاقية التوزيع وتسجيل المنتجات والطلب الأول.',time:'الأسابيع 4–8'},{t:'الإطلاق',d:'وصول الشحنة الأولى وتفعيل الإدراج وبدء التنشيط.',time:'الأسبوع 10+'}]},
+    retailers:{tab:'لتجار التجزئة والجملة',title:'إمداد موثوق بالعلامات التي يطلبها عملاؤك.',intro:'افتح حساباً تجارياً للحصول على توافر مستمر وشروط عادلة ودعم في العرض — سواء كنت تدير متجراً واحداً أو مستودعاً إقليمياً.',cta:'افتح حساباً تجارياً',offers:[{t:'حساب تجاري',d:'تسجيل بسيط بشروط ائتمان ودفع واضحة.'},{t:'تجديد أسبوعي',d:'مسارات مجدولة للحسابات الرئيسية؛ توصيل عاجل خلال 48 ساعة.'},{t:'دعم العرض',d:'مخططات الرفوف وعروض جاهزة ومواد نقاط البيع.'},{t:'تقويم العروض',d:'عروض موسمية وأسعار إطلاق تُشارك مسبقاً.'},{t:'مدير حساب مخصّص',d:'جهة اتصال واحدة للطلبات والمرتجعات والاستفسارات.'}],steps:[{t:'الاستفسار',d:'أخبرنا بنوع متجرك وموقعه وأحجامه.',time:'اليوم 1'},{t:'إعداد الحساب',d:'الاتفاق على الشروط التجارية وفتح الحساب.',time:'الأيام 2–5'},{t:'الطلب الأول',d:'توصية بالتشكيلة والتوصيل الأول.',time:'الأسبوع 2'},{t:'إمداد مستمر',d:'تجديد مجدول ومراجعات دورية للحساب.',time:'شهرياً'}]}},
+  contactPage:{kicker:'اتصل بنا',title:'تحدّث إلى فريقنا التجاري.',sub:'استفسارات المنتجات، الحسابات التجارية، عروض المورّدين — أرسل رسالة قصيرة وسنوجّهها إلى الشخص المناسب.',f:{name:'اسمك',company:'الشركة',email:'البريد الإلكتروني',type:'أنا…',message:'الرسالة',submit:'إرسال الرسالة',note:'نردّ خلال يومي عمل.'},types:{supplier:'مورّد / مالك علامة',retailer:'تاجر تجزئة / جملة',other:'أخرى'},sentTitle:'تم استلام رسالتك.',sentBody:'شكراً لك. سيردّ أحد أعضاء فريقنا التجاري خلال يومي عمل.',sentAgain:'إرسال رسالة أخرى',office:'المكتب الرئيسي',address1:'رِكاز لتوزيع المواد الغذائية',address2:'السراج، طرابلس، ليبيا',phone:'الهاتف',email:'البريد الإلكتروني',hours:'ساعات العمل',hourRows:[{d:'الأحد – الخميس',h:'08:00 – 17:00'},{d:'السبت',h:'09:00 – 14:00'},{d:'الجمعة',h:'مغلق'}],whatsapp:'راسلنا على واتساب',mapLabel:'المكتب الرئيسي · طرابلس'},
+  footer:{tagline:'نُقدّم علامات غذائية عالية الجودة إلى السوق الليبي من خلال التوزيع الفعّال والشراكات القوية وتطوير السوق المهني.',quick:'الشركة',brands:'العلامات',contact:'اتصل بنا',address:'السراج، طرابلس، ليبيا',hours:'الأحد – الخميس، 08:00 – 17:00',copy:'© 2026 رِكاز. جميع الحقوق محفوظة.',arTagline:'RIKAZ — Food import & distribution'},
+ }
+};
+const BADGE = { stock:{bg:'rgba(15,79,69,0.1)',color:'#0F4F45'}, new:{bg:'#B5A422',color:'#0F4F45'}, soon:{bg:'rgba(31,42,40,0.08)',color:'#5C6866'} };
+const CHANNELS = [{k:'retail',pct:58,color:'#0F4F45'},{k:'wholesale',pct:31,color:'#1B7A6A'},{k:'horeca',pct:11,color:'#B5A422'}];
+const pad2 = (n) => String(n).padStart(2,'0');
+const AR_UNITS = [[/\bkg\b/g,'كغ'],[/\bml\b/g,'مل'],[/(\d)\s*g\b/g,'$1 غ'],[/\bL\b/g,'لتر'],[/\bmonths?\b/g,'أشهر'],[/(\d)\s*h\b/g,'$1 ساعة'],[/(\d)\s*d\b/g,'$1 أيام']];
+const locU = (s, lang) => lang === 'ar' && typeof s === 'string' ? AR_UNITS.reduce((a, [re, r]) => a.replace(re, r), s) : s;
+
+class Component extends DCLogic {
+  state = { heroIdx: 0, page: null, lang: null, brandId: 'antat', productId: 'an3', width: 1200, menuOpen: false, query: '', category: 'all', country: 'all', sortAz: false, enquired: false, partnerTab: 'suppliers', form: { name:'', company:'', email:'', type:'supplier', message:'' }, sent: false };
+  rootRef = React.createRef();
+  componentDidMount() {
+    const el = this.rootRef.current; if (!el) return;
+    this.ro = new ResizeObserver(([e]) => { const w = e.contentRect.width; if (Math.abs(w - this.state.width) > 4) this.setState({ width: w }); });
+    this.ro.observe(el);
+    this.startHero();
+  }
+  componentWillUnmount() { if (this.ro) this.ro.disconnect(); clearInterval(this.heroTimer); }
+  heroGo(i) { this.setState({ heroIdx: i }); this.startHero(); }
+  startHero() { clearInterval(this.heroTimer); this.heroTimer = setInterval(() => this.setState(s => ({ heroIdx: s.heroIdx + 1 })), 4500); }
+  nav(page, extra = {}) {
+    this.setState({ page, menuOpen: false, enquired: false, ...extra });
+    if (!this.props.page && typeof window !== 'undefined') window.scrollTo(0, 0);
+  }
+  setForm(k) { return (e) => this.setState(s => ({ form: { ...s.form, [k]: e.target.value } })); }
+  renderVals() {
+    const s = this.state;
+    const page = s.page ?? this.props.page ?? 'home';
+    const lang = s.lang ?? this.props.lang ?? 'en';
+    const t = T[lang];
+    const arFont = this.props.arabicFont ?? 'Readex Pro';
+    const fontStack = `'Instrument Sans','${arFont}',sans-serif`;
+    const L = (o) => (o && typeof o === 'object' && !Array.isArray(o)) ? (o[lang] ?? o.en) : o;
+    const isMobile = s.width < 1000;
+    const w = s.width, rep = (n) => `repeat(${n},minmax(0,1fr))`;
+    const mob = isMobile;
+    const mobileVals = { stickyPos: w < 820 ? 'static' : 'sticky', mapRatio: w < 600 ? '4/3' : '16/8', fGap: mob ? '0px' : '9px', fTap: mob ? '44px' : '0px', linkTap: mob ? '44px' : '0px', chipH: mob ? '40px' : '0px', arrowSz: mob ? '44px' : '36px' };
+    const layout = {
+      heroCols: w >= 820 ? 'minmax(0,1.05fr) minmax(0,1fr)' : 'minmax(0,1fr)',
+      splitCols: w >= 820 ? 'minmax(0,1fr) minmax(0,2fr)' : 'minmax(0,1fr)',
+      cols4: rep(w >= 900 ? 4 : w >= 520 ? 2 : 1),
+      cols4min2: rep(w >= 900 ? 4 : 2),
+      cols5: rep(w >= 900 ? 5 : 1),
+      cols3: rep(w >= 1000 ? 3 : w >= 600 ? 2 : 1),
+      footerCols: w >= 900 ? 'minmax(0,1.4fr) repeat(3,minmax(0,1fr))' : rep(w >= 520 ? 2 : 1),
+    };
+    const go = (p) => () => this.nav(p);
+    const pages = ['home','about','brands','market','partner','contact'];
+    const active = page === 'brand' || page === 'product' ? 'brands' : page;
+    const navItems = pages.map((p, i) => ({ key: p, idx: pad2(i + 1), label: t.nav[p], go: go(p), color: active === p ? '#0F4F45' : '#3E4A48', line: active === p ? '#B5A422' : 'transparent' }));
+    const countFor = (id) => PRODUCTS.filter(p => p.brand === id).length;
+    const decorate = (b) => ({ ...b, desc: L(b.desc), story: L(b.story), catLabel: CATS[b.cat][lang], countryLabel: COUNTRIES[b.country][lang], count: countFor(b.id), open: () => this.nav('brand', { brandId: b.id }) });
+    const brands = BRANDS.map(decorate);
+    const q = s.query.trim().toLowerCase();
+    let filtered = brands.filter(b => (s.category === 'all' || b.cat === s.category) && (s.country === 'all' || b.country === s.country) &&
+      (!q || b.name.toLowerCase().includes(q) || b.desc.toLowerCase().includes(q) || PRODUCTS.some(p => p.brand === b.id && (p.name.toLowerCase().includes(q) || p.nameAr.includes(q)))));
+    if (s.sortAz) filtered = [...filtered].sort((a, b) => a.name.localeCompare(b.name));
+    const usedCats = [...new Set(BRANDS.map(b => b.cat))];
+    const categoryChips = [{ v: 'all', label: t.brandsPage.all }, ...usedCats.map(k => ({ v: k, label: CATS[k][lang] }))].map(c => {
+      const on = s.category === c.v;
+      return { ...c, pick: () => this.setState({ category: c.v }), bg: on ? '#0F4F45' : 'transparent', color: on ? '#fff' : '#1F2A28', border: on ? '#0F4F45' : 'rgba(15,79,69,0.2)' };
+    });
+    const usedCountries = [...new Set(BRANDS.map(b => b.country))];
+    const countryOptions = [{ v: 'all', l: t.brandsPage.allCountries }, ...usedCountries.map(k => ({ v: k, l: COUNTRIES[k][lang] }))];
+    const brand = brands.find(b => b.id === s.brandId) || brands[0];
+    const decP = (p) => ({ ...p, size: locU(p.size, lang), caseQty: locU(p.caseQty, lang), shelf: locU(p.shelf, lang), hasImg: !!p.img, noImg: !p.img, nameAlt: lang === 'ar' ? p.name : p.nameAr, name: lang === 'ar' ? p.nameAr : p.name, desc: L(p.desc), packLabel: L(p.pack), badge: t.badges[p.status], badgeBg: BADGE[p.status].bg, badgeColor: BADGE[p.status].color, open: () => this.nav('product', { productId: p.id, brandId: p.brand }) });
+    const brandProducts = PRODUCTS.filter(p => p.brand === brand.id).map(decP);
+    const product = decP(PRODUCTS.find(p => p.id === s.productId) || PRODUCTS[0]);
+    const pb = brands.find(b => b.id === product.brand) || brand;
+    const sp = t.productPage.specs;
+    const specRows = [
+      { k: sp.size, v: product.size }, { k: sp.sku, v: product.sku }, { k: sp.category, v: pb.catLabel }, { k: sp.origin, v: pb.countryLabel },
+      { k: sp.shelf, v: product.shelf }, { k: sp.pack, v: product.packLabel }, { k: sp.caseQty, v: product.caseQty }, { k: sp.status, v: product.badge },
+    ];
+    const bm = t.brandPage.meta;
+    const brandMeta = [{ k: bm.cat, v: brand.catLabel }, { k: bm.origin, v: brand.countryLabel }, { k: bm.range, v: `${brand.count} ${t.brandPage.items}` }, { k: bm.since, v: '2024' }];
+    const hasFilters = s.category !== 'all' || s.country !== 'all' || !!q || s.sortAz;
+    const brandCount = BRANDS.length, skuCount = PRODUCTS.length;
+    const stats = [{ v: String(brandCount), l: t.stats.brands }, { v: String(skuCount), l: t.stats.skus }, { v: '10', l: t.stats.regions }, { v: '1,200+', l: t.stats.partners }];
+    const heroIds = ['an3','mm2','ss2','an1','mm3','an5'];
+    const HERO_BG = { antat:'#F8EFEA', mymotto:'#EDF3F8', sweetsmil:'#F7F0E6' };
+    const hi = ((s.heroIdx % heroIds.length) + heroIds.length) % heroIds.length;
+    const heroSlides = heroIds.map((id, i) => { const p = PRODUCTS.find(x => x.id === id); const b = BRANDS.find(x => x.id === p.brand); const on = i === hi;
+      return { idx: pad2(i + 1), img: p.img, name: lang === 'ar' ? p.nameAr : p.name, brand: b.name, logo: b.logo, size: locU(p.size, lang), sku: p.sku, brandId: b.id,
+        opacity: on ? 1 : 0, transform: on ? 'translateY(0) scale(1)' : (i < hi ? 'translateY(-14px) scale(0.96)' : 'translateY(14px) scale(0.96)'), pe: on ? 'auto' : 'none',
+        bar: i < hi ? '100%' : on ? '100%' : '0%', barColor: on ? '#B5A422' : '#0F4F45',
+        pick: () => this.heroGo(i), open: () => this.nav('product', { productId: p.id, brandId: p.brand }) }; });
+    const heroCur = heroSlides[hi];
+    const _unusedHero = heroIds.map(id => { const p = PRODUCTS.find(x => x.id === id); const b = BRANDS.find(x => x.id === p.brand); return { img: p.img, name: p.name, brand: b.name, open: () => this.nav('product', { productId: p.id, brandId: p.brand }) }; });
+    const hubs = CITIES.filter(c => c.status === 'hub').length, served = CITIES.filter(c => c.status !== 'soon').length;
+    const marketFacts = [{ k: t.market.facts.hubs, v: String(hubs) }, { k: t.market.facts.cities, v: String(served) }, { k: t.market.facts.lead, v: locU('24 – 72 h', lang) }];
+    const dot = { hub: '#B5A422', served: '#1B7A6A', soon: 'rgba(31,42,40,0.25)' };
+    const coverageRows = CITIES.map(c => ({ city: L(c.city), region: L(c.region), channels: c.ch.map(k => t.marketPage.chNames[k]).join(' · '), lead: locU(c.lead, lang), status: t.marketPage.status[c.status], dot: dot[c.status] }));
+    const channelRows = CHANNELS.map(c => ({ name: t.marketPage.channels[c.k].n, desc: t.marketPage.channels[c.k].d, pctLabel: c.pct + '%', width: c.pct + '%', color: c.color }));
+    const logisticsRows = t.marketPage.logistics;
+    const partnerTabs = ['suppliers','retailers'].map((k, i) => { const on = s.partnerTab === k; return { idx: pad2(i + 1), label: t.partnerPage[k].tab, pick: () => this.setState({ partnerTab: k }), bg: on ? '#0F4F45' : '#fff', color: on ? '#fff' : '#0F4F45' }; });
+    const pcRaw = t.partnerPage[s.partnerTab];
+    const formType = s.partnerTab === 'suppliers' ? 'supplier' : 'retailer';
+    const pc = { ...pcRaw, offers: pcRaw.offers.map((o, i) => ({ ...o, idx: pad2(i + 1) })), steps: pcRaw.steps.map((st, i) => ({ ...st, idx: pad2(i + 1) })), go: () => this.nav('contact', { form: { ...s.form, type: formType } }) };
+    const partnerCards = t.partner.cards.map((c, i) => ({ ...c, idx: pad2(i + 1), go: () => this.nav('partner', { partnerTab: i === 0 ? 'suppliers' : 'retailers' }) }));
+    const typeOptions = Object.keys(t.contactPage.types).map(k => ({ v: k, l: t.contactPage.types[k] }));
+    return {
+      ...layout, ...mobileVals, showMobileBar: mob && page === 'product', showWa: mob && page === 'contact', footerPadB: mob && page === 'product' ? '72px' : '0px', fontStack, rootRef: this.rootRef, dir: lang === 'ar' ? 'rtl' : 'ltr', dirAlt: lang === 'ar' ? 'ltr' : 'rtl', t, arrow: t.arrow, arrowBack: t.arrowBack,
+      isDesktop: !isMobile, isMobile, menuOpen: s.menuOpen && isMobile, toggleMenu: () => this.setState(st => ({ menuOpen: !st.menuOpen })),
+      setEn: () => this.setState({ lang: 'en' }), setAr: () => this.setState({ lang: 'ar' }),
+      enBg: lang === 'en' ? '#0F4F45' : 'transparent', enColor: lang === 'en' ? '#fff' : '#0F4F45', arBg: lang === 'ar' ? '#0F4F45' : 'transparent', arColor: lang === 'ar' ? '#fff' : '#0F4F45',
+      fEnBg: lang === 'en' ? '#fff' : 'transparent', fEnColor: lang === 'en' ? '#0F4F45' : '#fff', fArBg: lang === 'ar' ? '#fff' : 'transparent', fArColor: lang === 'ar' ? '#0F4F45' : '#fff',
+      navItems, goHome: go('home'), goBrands: go('brands'), goPartner: go('partner'), goMarket: go('market'), goContact: go('contact'),
+      isHome: page === 'home', isAbout: page === 'about', isBrands: page === 'brands', isBrand: page === 'brand', isProduct: page === 'product', isMarket: page === 'market', isPartner: page === 'partner', isContact: page === 'contact',
+      apartItems: t.apart.items.map((it, i) => ({ ...it, idx: pad2(i + 1), icon: ICONS[['network','distribution','growth','selection','team'][i]] })),
+      valueItems: t.values.items.map((it, i) => ({ ...it, idx: pad2(i + 1), icon: ICONS[['quality','integrity','commitment','partnership','continuous'][i]] })),
+      featuredBrands: brands, brandCount, skuCount, stats, heroSlides, heroCur, heroTotal: heroIds.length, heroBg: HERO_BG[heroCur.brandId] || '#fff', heroNext: () => this.heroGo(hi + 1), heroPrev: () => this.heroGo(hi - 1), marketFacts, mapSrc: `libya-map.html?lang=${lang}&arfont=${encodeURIComponent(arFont)}`,
+      query: s.query, setQuery: (e) => this.setState({ query: e.target.value }), country: s.country, setCountry: (e) => this.setState({ country: e.target.value }),
+      countryOptions, categoryChips, toggleSort: () => this.setState(st => ({ sortAz: !st.sortAz })), sortBg: s.sortAz ? '#0F4F45' : 'transparent', sortColor: s.sortAz ? '#fff' : '#1F2A28',
+      filteredBrands: filtered, resultCount: filtered.length, noResults: filtered.length === 0, hasFilters, clearFilters: () => this.setState({ category: 'all', country: 'all', query: '', sortAz: false }),
+      brand, brandMeta, brandProducts, brandProductCount: brandProducts.length, product, specRows, openCurrentBrand: () => this.nav('brand', { brandId: pb.id }),
+      relatedProducts: PRODUCTS.filter(p => p.brand === product.brand && p.id !== product.id).slice(0, 4).map(decP),
+      enquire: () => this.setState({ enquired: true }), enquired: s.enquired,
+      coverageRows, channelRows, logisticsRows, partnerTabs, pc, partnerCards,
+      form: s.form, setName: this.setForm('name'), setCompany: this.setForm('company'), setEmail: this.setForm('email'), setType: this.setForm('type'), setMessage: this.setForm('message'), typeOptions,
+      submit: () => this.setState({ sent: true }), sent: s.sent, notSent: !s.sent, resetForm: () => this.setState({ sent: false, form: { name:'', company:'', email:'', type:'supplier', message:'' } }),
+    };
+  }
+}
+</script>
+</body>
+</html>
