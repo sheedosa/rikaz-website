@@ -1,0 +1,5 @@
+# Rikaz — https://sheedosa.github.io/rikaz-website/
+User-agent: *
+Allow: /
+
+Sitemap: https://sheedosa.github.io/rikaz-website/sitemap.xml

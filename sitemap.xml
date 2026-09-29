@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/about/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/about/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/about/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/brands/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/brands/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/brands/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/brands/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/market/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/market/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/market/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/market/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/partner/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/partner/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/partner/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/partner/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/contact/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/contact/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/contact/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/brand/antat/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/brand/antat/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/brand/antat/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/brand/antat/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/antat-logo.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/brand/mymotto/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/brand/mymotto/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/brand/mymotto/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/brand/mymotto/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/mymotto-logo.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/brand/sweetsmil/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/brand/sweetsmil/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/brand/sweetsmil/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/brand/sweetsmil/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/sweetsmile-logo.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/brand/maretti/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/brand/maretti/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/brand/maretti/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/brand/maretti/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/maretti-logo.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/brand/spuds/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/brand/spuds/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/brand/spuds/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/brand/spuds/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/spuds-logo.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/brand/bonucci/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/brand/bonucci/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/brand/bonucci/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/brand/bonucci/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/bonici-logo.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/brand/uber/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/brand/uber/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/brand/uber/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/brand/uber/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/uber-logo.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/an1/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/an1/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/an1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/an1/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/antat-product-1.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/an2/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/an2/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/an2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/an2/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/antat-product-2.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/an3/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/an3/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/an3/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/an3/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/antat-product-3.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/an4/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/an4/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/an4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/an4/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/antat-product-4.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/an5/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/an5/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/an5/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/an5/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/antat-product-5.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/an6/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/an6/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/an6/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/an6/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/antat-product-6.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/mm1/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/mm1/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/mm1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/mm1/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/mymotto-product-1.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/mm2/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/mm2/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/mm2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/mm2/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/mymotto-product-2.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/mm3/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/mm3/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/mm3/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/mm3/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/mymotto-product-3.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/mm4/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/mm4/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/mm4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/mm4/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/mymotto-product-4.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/mm5/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/mm5/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/mm5/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/mm5/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/mymotto-product-5.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/ss1/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/ss1/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/ss1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/ss1/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/sweetsmile-product-1.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/ss2/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/ss2/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/ss2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/ss2/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/sweetsmile-product-2.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/ss3/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/ss3/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/ss3/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/ss3/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/sweetsmile-product-3.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/ss4/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/ss4/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/ss4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/ss4/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/sweetsmile-product-4.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/ma1/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/ma1/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/ma1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/ma1/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/ma2/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/ma2/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/ma2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/ma2/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/sp1/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/sp1/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/sp1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/sp1/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/bo1/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/bo1/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/bo1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/bo1/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/product/ub1/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/ub1/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/ub1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/ub1/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/about/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/about/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/about/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/brands/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/brands/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/brands/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/brands/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/market/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/market/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/market/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/market/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/partner/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/partner/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/partner/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/partner/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/contact/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/contact/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/contact/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/brand/antat/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/brand/antat/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/brand/antat/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/brand/antat/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/antat-logo.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/brand/mymotto/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/brand/mymotto/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/brand/mymotto/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/brand/mymotto/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/mymotto-logo.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/brand/sweetsmil/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/brand/sweetsmil/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/brand/sweetsmil/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/brand/sweetsmil/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/sweetsmile-logo.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/brand/maretti/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/brand/maretti/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/brand/maretti/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/brand/maretti/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/maretti-logo.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/brand/spuds/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/brand/spuds/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/brand/spuds/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/brand/spuds/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/spuds-logo.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/brand/bonucci/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/brand/bonucci/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/brand/bonucci/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/brand/bonucci/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/bonici-logo.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/brand/uber/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/brand/uber/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/brand/uber/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/brand/uber/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/uber-logo.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/an1/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/an1/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/an1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/an1/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/antat-product-1.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/an2/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/an2/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/an2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/an2/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/antat-product-2.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/an3/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/an3/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/an3/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/an3/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/antat-product-3.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/an4/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/an4/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/an4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/an4/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/antat-product-4.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/an5/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/an5/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/an5/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/an5/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/antat-product-5.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/an6/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/an6/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/an6/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/an6/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/antat-product-6.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/mm1/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/mm1/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/mm1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/mm1/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/mymotto-product-1.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/mm2/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/mm2/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/mm2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/mm2/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/mymotto-product-2.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/mm3/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/mm3/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/mm3/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/mm3/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/mymotto-product-3.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/mm4/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/mm4/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/mm4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/mm4/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/mymotto-product-4.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/mm5/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/mm5/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/mm5/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/mm5/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/mymotto-product-5.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/ss1/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/ss1/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/ss1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/ss1/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/sweetsmile-product-1.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/ss2/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/ss2/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/ss2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/ss2/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/sweetsmile-product-2.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/ss3/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/ss3/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/ss3/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/ss3/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/sweetsmile-product-3.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/ss4/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/ss4/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/ss4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/ss4/"/>
+    <image:image><image:loc>https://sheedosa.github.io/rikaz-website/assets/brands/sweetsmile-product-4.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/ma1/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/ma1/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/ma1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/ma1/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/ma2/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/ma2/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/ma2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/ma2/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/sp1/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/sp1/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/sp1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/sp1/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/bo1/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/bo1/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/bo1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/bo1/"/>
+  </url>
+  <url>
+    <loc>https://sheedosa.github.io/rikaz-website/ar/product/ub1/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sheedosa.github.io/rikaz-website/product/ub1/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sheedosa.github.io/rikaz-website/ar/product/ub1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sheedosa.github.io/rikaz-website/product/ub1/"/>
+  </url>
+</urlset>

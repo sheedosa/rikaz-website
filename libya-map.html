@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8">
-<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Readex+Pro:wght@400;500;600&family=Noto+Kufi+Arabic:wght@400;500;600&family=Alexandria:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Rikaz distribution coverage map — Libya</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
 <style>html,body{margin:0;height:100%;background:#fff;overflow:hidden}svg{display:block;width:100%;height:100%}</style>
 </head><body>
-<svg id="m"></svg>
+<svg id="m" role="img"></svg>
 <script>
 const q = new URLSearchParams(location.search);
 const lang = q.get('lang') || 'en';
@@ -13,6 +14,10 @@ const AR = lang === 'ar';
 const AR_FONT = q.get('arfont') || 'Readex Pro';
 const FONT = AR ? `'${AR_FONT}',sans-serif` : "'Instrument Sans',sans-serif";
 const GREEN = '#0F4F45', TEAL = '#1B7A6A', GOLD = '#B5A422', INK = '#1F2A28', MUTED = '#5C6866';
+document.documentElement.lang = AR ? 'ar' : 'en';
+const svg = document.getElementById('m');
+svg.setAttribute('aria-label', AR ? 'خريطة ليبيا تُظهر مراكز توزيع ركاز في طرابلس وبنغازي والمدن التي نخدمها'
+  : 'Map of Libya showing Rikaz distribution hubs in Tripoli and Benghazi and served cities');
 // label placement: dx, dy, anchor (mirrored for RTL not needed — geography is fixed)
 const cities = [
   {n:'Tripoli',  a:'طرابلس', c:[13.19,32.89], s:'hub',    l:[-3,-14,'end']},
@@ -26,80 +31,265 @@ const cities = [
   {n:'Tobruk',   a:'طبرق',   c:[23.98,32.08], s:'served', l:[0,-11,'middle']},
   {n:'Sabha',    a:'سبها',   c:[14.43,27.04], s:'served', l:[10,4,'start']},
 ];
-const neighbours = {'788':['Tunisia','تونس'],'012':['Algeria','الجزائر'],'818':['Egypt','مصر'],'562':['Niger','النيجر'],'148':['Chad','تشاد'],'729':['Sudan','السودان']};
-let topo;
-async function draw() {
-  if (!topo) topo = await (await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json')).json();
-  const all = topojson.feature(topo, topo.objects.countries);
-  const libya = all.features.find(f => f.id === '434');
-  const borders = topojson.mesh(topo, topo.objects.countries, (a, b) => a !== b);
+// Geometry: Natural Earth 1:50m via world-atlas@2.0.2, precomputed offline and clipped to lon -10..45, lat 8..42.
+// Rings are delta-encoded lon/lat in 0.01° steps (Libya: 0.001°) (zigzag varint, 5 bits per char: 0123456789ABCDEFGHIJKLMNOPQRSTUV end a number, abcdefghijklmnopqrstuvwxyz!#$%&* continue it).
+// land: every country merged (Libya is painted on top); mesh: shared borders; libya: its outline.
+// nb: [name, arabic, path.centroid, path.bounds NW, path.bounds SE] as lon/lat; libyaB: Libya's path.bounds for fitExtent.
+const GEO = {
+  land: [
+    'p&1as10kh4Ua1MUEUAq15KNUH83GAQ0m12e12c1EUCSc1g1a1g1CU8s10Gk1e1i1c1OQOSICk1Os1Iq1Is1Ik1Kk1Iq1SSa1Sm1Qk1Sm1Km1Io1Km1Ko18Mc16Q2K6OEO5B70NIPSRSJQHk1D$19c18e18g10K8K9i13e16UGII292943CN67M2I5m12i13i11M0q1Ie1OUCSQMIc1Is1Kq1IG0a17S2KEKa1a1Kk1Kw1Ke1G!1Gq14q12o14g14e14s11u1SO8y12w12u1Kq10s10q10s10O7O9i1PI5Q6UCa1Ca16c16g1GGMa18IHc17e17k14K65Om15e1Be1NO3m1Am12o14q1Cq1a1G6y1Gw1EE1G33979ADC81608M2K1M71d1Sb17FO9MCAIi1Ae1QK26JAJD5HJHNFPVDNJ5B1F6TGRKHI5m1R0F6J2LGJVj1HTHJHJTPb1Jb1JFDBD3D2FMj1UNSDu161F4JM2E2CKQDCf1MB23735363M3C2K7a1BU5q1Lo1NU5a13a11i1Ag1AS4u1JM3g11a17a17G5e1PI7m17o17m17IFIT0f1ARIb1KPMJODU9S9c11a13c11a11g17g17g19q1Dq1FOFq1Da1Na1Na1NQDSBg13a14UCUCOGUUUa1Ka18O1M7MFMBU3Q1Q8e1CMIMQMOKQGOEm1Km1Ku10M4i1SI0O5c10e12U7e1Ho19c19c1D8b1390De1Ns13u15K5SHI5c11e10i14i17E5GDIb16BGNU3u1Cs1A!19y1BU3a13q19q17SHUFG3k10SHw15w13U9UBa1FK5I0O8UCa1Gc1Mc1MO8G1I08CA868CCc12e1Ac1A79V9V9S3S8a146A4G62M1c1Da1BI0o1EA2E7e1VD0d1S1DLNQ9M3CD6BM6EG7A5882E7k1VE5G0e1A81o1C6769g1A!10o1ASCSC44g1a1IMKUKa1CUCUCk1Ci1Gm1GS6MAG8KAQIMGg1Ig1KU8m1Ug1OACC0GFm11K0MAa13G0A3ERU8S8SAEEGDa1FUEKUMa1S0G1E78HCTBJDB3F77DF9T5j1Ep1IPEL4J7THTHRPRPD7t1Nb17F2b13b15b10RBr1CVGJITe1LGp1Gj1Kl1IL4z16#14DD1R1PBF3R57B5HAD4TBR7T7J1b1Ab1APCFG3OBE0A3AD6D9F2J4n1Kd12LNH7H318GGz11RBN0F628I2E6$14G4EIUG26L0n11n11V0V277901KAAE1a181INC36H2D83K9MFC26U84U3KD2l1EB0DGPCB375B2HAJ678AIG02EBO2CC4E1GD4D1D8D616E6285I3q1888b10B6DG7E165A66O8KM769291B80A8A0CPS766AKGKK16D2d13b13P7p113A2ACI1k16OQ6c1e1QKQKw10MAa128925UBs12C4C6NK86K0O323755B61c26c11c11M2w1086FAD2B496c1KI4o16o16c12c140490l14l16J8RI745A4I4GC8c12$17$17k14m16o1Bo1Bm14m12KAMa1k1Ik1Ik1Ik1Sq1Gi18k18a1Ca1Am20w13w13y10y10K8$1011552DIJIBu1Je18e18C1E3EPCNKHQDK1GEC4Q2k1FGJe15e17c11c13SFq17o15e12!1G!18!1Ag1Dg1BK1I2Q7Q4k1Em1GQGS4OAc1Ga1GKKg1e1CO0E0G16%v20253LCPUb1SHk1Fi1Di1DM35H5F79d17p1Ar1AN2F3b1Db14r17DPb1Tz1Ph1BTNTNRRB3D54E8C1A0CKGKAw1KEIj11l11R2L17E5A58TEd16d14d1AD1TCJ3j1LL2NEF2J7TNTDP6f103D89KH9B8BC1K0e1FGHAHLEDCJ4TCH2H717KHK9A76H3553NAb1i1n18778J89k1L3551p1EBK3Qj1Gh1K9I866EL1D7L71D4B5H7V4FONQNGb1CDODQPCD8LLFD056AG1Ab1ED3F9AHAB6FK2RHP9N0F153E3A0I9q1BODM1OPi17MRa15Q9872H2f16P091B5590HKTKTQ7470F7n15J97133C5C90FAJC3I08347A76703p1B9573B60GF8F8H2DC996TIJERGPCb12F5PEHAJ9098F8Ta19KB0L1Nj10NB6960S0ATe1D45C9ED1B51J1H7BTOFMFM0OMM1GLUVKF67KFCD43846c1MIc1A0K7M4IIGCO1UBSDa17a17UBIDA1E10A58E4a1066665AB4B054D3J69656b1CVI59D5H1t1Cb17F1D1F3J1FI5E520D59N3D89MDUNQH61C2CM2e1982841C3A9070L2R5D438NGJMb1ELm1HIJE0I7ELc1d1Id1GHE7E7C808383483CJU088QGS0e14Q5G1MCQA8680ULEP2TG5A*P041UBq13y14w12K1M54H79NBNF1LMDw1Lw1Jy1Fw1Hc1Fi1Rq1Hs1JEHUHUJQT4NBL5H9FN6RILc1Jc1h14f12F6RC187A52T2J9NPRf1DRDR1LGLm1Be1JMJ2p1ARDFT4f19RHBF2n15FPFPFRV5D9Fb10b10DI1UCGO8Ge13QAC88K6Q42e1JG7O9k1FSHS7O9ODOJCh10J4b1Gb1I3608CE7I7IDED8V591J0F570OQ56NAV29257340CJQHQPMB4L5h1AL2B1J79636b1Ml1Cj1c1j1c1PQNCpw102BJFTHn1Jn1Jn1Jb1TB5r19t17d19f19b17j1b1LDI3IF55RBB35251NRLTLLJJNJLPPd1Pd10JCd1Ed1CHMFg1D8BBBf1Lb1FVDRN5NJ95VBJ17DF0BKF9593N1f10h11THVFVVDRDRb1b1F7NGR2T3DBN5L4r14L0b19T6r14v13v13B3DDb1Nt11p1FB9JP5J3156711FH5F1d1CTIF2PSBK7K2618L85IGOEA82J0FFHOh1Oh1O6C06DB93h12n15F1b1Fd1FJ0h1Eb12b12N4R9L2HBB2ESCQCQ1a16S5SBIGm11ODUk15DCB8B1B0d1BH1322I9OE6I2EA8A3KCKUGF1H9Pd19JL5L192B41E2A8M2UES163CCAE8KMESESIUGU16764GAc1Ae1888K4c12M0C1CDQ5S5S1IAAH07E2CKMD1540AyqA00nw5L5R3PCPFPDJ5T0J5F2HCj1CR71SPk1Nm16e14g10A9c1RU0g19S5S2808Dk15A1868087C7Qh1K8K87A32C087S7SCg1Cg13c13c11GBO0G5I9CJE1IBIHEBS5e1PMNOTMTKHQFODQFg1JOJM1I5K9O3IJk1Li1BCBK1E36RERc1h1Sh1Sh14TKNQNm1LOLMHc1Hc1CO0IBSBO7K6U2c18I4K5i1BM2ED6BGC0JM7C7S9MHQFQFUFKHKf1UNCBCJ2LID0J2Lc1Ha1FKFK8AAI5M3GDSLe1Nc1BAJCBU3SVCHc1Ha1Ha1Ve1BMd1g1Hg1d1c1FUFUNUNa1JAr14L4JD0ICMAQAO4k1Ak1Ak1Ak16Q1EDD99NV5b17b17b1Hh1Fh11P1N5HFPJPd1ERMRMFKHMb1Qb1e19Q0GDi19ILMJMBM7A9E7S5SHc1H74FFJ9N8Ja1R8D8R1f16BORAH6D8DONILINc1VQFAD2h11HMd18HKDAH8P6h18h1IJIb1Kd1Ib1Ob1Ob1ANCPITGTOl1Ml1On1KJKJGLSHa1PT251B33F1B0b12b18b1EVEVKJABC9a1Ba19INKNi1Rk1T8F032n1Ad1EPGPQRAF070578D41N4F2b1Cb17V0R0R8V6b11j18V6V8b1CPARCDE5Q5g1Pa1TAFEFA464ADODOF8DKf1Kf1Kf1Cb1Cb1Cd1Ad16d16d14d18P8ROP8P8PG1ADAN8NEH6G183G4IACOFCB4L4DORK7S1M5I9a1Rg1Bg1BUf1Uf1IPIPg1Pi1Pg1PMf1Af1O2MJKJEVc196IGF8L29GJIJAHCd15J7BDBLDLDP9N7Vd1N24B81E2SAO6Q0O3IDg1TKVIVMNMPa1LUNOFM7e10g12e10C60nF',
+    'gk8u*253184I646B37',
+    'il8uv2D58GA440',
+    'ol8kx23310DCEC8B',
+    'kc5$!7n15D6ECS682CB',
+    'qg2gz6VD6EME43',
+    'qe2ys6509530F630742O26e10KD212595',
+    '&9wr731B2J0184626EBI1',
+    'uJwy7K5K6C1A32B9DBDBF7HHBH5b1EJ4543K96D495F97AB25608k1Oi1OOCu1C815701631553',
+    '!Qaz711VCTCJ2542C04k12a17IL23',
+    'c9it77BT4746EA20AAAk18A549PL',
+    'ug7u&430FE5A96f1E586A4983a1Bc1P83',
+    'og8oi3E0560468MH0L1556341456L3B6JK3E82864C3AC1690P2515',
+    'ye7wa511982E68094B',
+    'c#2ca775H0HA0MK3ID',
+    'oz2gb7B3B614G48343',
+    'ex2o&791323248I303',
+    'kl2yf791B60A22G347',
+    'mb3$o7DL79NRNR3B3D3B7B5D0F47658587B5EDA70709JF97591B2709L0L6L1b1C92B4Pc1LGNAN2L1L8j1Mn1KJC7896P6NC90L0B0B4LGFK1AAOCMA8C48688MNA5A2K82AKCQ0C169A3C1g1JC3A0U8M4q13Q4I2Q8KCA4A0S0S3C488C4C1a1EE2C5',
+    'g$1q*7ABCPAP2B3B57LP4L8D2D3J5f13f13f15J5FD5J6PA91B192767h19FH9F0F4D0969EBGDK1G1g148682I1E468562082EBCF41C2C884A0a1BC3I7C9CDA781O4K4860C9A1M3K4QAOAe1a1M6AA4AA4ABE0M9878B638121537B43',
+    'av1gu7BJBE0C24E5',
+    '!t1qa8797226AEA44337',
+    'eo5oe7319806A6402307',
+    '!a4$p74LC3KL1933VA53923A045832B77108CO6487826C0E24',
+    'sc4km7KJF4HDLGFG16EGEFG1',
+    'kb4kr7715271532G6K8CC4670V',
+    'yb4sp791BI5E604065032565',
+    'q%3ow749P6HADOVU08C6Q4A36543FB13A9036H67E5',
+    'ms4qt7ALA7O7A1g1Dm13634BA927376NCNGBK1K0651J7771523652B078LC360A987G743604V2N0L85MD6767ALELELAL4J59214OAa1GM6A0',
+    'uu4ou775F4DM',
+    'kv4yu791AGG85D',
+    'i!4ss7L5524602JC2E44E74B',
+    '!!4!%7N5RE28EG64K0AB4537',
+    'gt4cn7757072144248428043',
+    'cq4gc717J6580K4A42A9KF',
+    '!j5w%65B7A4A9IIQ0CC61L9FAD4F',
+    '$i5ah7J34G9EG7A74113',
+    'oi5sf75088KEUCA0I5VB75N1',
+    'w*4ch7H7BA7Ic1Q81471L',
+    'a&4wh7FFD256AGG8810B',
+    'i*4od779D46424081620C5',
+    'u&4gf731DC5886MD',
+    'wh5km7O560C14BF1RB94D8L252CCK6',
+    'wc5sk79048IEO0O64099H9',
+    'ub5&f7H152C48226I8CAE7H3',
+    'mf5we7F599B80AE38616A3',
+    'iy4$k7D91E8GC045',
+    'yy4mj7B54E5866664567',
+    'mz4yf70B13h134C24C56424',
+    '$#4kk70J5014082C',
+    'g$4am75DDGHA5A963CC660EFK1176B',
+    '$%4al77DB4LC781680A5Q3',
+    'q!4yg730381824808D',
+    'cd5$o7HBLG16E68A5ELI0Ca16K9A139232b19319',
+    'cf5!v73BSJAB4B33967227A7F3F0n1C9ASG48H1LHV89834EIO1C4E628e12',
+    'qa5w$7L5NGO8A585',
+    'a*4$z7755B1FB072160850373390D42C3E24c12A9E448G2',
+    'y&4$j7H10G84M703',
+    'kz4ci773D44C84A323',
+    'ao5sa7D3307AAM7E16E88EIEu1GC00BHVDF4BN3',
+    'cv4c&6E0I060ACG26BD53321C3G209258580K2I2I6I4y13KBi11e15I4a14635T4783A2AAS8S0OI60373L3B19F5N1l12l11h15h13j11h13B40C1A36P4NAn16n16N6d13B096581O4M884783A80A4A634D',
+    'c#1qg835571h13979Fb1BDf1IL8985648A826N894088E3CD1920668',
+    'q!7qe36HJ634A824',
+    '$!7ec38B626426a1D19J0J4J1N45IE782229AF20A84449CI3C569',
+    'om6!#6C1M4AK2Me15g13U0U2m1Co1CQGG4SCS6HDb1Jb1Jd1J5H4BEF416BL3N0B0B0f1VJBN5L3D093770715D25C74N1B0d1CB47AHc13QI5G8IEI4'],
+  mesh: [
+    'ql8kg3g1S8868AEC64G18783I2O2A4IC8469A08MKA6E6C0C3C5A9C9I5C2C584A6E0G6g12i11i16i10i10',
+    'yn2$f810022001',
+    'od8qd8E3O5G581KEa11Q0E1G5M186CI4242E2G1636DI3UNI7435325C7E1G08163250329E9E787ER4D1D7FJH476915EN6D5313OBU9E1c16M0M7a1Lc1R8923857096RID7BBDr193J0N0F1312567292787C7051917154BCD831R4B4F1R2543C0A14303DB193B37BD7D3B25O1C7a1H6579034529190D63MBGD23792B1354B2B273F9H9D9955056382U3A569472B0D7J9V2L290j1E92F6H4T9D4J651JLd1NJ39O7A309451LFb19T5n17b13D0b14R4R0L1t1Hl1Hj1Hb19b17d17R3r10h12R0F6LERE94F2N2R9R9H5J5h1BH7J2R2N1HA7CV6N2535F9f119Kh105F1F0B3755b1J5959L30VGF2',
+    'yc5s&76282EGCAIE4A083408080Kk1KC24A1M5I72945698H4042666U6444A6A84C1O4G2I8',
+    'al5wg8MFC5A2G6G0C064A2Q3',
+    '$h2mp6055d11D1N0RGN297BRBf1Hb1Hb1HBBH7D917BHDBV555FH779HCj1El14H1D5HHLDHPT77F9b1BN9Bq19i19a17U5U5O5O7Q5OBo19m156d1MVKVMf1O5a1Ho1JQ56h1GNC583IFg1Jc15M0U4K6Ai1OIa1MCI8GAEICG0K6U6MGM5K7K2e11E7E5G0E6e16S8e13A56H80646SGEQE6I80A3C',
+    'y3ur11k12CA88A0ADQRIBG7E18GA88287G2S6M6S08FG7270FB503214661A66A422D414264040242M282I2U0a1460494LGDCBE98JE381A6GAI4Q38BCo19a17a172105C0I6Q2Q05J9R571V1V2521c1LMDMDUJ270j12d16L0J8FUR6H0R0R2j12R2T0p10T',
+    'yi8&h70117LJVPLHd1RR5n1BB9DF5L1D1PCPAP2H0F9HBN5R1P1P0l117HVLd1B7p1BPBRDTFTDPDRDRDRDTFTDl1LRDRDPDPBNDPDj1JTHRFd1JPDPDn1NRFPDb14b14L6HEB8V6JSD8J42ACGAI5A180A6A1A5C360A284CA82688A42602B45A6C4466EAC2A0G0E14212F80846AAE882EECIFk198F69002CC889AF479L0b10',
+    'k$4!r1Vc1LAR6R4H4F6FG5I8U587426AEI8o1G262I48GQ2A0M2A68CC482G1a18ESU8E2A0E2CAA64M4E1e16c18c16C16B1J2965G9CD65G9QTOTQRM9K4k1IK4s10q11q11G2Ol1A9i10i10i10i103C2EIIA844OEO8o1AIG8E0S86A6QESC86a1Ja1Ja1JQNQN412020442042M0k12E6USSSSSMS64CKEa124a1Qa1Sa1Q2604BS3C0M2a11K020412PSPUm10m10o10040402360A020206020202q10q101F9h10L3R0115311311038r16p16r1030159110121m1F2120GJSNULSN438L2303031D0523030101BP5H0F0725012001g10070h12d12R0T0D1J359BD9b11R0H2R2P197BTLj19H',
+    '&w4gw1J4P4p14J87A2O36745C2CQU4G2S2Q4K1MJk1HSFMDMBERUTS5ADO6MAa10G3GDAD25698B89C5I2a12a138D4342C9e17U6IDMNAL3N3D294781A2EESGMc1M8A6C0E1E3E9I7K0E4A8CIE42C8A6OE661858981C1K5C3A86AAC6K6862E0C6AAK88ECCC6G2E7m1GKKEQ0m12S8M1q1722222C0U0m10m10o10m10m10o10m10m10o10m10m10o10m10m10m10o10O0Q0O0Qs10q10s10s10200s10s10s10s10s10s10s10s1g10g10g10i10g10g10g10g10g10g10g10g10g10g10g10i10g10g10g10g10g10g10g10i10g10g10g10g10g10g11g10g10O0A2Kg182C1673D7Fg10a10c10a10c10a10c10a10a10c10a10c10a10a10c10a10c10a10a10c10a10c10a10c10a10a10c10a10a10c10a10c10a10',
+    'kr7qq3HBJN37153537B7333753705193D2F355B3B13097D9F75175Bd179D0H0F3L490175T2D9F7J4V0V7P7N3BFf19DBf19d19LHN4f14h14h14R2R7R7P2TBj17J7B7BBR9d13d10J3915N3b13H5B7DFFNDNFRNh1RR5D3P9h19R2N7h10J99B991JCDA54B7F9HPDP4R4R0B3DLh13D7N7l109',
+    'jo1mi75O5Q5I0ECSCCIOMKM4A48E4E30N1NSNS086E6G0ECAICGG8G2E7AP6Ri15Q32HCFK14I4a10c10E422CIES2G38LG0648C8IAA8185606480S261Q5KDQ4664KAIMQGa1EMGAE621638D8F4J092362I1G3876H1D69071V0D49251131315B7P5L2J45294j1332D5J7B032147C26GI',
+    'hw1sg8JD',
+    'uz8cw1b1AP8PAVAVARATA74TSLIJK70J8HKHQFa17MLA9GLQDC3C7MBO9G1604Kc1ACAAAC28Qg1Me1IQ',
+    'o!6ox5k15e15u17u17a13A2k1Ui1UMc1Ma1A8e16w1Aw1A42CQGc14444g1IOCb1c1Va1b1e1TSLKNKRSu1Ew1Ey1Ec18c18u1Ei1Ai1Ag1A82SOo17c13a15c13a13c15c15M9a1Fc1Fk1Ls1Pa1Fa1Fk1LSDSDk1VQJSJULULOHOHc1Nc1Nc1La1Nc1Na1LQHQJc1La1N61a11c11',
+    '!Ggr12e12m11K4E2c10c14S4QQ2S4EM8Q1Q68AGMK1M66A6G2GC8KAUDM046C8C64G32244Ac118DO1G1O3M387636FMDM0KEQ6EC62618561C28481I0S4k10OOIe1a1IUAQ6i16i184A4e1USAK6a16K1e11S4OGC4E2c19e19c1Bc19E2A1GBQLGF89INIPCDE5C1C086ECK4I0k1Mm1O80O3S5e1Le1NUFUDk19q17k10k11Ua1a1c1OESC82q1As14q14o11m11I1g17U9UBQJi13S4AKUSKAMEe1GS8SKK6e10GJELINGLQd1An1Ap12H27252DE3U3K7CF216B271N3V7J4R1B17B7H9j1PB3F1F5HDHPJRFPHP9n1Bj1TP3F170L3V3H53T9HB9P3P5T3P5D9FFDD9d13Hd1FR097R5T',
+    'oMej2BIFCH6BA5CNQROPQ5072F5975190P7J715Af13J9ATg1JS361A2482K424283E9KBC32B2B1NF93N2L4B8f1ULIJGH4343Q2U28I3I166DALC7G5696B49476B2D2JSHQBM3C6M58JMHK6U2Q0G4A2AC4S0U1S3o1622a1Se1SQ2S2S0U2o12c10a12S2Q0a12U02E4460o17k154Og1a1M6468A4I2C8A6I8UKc1Cm12m12a1880S0U1U0S0s10a10U0S0Q0U0S0S0Q0c1k1Ao18c16a16e18e16g18i16IASQUOQOSMQMKIKIQMQMSMQMMIMIc1Kc1Me1Kc1Kc1Ke1Kc1Mc1Kc1Ke1Kc1Kc1Kc1Kc1Me1Kc1Kc1Ke1Kc1Mc1Kc1Ke1Kc1Kc1Ke1Mc1Ku1Bu1Bs19q1Bs19s1BOBQLQLc1Rc1R2040a1Gc1Gk1Mk1M8h16f18f16b14V6b12V0T0H89EBMTKTMVDFARGBQPQR6919HVHV7F1h13h11T3R3h11h13p13n13h13h11d13b11d13b11b13VPRPRTVVVTVPRNPPPJPHRPb1Nb1Nb1Fb1Hb1Pb1BF6N6NAl1Al1',
+    '#Dm#66DCBk1PQH057D3769GB25377BGf14f15P0F4BET5P3NARGL8f1CHKHA3MDGBAFJDFB3D6J0B93h10V2d10r12V2l12D0h15R351755F5H57j1Bj1Bb13H2D1B537092B8D2F39191B458183C5A71D7753V1P3VJb1Lj1DH5V9f1FHRNVLLVJR7f19l17b1191R0D2903115091D7B7371N2J4n169131D5NFFFB5P1B5PHPHB7PDPFF9B9VLJ9351D0T0T0j10j10p1P0294F2D171B094B6B0775J3L1F0P2F0B0B1F7FBLFB9F1F0F894',
+    'jw1$m50b10h12b10h10h10l10n10V0Lj10d10f10d10f10f10d10',
+    '&y3ug8233F09',
+    'jw1sk5i1Le1Ng1Lg1Lg1Lg1Le1Lg1Lg1Lg1Le1Lg1Lg1Lg1Lg1Le1La1JODODo1Ro1Rd10b10p10n10V0V0V0b10T1T04l16r16r12P4N6r16r14p16r14P2N6r16r14r14N2P6r16p16r12P4N6r16r16r12N2P6r16p16r12P4N4r16r16r16p14P2N6r14r16r16p1OPUV7l15R5P3T5Rj10j10h10h10j10h10j10h10j10h10h10j10h10j10h10h10j10f10L0961U7179392B19P3b17f15f12',
+    'dUi$4UJUJSHSHa1Jc1La1Lc1Ja1La1Lc1La1Ja1Lc1La1Ja1Lc1La1La1Jc1La1Lc1Ja1La1Lc1Ja1La1Lc1La1Jc1La1La1Jc1La1Lc1La1JUJ272F1H0DA9GBa1Fa1F652B8FE9E5K5S1U1C7QTE3g19S3C1O7SDEB03090V6H6B175555177B5B29A5IBC3808082q18o18a16a16',
+    'm1g%2j1Er1Gb193456F4P1H3TLLJ53TBTDRBb1J53F3L1H39P7RB3b1Ab1AD1B5f1VHNBV290B559170V6913F0d15NJ7D7B392RIPIJ6J3JD99BBDF4DAD8J1HNBPB47890H1T9BD97F75D7J9b17R395D9BB1D2F4B672B3T9V9FD7D94L2V3P0D5H1972P1T7B717579599F2F67604486A065G3G283O10L55033134F11B0F6HE55190D4N37B2F0D19157196913335330BCF6d165G30987C5053J2HHBJF9D5502E1A38l1O7A5Q5Q2G2E0A58B8F4F991703426ISACC866660614B4JE90789K3492740S0MJg15O9O7AFAH6H2D13105AD29173391F3J9D79J71D2f1G',
+    'qo4wg887EV69A32323BL1P1N13B0F1533PP7L3H0V69293T1B3TVT995N6B2F7b1190R10456B4P1549Q749AFS0E0A7Q66640C1GAU4220M364660O',
+    'g%4!f6739B7BHFFH2R4RAPAT3J7N7JTj1592DAN8N2FCp1Af1AV270l10n10l10n10l10n10l10l10n10l10n10l10n10l10n10l10n10l10l10n10l10n10l10n10l10n10l10n10l10l10n10l1',
+    '$v4$z3VGVEVGVGVGVGVGVGVGVEVGVGVGVGVGVGVGTGVEVGVGVGVGVGVGVGVGVEVGVGVGVGVGVGVGVGVEVGVGVGVGVGVGVGVGp1Mp1OVGb1Id1Fb1FRDRBf1Fd1F',
+    '!k2at4Je1Jg1FQDOFU56h1Ch1Aj1Cj1Cr1D72D8FC5IJM9Q7Q1k13ELULSJSJQPe15G4KAGi1Mc1M4G2m19E9O7e10MGm1Iq15O5Q3e11c11c12i12k13U3C9g1Fi15EHa1Vg1FQMCKA',
+    '#&1wu1Q8QA44216F424440414567C3650H2F63290B4529',
+    'ga7&q6519997LB5536937PF9J2H2L1',
+    'sa4wf82A0I',
+    'ks7sq6Gl1Cl1Gl1El1F3CVK4M48LTL',
+    's!6wy5Aq16M4GEa11A4g1186KEUCQ4CCOCU5G144K6U4G6MCK5k10O8S3a14m1046622QAA0',
+    'g&6qk6D0FA1854B0L6NFBN1B9N4D2J2F17552340E4G3E70593NBFD3BBR2563g14c1ASC80',
+    'e!6iy55G7Q7OBc1Dk1DQBQ1C5IHo1Dc1Fk1KG0Ee1c1127A',
+    'cw6cd67G16',
+    'yx8ei78F8P8PA5A587',
+    'ey8!x743a1j1EB',
+    '%r1q*137D9B9392H0h12d1ADC5E0C40L3NG78745NB771J0Ha1DEF6F2T3570985A90F2J2N07155171V85G7A180652B3979',
+    'a%3gy74081E7G18644482824A142085A7C0662A646A4E0E2C8266K48684C8CE4E4AE6C087C7C2E',
+    'ip4mc8K1S1GEQ0C2M1K0O4OAI182426Cc10C0K1K861AF65A3OB62A4S5S7OFQ4U8I2K2E2Q3U8C86A1G7I56162666I2O3',
+    'nHsr1OIC62638266282683S5S3S3U04583O7CB60CCM4C541A4G0A3ABQ1I6A0M5c11M4A1878086806947C5G0S8O6Q24G001q10S0S0c10a10U2U022A2a11U1g12G1C3Q2E0AB4064A6C68A468080862Ao19',
+    'iz8cc831b13018511x10H3p14F1D3b13N5R1V091',
+    'ie7ez240SAQ2Q7G184886GC8E0IFGLGJ8342Gc1CSAOCQCSC7CDE7E38085a1d1A7E0a14U6g1M48A0C9678BE1e18G6G3I3C0QBc14G0G5QHc1LQ9O7A5OPININONONQHSJSPITITKBG9KLCHIJJTPf1FLDL99PR553J0d12l14j1E3I3I6O4S4U8K6K0G785E1E0',
+    'qn8op2N9N710999TB770f1Q527553',
+    'qu6e#670B6507373515093B0H4B7120I787491F2B2L3H5D590H6B614',
+    'pc1gb2CDG9O2G5G9ALAF6NIBC5KFK9I2A7G5E0CII8m1GG6I6k10g13K3E4C9EJA5A58FAF65ADA0A664',
+    '$o4ie272H4L6P4N9PB9753B0B15777h1J7537052F0H7F99939155Jd195H0NPPP5DHLNNJB1553B5NDLDP0R0NBL3b1590l11r12J5H9D9132301c1NAB9B3159JRVVF7757L51J3l11T3T1',
+    'qa3cr1Ho19O9ODODORULI52B676JGHGLGJI9GJQNO9C5KGIGOKGS0m15q11o16C2C0Q5m12MANGPQNSFODc1Bi13Q3Q2U4MCc17K2G1Q3CHi114FS5o1Ha1REDI5a1B8l1Cd10',
+    '&Emk25BDTBBNLPJN4P3P37AB0D05313359F759190510717713727539252397730',
+    '!x8ey7K4a1A',
+    'iz8ma8521406C0'],
+  libya: ['atImb#1o7i3sAy3o5$2o2m2$7u9c4k5u5m7q2e56y4Rw5p4uDt3mD&2e5i2o2&4g6!1k1sAa2k4c4m3i5Mw2w4&2u5!2m3w3cBy5kAk5wBs5i9i4a2w35i3%4m70w8Ei7Ei4i2!B0y1w9b4w9p1uEl7uEl7a9#1gAPiARcCa3aCc3a9c1aGt5a7t1wBDaAr2aAr2&4z1yBd8u5p2!Dp2yDp2!Dp2u5*4$5n96zBg3r8e5bBk6z7y6t6$7*3e9b3e9b3iAd1gAd1mADmAD!Bx2$Bx2!Bx2aFz4&Ez4o7z4cFv4cAp7cAp7cAr7k8#3k8%3wBp1mAo1k9$3m9&3u7u4o9!9o9y9e6gAo2g7Li7h2u6d5!6#3e9Vg8Vg8&2kBs3!6u5&6y7u6!7u6$7w4$7u4wDe6yDe6aG4y6k1aDw8o5Ao7f2$AC&AAo9l2qBn5mEl3eAh3!Al4o2tAd1d35d4iBl7aGx1&Fx1k6%1y8t5u5x1&AB$AB$Cg1eC%1q4%1y4l4u5xAi2r3p2x1l3z3h2h3#5n5v4x5Er8e1r8e3n8&2l9Rb6p2r7v2j6n9%Cr1*2Kn4$2v7y2t7Gx4s3*Eg3dCm3n9Ex20*D0*D0bE0*D0*D0dE0*D0*D0dE0*D0%D0dE0*D0dE0*D0*D0bE0*D0*D0dE0*D0*D0dE0%D0*D0dE0*D0dE0*D0*D0bE0*D0rF0rF0tF0rF0rF0rF0rF0rF73530173pF0jF0rF0hF00z70z70z70z7*9&4%9a5*9&4bA&4bA$4bA&4%9&4*9$4%9&4*9&4%9&4*9$4*9&4%9a5*9&4%9&4*9$4*9&4%9&4*9&4*9$4%9a5*9&4%9&4*9&4%9$4*9&4*9&4%9&4*9$4%9&4*9&4*9$4%9a5*9&4*9&4%9&4*9&4%9$4*9&4%9&4*9$4bAa5bA&4bA&4%Em7%Em7lAe5lAc5dB%4dB*4v8%3t8#3tBf5rBd5fDv6dDv6hAb5hAd5R0TArAw8rAw8f8!6h8y6n7!3pFo3pFq3nFq3nFo3jGu3jGu3z5cBx6mCp4y7p4w7n5o9x1q1pCy3pCy3fDu3dDu3rFn4v2Ah4!2p4!3h2k5j6g7z2e8z2e8D&Cl1u4#6e9#6e9d6k8h6k8j8cBr1a5Sg6m3q5gCq6!Ag7s1$4MsDt3i4v2a8p2&ADa7&4$Du5qEx1e8z1c8TyARyATyAUyCSyCr1g9R&3t3&Bx4mC*1k4#5aAt9mC*4s7y6a4'],
+  libyaB: [[9.31149,33.1826],[25.15165,19.49595]],
+  nb: [["Tunisia","تونس",[9.551,34.17],
+    [7.497,37.34],
+    [11.536,30.23]],
+    ["Sudan","السودان",[29.957,16.078],
+    [21.825,22.202],
+    [38.609,8.665]],
+    ["Niger","النيجر",[9.413,17.481],
+    [0.164,23.518],
+    [15.964,11.696]],
+    ["Egypt","مصر",[29.853,26.595],
+    [24.702,31.655],
+    [36.87,21.994]],
+    ["Chad","تشاد",[18.65,15.44],
+    [13.448,23.445],
+    [23.982,7.476]],
+    ["Algeria","الجزائر",[2.614,28.42],
+    [-8.685,37.092],
+    [11.968,18.987]]]
+};
+
+// decode rings -> [[lon,lat],...]
+const DT = '0123456789ABCDEFGHIJKLMNOPQRSTUV', DC = 'abcdefghijklmnopqrstuvwxyz!#$%&*';
+const decode = (s, u = 100) => {
+  const v = []; let z = 0, m = 1;
+  for (const ch of s) {
+    const t = DT.indexOf(ch);
+    if (t < 0) { z += DC.indexOf(ch) * m; m *= 32; continue; }
+    z += t * m; v.push(z % 2 ? -(z + 1) / 2 : z / 2); z = 0; m = 1;
+  }
+  const pts = []; let x = 0, y = 0;
+  for (let i = 0; i < v.length; i += 2) pts.push([(x += v[i]) / u, (y += v[i + 1]) / u]);
+  return pts;
+};
+const LAND = GEO.land.map(s => decode(s)), MESH = GEO.mesh.map(s => decode(s)), LIBYA = GEO.libya.map(s => decode(s, 1000));
+
+// Mercator with d3.geoMercator().fitExtent semantics (fitted to Libya's bounds)
+const R = Math.PI / 180;
+const merc = ([lon, lat]) => [lon * R, -Math.log(Math.tan(Math.PI / 4 + lat * R / 2))];
+const fitMercator = ([[x0, y0], [x1, y1]]) => {
+  const [bx0, by0] = merc(GEO.libyaB[0]), [bx1, by1] = merc(GEO.libyaB[1]);
+  const w = x1 - x0, h = y1 - y0, k = Math.min(w / (bx1 - bx0), h / (by1 - by0));
+  const tx = x0 + (w - k * (bx1 + bx0)) / 2, ty = y0 + (h - k * (by1 + by0)) / 2;
+  return (p) => { const [x, y] = merc(p); return [k * x + tx, k * y + ty]; };
+};
+const pathOf = (proj, lines, close) => lines.map(l => 'M' + l.map(p => proj(p).map(v => v.toFixed(2)).join(',')).join('L') + (close ? 'Z' : '')).join('');
+// centripetal Catmull-Rom (d3.curveCatmullRom.alpha(0.5)) as cubic Béziers
+const catmullRom = (pts) => {
+  const f = (v) => +v.toFixed(2), P = [pts[0], ...pts, pts[pts.length - 1]];
+  const d = (a, b) => Math.sqrt(Math.hypot(a[0] - b[0], a[1] - b[1]));   // |ab|^alpha
+  let s = `M${f(pts[0][0])},${f(pts[0][1])}`;
+  for (let i = 1; i < P.length - 2; i++) {
+    const [p0, p1, p2, p3] = [P[i - 1], P[i], P[i + 1], P[i + 2]];
+    const l01 = i > 1 ? d(p0, p1) : 0, l12 = d(p1, p2), l23 = i < P.length - 3 ? d(p2, p3) : 0;
+    let c1 = p1, c2 = p2;
+    if (l01 > 1e-12) { const a = 2 * l01 * l01 + 3 * l01 * l12 + l12 * l12, n = 3 * l01 * (l01 + l12);
+      c1 = [0, 1].map(j => (p1[j] * a - p0[j] * l12 * l12 + p2[j] * l01 * l01) / n); }
+    if (l23 > 1e-12) { const b = 2 * l23 * l23 + 3 * l23 * l12 + l12 * l12, m = 3 * l23 * (l23 + l12);
+      c2 = [0, 1].map(j => (p2[j] * b + p1[j] * l23 * l23 - p3[j] * l12 * l12) / m); }
+    s += `C${f(c1[0])},${f(c1[1])},${f(c2[0])},${f(c2[1])},${f(p2[0])},${f(p2[1])}`;
+  }
+  return s;
+};
+// tiny SVG builder: null attributes are skipped
+const add = (parent, tag, attrs = {}, text) => {
+  const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  for (const k in attrs) if (attrs[k] != null) el.setAttribute(k, attrs[k]);
+  if (text != null) el.textContent = text;
+  return parent.appendChild(el);
+};
+
+function draw() {
   const W = innerWidth, H = innerHeight;
   const small = W < 560, tiny = W < 420;
-  const svg = d3.select('#m').html('').attr('viewBox', `0 0 ${W} ${H}`);
+  svg.textContent = ''; svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
   const pad = small ? 18 : Math.max(28, Math.min(W, H) * 0.08);
-  const proj = d3.geoMercator().fitExtent([[pad, pad + (small ? 10 : 18)], [W - pad, H - pad - (small ? 8 : 26)]], libya);
-  const path = d3.geoPath(proj);
-  const defs = svg.append('defs');
-  defs.append('clipPath').attr('id', 'ly').append('path').datum(libya).attr('d', path);
-  const grid = defs.append('pattern').attr('id', 'grid').attr('width', 14).attr('height', 14).attr('patternUnits', 'userSpaceOnUse');
-  grid.append('path').attr('d', 'M14 0H0V14').attr('fill', 'none').attr('stroke', 'rgba(15,79,69,0.07)').attr('stroke-width', 1);
+  const proj = fitMercator([[pad, pad + (small ? 10 : 18)], [W - pad, H - pad - (small ? 8 : 26)]]);
+  const libyaD = pathOf(proj, LIBYA, true);
+  const defs = add(svg, 'defs');
+  add(add(defs, 'clipPath', {id: 'ly'}), 'path', {d: libyaD});
+  const grid = add(defs, 'pattern', {id: 'grid', width: 14, height: 14, patternUnits: 'userSpaceOnUse'});
+  add(grid, 'path', {d: 'M14 0H0V14', fill: 'none', stroke: 'rgba(15,79,69,0.07)', 'stroke-width': 1});
 
   // neighbours
-  svg.append('g').selectAll('path').data(all.features.filter(f => f.id !== '434')).join('path')
-    .attr('d', path).attr('fill', '#F3F2EC');
-  svg.append('path').datum(borders).attr('d', path).attr('fill', 'none').attr('stroke', '#fff').attr('stroke-width', 1.2);
+  add(svg, 'path', {d: pathOf(proj, LAND, true), fill: '#F3F2EC'});
+  add(svg, 'path', {d: pathOf(proj, MESH, false), fill: 'none', stroke: '#fff', 'stroke-width': 1.2});
   // neighbour names
-  const nl = svg.append('g').attr('display', small ? 'none' : null).attr('font-family', FONT).attr('font-size', 10.5).attr('letter-spacing', AR ? 0 : '0.14em').attr('fill', '#9AA3A1').attr('text-anchor', 'middle');
-  all.features.filter(f => neighbours[f.id]).forEach(f => {
-    const inter = { type: 'Feature', geometry: f.geometry };
-    let [x, y] = path.centroid(inter);
-    const b = path.bounds(inter);
-    x = Math.max(b[0][0] + 30, Math.min(b[1][0] - 30, Math.max(40, Math.min(W - 40, x))));
-    y = Math.max(b[0][1] + 16, Math.min(b[1][1] - 10, Math.max(30, Math.min(H - 20, y))));
+  const nl = add(svg, 'g', {display: small ? 'none' : null, 'font-family': FONT, 'font-size': 10.5, 'letter-spacing': AR ? 0 : '0.14em', fill: '#9AA3A1', 'text-anchor': 'middle'});
+  GEO.nb.forEach(([en, ar, c, nw, se]) => {
+    let [x, y] = proj(c);
+    const [b0, b1] = [proj(nw), proj(se)];
+    x = Math.max(b0[0] + 30, Math.min(b1[0] - 30, Math.max(40, Math.min(W - 40, x))));
+    y = Math.max(b0[1] + 16, Math.min(b1[1] - 10, Math.max(30, Math.min(H - 20, y))));
     if (x < 30 || x > W - 30 || y < 20 || y > H - 34) return;
-    nl.append('text').attr('class','deco').attr('x', x).attr('y', y).text(AR ? neighbours[f.id][1] : neighbours[f.id][0].toUpperCase());
+    add(nl, 'text', {class: 'deco', x, y}, AR ? ar : en.toUpperCase());
   });
   // sea label
   const [sx, sy] = proj([18.6, 33.9]);
-  if (!small) svg.append('text').attr('class','deco').attr('x', sx).attr('y', Math.max(18, sy)).attr('text-anchor', 'middle').attr('font-family', FONT)
-    .attr('font-size', 11).attr('font-style', AR ? 'normal' : 'italic').attr('fill', '#8FA9A4').attr('letter-spacing', AR ? 0 : '0.06em')
-    .text(AR ? 'البحر الأبيض المتوسط' : 'Mediterranean Sea');
+  if (!small) add(svg, 'text', {class: 'deco', x: sx, y: Math.max(18, sy), 'text-anchor': 'middle', 'font-family': FONT,
+    'font-size': 11, 'font-style': AR ? 'normal' : 'italic', fill: '#8FA9A4', 'letter-spacing': AR ? 0 : '0.06em'},
+    AR ? 'البحر الأبيض المتوسط' : 'Mediterranean Sea');
 
   // Libya
-  svg.append('path').datum(libya).attr('d', path).attr('fill', '#EAF1EE');
-  svg.append('rect').attr('width', W).attr('height', H).attr('fill', 'url(#grid)').attr('clip-path', 'url(#ly)');
-  svg.append('path').datum(libya).attr('d', path).attr('fill', 'none').attr('stroke', GREEN).attr('stroke-width', 1.25).attr('stroke-linejoin', 'round');
+  add(svg, 'path', {d: libyaD, fill: '#EAF1EE'});
+  add(svg, 'rect', {width: W, height: H, fill: 'url(#grid)', 'clip-path': 'url(#ly)'});
+  add(svg, 'path', {d: libyaD, fill: 'none', stroke: GREEN, 'stroke-width': 1.25, 'stroke-linejoin': 'round'});
   const [lx, ly] = proj([19.2, 25.2]);
-  if (!small) svg.append('text').attr('class','deco').attr('x', lx).attr('y', ly).attr('text-anchor', 'middle').attr('font-family', FONT).attr('font-size', 13).attr('font-weight', 600)
-    .attr('letter-spacing', AR ? 0 : '0.32em').attr('fill', 'rgba(15,79,69,0.28)').text(AR ? 'ليبيا' : 'LIBYA');
+  if (!small) add(svg, 'text', {class: 'deco', x: lx, y: ly, 'text-anchor': 'middle', 'font-family': FONT, 'font-size': 13, 'font-weight': 600,
+    'letter-spacing': AR ? 0 : '0.32em', fill: 'rgba(15,79,69,0.28)'}, AR ? 'ليبيا' : 'LIBYA');
 
   // routes — coastal corridor + inland spur
   const by = Object.fromEntries(cities.map(c => [c.n, c]));
-  const line = d3.line().curve(d3.curveCatmullRom.alpha(0.5));
-  const rg = svg.append('g').attr('fill', 'none').attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round');
-  const seg = (names, planned) => rg.append('path').attr('d', line(names.map(n => proj(by[n].c))))
-    .attr('stroke', planned ? MUTED : TEAL).attr('stroke-width', planned ? 1.2 : 1.6)
-    .attr('stroke-dasharray', planned ? '2 4' : null).attr('opacity', planned ? 0.7 : 0.8);
+  const rg = add(svg, 'g', {fill: 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round'});
+  const seg = (names, planned) => add(rg, 'path', {d: catmullRom(names.map(n => proj(by[n].c))),
+    stroke: planned ? MUTED : TEAL, 'stroke-width': planned ? 1.2 : 1.6,
+    'stroke-dasharray': planned ? '2 4' : null, opacity: planned ? 0.7 : 0.8});
   seg(['Zawiya','Tripoli','Al Khums','Zliten','Misrata'], false);
   seg(['Misrata','Sirte','Benghazi'], true);
   seg(['Benghazi','Al Bayda','Tobruk'], false);
   // inland spur Tripoli → Sabha, gentle bow
   { const [x1,y1]=proj(by.Tripoli.c), [x2,y2]=proj(by.Sabha.c);
-    rg.append('path').attr('d', `M${x1},${y1} Q${(x1+x2)/2-(y2-y1)*0.12},${(y1+y2)/2} ${x2},${y2}`)
-      .attr('stroke', TEAL).attr('stroke-width', 1.6).attr('opacity', 0.8); }
+    add(rg, 'path', {d: `M${x1},${y1} Q${(x1+x2)/2-(y2-y1)*0.12},${(y1+y2)/2} ${x2},${y2}`, stroke: TEAL, 'stroke-width': 1.6, opacity: 0.8}); }
 
   // points
-  const pg = svg.append('g');
+  const pg = add(svg, 'g');
   cities.forEach(c => {
     const [x, y] = proj(c.c);
-    const g = pg.append('g').attr('transform', `translate(${x},${y})`);
+    const g = add(pg, 'g', {transform: `translate(${x},${y})`});
     if (c.s === 'hub') {
-      g.append('circle').attr('r', 11).attr('fill', GOLD).attr('opacity', 0.18);
-      g.append('circle').attr('r', 5.5).attr('fill', GOLD).attr('stroke', '#fff').attr('stroke-width', 2);
+      add(g, 'circle', {r: 11, fill: GOLD, opacity: 0.18});
+      add(g, 'circle', {r: 5.5, fill: GOLD, stroke: '#fff', 'stroke-width': 2});
     } else if (c.s === 'soon') {
-      g.append('circle').attr('r', 3.8).attr('fill', '#fff').attr('stroke', MUTED).attr('stroke-width', 1.4);
+      add(g, 'circle', {r: 3.8, fill: '#fff', stroke: MUTED, 'stroke-width': 1.4});
     } else {
-      g.append('circle').attr('r', 3.8).attr('fill', TEAL).attr('stroke', '#fff').attr('stroke-width', 1.6);
+      add(g, 'circle', {r: 3.8, fill: TEAL, stroke: '#fff', 'stroke-width': 1.6});
     }
   });
   // labels: priority order, collision-avoided, size-aware
@@ -107,31 +297,31 @@ async function draw() {
   const smallPos = { Benghazi:[0,20,'middle'], Tripoli:[0,-12,'middle'], Misrata:[4,16,'middle'], Sirte:[0,16,'middle'], Tobruk:[0,-9,'middle'], Sabha:[8,4,'start'] };
   const rank = (c) => c.s === 'hub' ? 0 : minor.has(c.n) ? 2 : 1;
   const order = [...cities].sort((a, b) => rank(a) - rank(b));
-  const lg = svg.append('g').attr('font-family', FONT);
+  const lg = add(svg, 'g', {'font-family': FONT});
   const placed = [];
   const hit = (b) => placed.some(p => b.x < p.x + p.width + 2 && b.x + b.width + 2 > p.x && b.y < p.y + p.height && b.y + b.height > p.y);
   order.forEach(c => {
     if (small && minor.has(c.n)) return;
     const [x, y] = proj(c.c), [dx, dy, anchor] = (small && smallPos[c.n]) || c.l;
     const hub = c.s === 'hub';
-    const el = lg.append('text').attr('x', x + dx).attr('y', y + dy).attr('text-anchor', anchor)
-      .attr('font-size', hub ? (tiny ? 11 : small ? 12 : 13) : (tiny ? 10 : small ? 10.5 : 11.5)).attr('font-weight', hub ? 600 : 500)
-      .attr('fill', c.s === 'soon' ? MUTED : (hub ? GREEN : INK))
-      .attr('stroke', '#fff').attr('stroke-width', 3.5).attr('stroke-linejoin', 'round').attr('paint-order', 'stroke')
-      .text(AR ? c.a : c.n);
-    const b = el.node().getBBox();
+    const el = add(lg, 'text', {x: x + dx, y: y + dy, 'text-anchor': anchor,
+      'font-size': hub ? (tiny ? 11 : small ? 12 : 13) : (tiny ? 10 : small ? 10.5 : 11.5), 'font-weight': hub ? 600 : 500,
+      fill: c.s === 'soon' ? MUTED : (hub ? GREEN : INK),
+      stroke: '#fff', 'stroke-width': 3.5, 'stroke-linejoin': 'round', 'paint-order': 'stroke'}, AR ? c.a : c.n);
+    const b = el.getBBox();
     if (b.x < 2 || b.x + b.width > W - 2 || b.y < 2 || hit(b)) { el.remove(); return; }
     placed.push(b);
   });
-  svg.selectAll('text.deco').each(function(){ const b=this.getBBox(); if (hit(b)) this.remove(); });
+  svg.querySelectorAll('text.deco').forEach(el => { if (hit(el.getBBox())) el.remove(); });
   // scale bar
   const [a1] = proj([10.5, 20.3]), [a2] = proj([10.5 + 500 / (111.32 * Math.cos(20.3 * Math.PI / 180)), 20.3]);
   const sbw = a2 - a1, sbx = W - 16 - sbw, sby = H - 14;
-  const sb = svg.append('g').attr('display', tiny ? 'none' : null).attr('font-family', FONT).attr('font-size', 10).attr('fill', MUTED);
-  sb.append('path').attr('d', `M${sbx},${sby - 4}V${sby}H${sbx + sbw}V${sby - 4}`).attr('fill', 'none').attr('stroke', MUTED).attr('stroke-width', 1);
-  sb.append('text').attr('x', sbx + sbw / 2).attr('y', sby - 7).attr('text-anchor', 'middle').text(AR ? '500 كم' : '500 km');
+  const sb = add(svg, 'g', {display: tiny ? 'none' : null, 'font-family': FONT, 'font-size': 10, fill: MUTED});
+  add(sb, 'path', {d: `M${sbx},${sby - 4}V${sby}H${sbx + sbw}V${sby - 4}`, fill: 'none', stroke: MUTED, 'stroke-width': 1});
+  add(sb, 'text', {x: sbx + sbw / 2, y: sby - 7, 'text-anchor': 'middle'}, AR ? '500 كم' : '500 km');
 }
-draw();
+draw();                                        // draw now so nothing is blank…
+if (document.fonts) document.fonts.ready.then(draw);   // …and again with real font metrics for getBBox
 let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(draw, 120); });
 </script>
 </body></html>
