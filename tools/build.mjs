@@ -23,7 +23,7 @@ import vm from 'node:vm';
 
 // ── Site settings ────────────────────────────────────────────────────────────────────────────────────
 // When the site moves to its own domain, change SITE_URL (keep the trailing slash), add a CNAME file and rebuild.
-const SITE_URL = process.env.SITE_URL || 'https://sheedosa.github.io/rikaz-website/';
+const SITE_URL = process.env.SITE_URL || 'https://rikazfoods.ly/';
 const ORG = {
   phone: '+218910000000',            // ⚠ placeholder number shown on the site — replace with the real one
   email: 'info@rikaz.ly',

@@ -1,5 +1,5 @@
-# Rikaz — https://sheedosa.github.io/rikaz-website/
+# Rikaz — https://rikazfoods.ly/
 User-agent: *
 Allow: /
 
-Sitemap: https://sheedosa.github.io/rikaz-website/sitemap.xml
+Sitemap: https://rikazfoods.ly/sitemap.xml

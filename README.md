@@ -3,7 +3,7 @@
 Exported from Claude Design. `index.html` is the design file; `support.js` is its runtime.
 Static site — serve locally with `python3 -m http.server` and open http://localhost:8000.
 
-Live (GitHub Pages): https://sheedosa.github.io/rikaz-website/
+Live: https://rikazfoods.ly/ (GitHub Pages, custom domain set by the `CNAME` file)
 
 ## After editing `index.html`, run the build
 
