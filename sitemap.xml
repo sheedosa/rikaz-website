@@ -835,6 +835,61 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ub1/"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ub1/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ub1/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/uber-product-1.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ub2/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ub2/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ub2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ub2/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/uber-product-2.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ub3/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ub3/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ub3/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ub3/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/uber-product-3.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ub4/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ub4/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ub4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ub4/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/uber-product-4.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ub5/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ub5/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ub5/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ub5/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/uber-product-5.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ub6/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ub6/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ub6/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ub6/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/uber-product-6.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ub7/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ub7/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ub7/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ub7/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/uber-product-7.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://rikazfoods.ly/ar/</loc>
@@ -1671,5 +1726,60 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ub1/"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ub1/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ub1/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/uber-product-1.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ub2/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ub2/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ub2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ub2/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/uber-product-2.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ub3/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ub3/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ub3/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ub3/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/uber-product-3.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ub4/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ub4/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ub4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ub4/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/uber-product-4.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ub5/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ub5/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ub5/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ub5/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/uber-product-5.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ub6/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ub6/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ub6/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ub6/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/uber-product-6.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ub7/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ub7/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ub7/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ub7/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/uber-product-7.webp</image:loc></image:image>
   </url>
 </urlset>
