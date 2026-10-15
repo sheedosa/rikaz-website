@@ -102,8 +102,8 @@ function jsonLd(r, m) {
       '@type': 'Product', '@id': url + '#product', url, name: L === 'ar' ? p.nameAr : p.name, alternateName: L === 'ar' ? p.name : p.nameAr,
       description: p.desc[L], sku: p.sku, ...(p.img ? { image: [abs(p.img.replace(/\.webp$/, '.png')), abs(p.img)] } : {}),
       brand: { '@type': 'Brand', name: b.name, logo: abs(b.logo.replace(/\.webp$/, '.png')) }, category: CATS[b.cat][L],
-      countryOfOrigin: { '@type': 'Country', name: COUNTRIES[b.country][L] }, size: sz,
-      additionalProperty: [[spec.pack, p.pack[L]], [spec.caseQty, locU(p.caseQty, L)], [spec.shelf, locU(p.shelf, L)]].map(([name, value]) => ({ '@type': 'PropertyValue', name, value })),
+      countryOfOrigin: { '@type': 'Country', name: COUNTRIES[b.country][L] }, ...(p.size ? { size: sz } : {}),
+      additionalProperty: [[spec.pack, p.pack[L]], [spec.caseQty, p.caseQty && locU(p.caseQty, L)], [spec.shelf, p.shelf && locU(p.shelf, L)]].filter(([, v]) => v).map(([name, value]) => ({ '@type': 'PropertyValue', name, value })),
     });
     webpage.mainEntity = { '@id': url + '#product' };
   }
@@ -292,7 +292,7 @@ function productCard(p) {
     <div class="kicker" style="margin-top:auto"><i></i>${esc(b.name)} · ${esc(CATS[b.cat].en)}</div>
     <h1 style="font-size:${p.name.length > 30 ? 46 : 54}px;margin-top:18px">${esc(p.name)}</h1>
     <div dir="rtl" style="font-family:'Readex Pro';font-size:28px;color:#3E4A48;margin-top:12px;text-align:left">${esc(p.nameAr)}</div>
-    <div style="font-size:21px;color:#5C6866;margin-top:14px">${esc(p.size)} · ${esc(p.pack.en)} · Case ${esc(p.caseQty)}</div>
+    <div style="font-size:21px;color:#5C6866;margin-top:14px">${esc([p.size, p.pack.en, p.caseQty && 'Case ' + p.caseQty].filter(Boolean).join(' · '))}</div>
     <div class="foot"><img src="assets/logo-full-horizontal.png" style="height:44px"><span>Distributed in Libya</span></div>
   </div>
   <div class="right" style="background:${HERO_BG[b.id] || '#EAF1EE'}"><div class="grid"></div><img class="shot" src="${p.img}" style="inset:60px 50px"></div></div>`);
