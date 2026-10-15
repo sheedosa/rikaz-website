@@ -50,7 +50,7 @@ const D = vm.runInNewContext(script + '\n;({ HERO_IDS, BRANDS, PRODUCTS, CATS, C
   React: { createElement: () => null, createRef: () => ({}) }, DCLogic: class {}, URL,
 });
 const { BRANDS, PRODUCTS, CATS, COUNTRIES, T, seoFor, pathFor, locU } = D;
-const HERO_BG = { antat: '#F8EFEA', mymotto: '#EDF3F8', sweetsmil: '#F7F0E6' };
+const HERO_BG = { antat: '#F8EFEA', mymotto: '#EDF3F8', sweetsmil: '#F7F0E6', coach: '#EFF5E8', kemo: '#FCF1E6', maretti: '#F5F0E4', uber: '#FBEDEB', bonucci: '#F2EEF7', moulindor: '#FBEEEE' };
 
 const LANGS = ['en', 'ar'];
 const routes = [];
