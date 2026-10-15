@@ -202,6 +202,42 @@
     <image:image><image:loc>https://rikazfoods.ly/assets/brands/antat-product-6.webp</image:loc></image:image>
   </url>
   <url>
+    <loc>https://rikazfoods.ly/product/an7/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/an7/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/an7/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/an7/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/antat-product-7.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/an8/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/an8/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/an8/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/an8/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/antat-product-8.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/an9/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/an9/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/an9/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/an9/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/antat-product-9.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/an10/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/an10/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/an10/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/an10/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/antat-product-10.webp</image:loc></image:image>
+  </url>
+  <url>
     <loc>https://rikazfoods.ly/product/mm1/</loc>
     <lastmod>2026-10-15</lastmod>
     <priority>0.7</priority>
@@ -1091,6 +1127,42 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/an6/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/an6/"/>
     <image:image><image:loc>https://rikazfoods.ly/assets/brands/antat-product-6.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/an7/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/an7/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/an7/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/an7/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/antat-product-7.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/an8/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/an8/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/an8/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/an8/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/antat-product-8.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/an9/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/an9/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/an9/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/an9/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/antat-product-9.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/an10/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/an10/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/an10/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/an10/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/antat-product-10.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://rikazfoods.ly/ar/product/mm1/</loc>
