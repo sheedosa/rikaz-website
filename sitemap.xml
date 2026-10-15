@@ -139,6 +139,15 @@
     <image:image><image:loc>https://rikazfoods.ly/assets/brands/soffi-logo.webp</image:loc></image:image>
   </url>
   <url>
+    <loc>https://rikazfoods.ly/brand/kemo/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/brand/kemo/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/brand/kemo/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/brand/kemo/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-logo.webp</image:loc></image:image>
+  </url>
+  <url>
     <loc>https://rikazfoods.ly/brand/uber/</loc>
     <lastmod>2026-10-15</lastmod>
     <priority>0.8</priority>
@@ -865,6 +874,87 @@
     <image:image><image:loc>https://rikazfoods.ly/assets/brands/soffi-product-1.webp</image:loc></image:image>
   </url>
   <url>
+    <loc>https://rikazfoods.ly/product/ke1/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ke1/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ke1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ke1/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-product-1.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ke2/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ke2/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ke2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ke2/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-product-2.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ke3/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ke3/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ke3/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ke3/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-product-3.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ke4/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ke4/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ke4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ke4/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-product-4.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ke5/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ke5/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ke5/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ke5/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-product-5.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ke6/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ke6/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ke6/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ke6/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-product-6.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ke7/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ke7/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ke7/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ke7/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-product-7.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ke8/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ke8/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ke8/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ke8/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-product-8.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ke9/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ke9/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ke9/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ke9/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-product-9.webp</image:loc></image:image>
+  </url>
+  <url>
     <loc>https://rikazfoods.ly/product/ub1/</loc>
     <lastmod>2026-10-15</lastmod>
     <priority>0.7</priority>
@@ -1064,6 +1154,15 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/brand/soffi/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/brand/soffi/"/>
     <image:image><image:loc>https://rikazfoods.ly/assets/brands/soffi-logo.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/brand/kemo/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/brand/kemo/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/brand/kemo/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/brand/kemo/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-logo.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://rikazfoods.ly/ar/brand/uber/</loc>
@@ -1790,6 +1889,87 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/sf1/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/sf1/"/>
     <image:image><image:loc>https://rikazfoods.ly/assets/brands/soffi-product-1.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ke1/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ke1/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ke1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ke1/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-product-1.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ke2/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ke2/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ke2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ke2/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-product-2.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ke3/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ke3/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ke3/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ke3/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-product-3.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ke4/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ke4/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ke4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ke4/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-product-4.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ke5/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ke5/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ke5/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ke5/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-product-5.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ke6/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ke6/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ke6/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ke6/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-product-6.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ke7/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ke7/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ke7/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ke7/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-product-7.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ke8/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ke8/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ke8/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ke8/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-product-8.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ke9/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ke9/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ke9/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ke9/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/kemo-product-9.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://rikazfoods.ly/ar/product/ub1/</loc>
