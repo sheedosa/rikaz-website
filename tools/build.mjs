@@ -25,10 +25,10 @@ import vm from 'node:vm';
 // When the site moves to its own domain, change SITE_URL (keep the trailing slash), add a CNAME file and rebuild.
 const SITE_URL = process.env.SITE_URL || 'https://rikazfoods.ly/';
 const ORG = {
-  phone: '+218910000000',            // ⚠ placeholder number shown on the site — replace with the real one
+  phone: '+218911215454',
   email: 'info@rikaz.ly',
-  street: { en: 'Al Serraj', ar: 'السراج' }, city: { en: 'Tripoli', ar: 'طرابلس' }, country: 'LY',
-  geo: { latitude: 32.8952, longitude: 13.19 },
+  street: { en: 'Al Qadariya', ar: 'القدارية' }, city: { en: 'Misrata', ar: 'مصراتة' }, country: 'LY',
+  geo: { latitude: 32.3754, longitude: 15.0925 },   // Misrata centre — replace with the exact office pin when available
   hours: [{ days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'], opens: '08:00', closes: '17:00' }, { days: ['Saturday'], opens: '09:00', closes: '14:00' }],
   sameAs: [],                        // add official social profiles (Facebook, Instagram, LinkedIn…) when available
 };

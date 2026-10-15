@@ -16,8 +16,8 @@ const FONT = AR ? `'${AR_FONT}',sans-serif` : "'Instrument Sans',sans-serif";
 const GREEN = '#0F4F45', TEAL = '#1B7A6A', GOLD = '#B5A422', INK = '#1F2A28', MUTED = '#5C6866';
 document.documentElement.lang = AR ? 'ar' : 'en';
 const svg = document.getElementById('m');
-svg.setAttribute('aria-label', AR ? 'خريطة ليبيا تُظهر مراكز توزيع ركاز في طرابلس وبنغازي والمدن التي نخدمها'
-  : 'Map of Libya showing Rikaz distribution hubs in Tripoli and Benghazi and served cities');
+svg.setAttribute('aria-label', AR ? 'خريطة ليبيا تُظهر مراكز توزيع ركاز في مصراتة وطرابلس وبنغازي والمدن التي نخدمها'
+  : 'Map of Libya showing Rikaz distribution hubs in Misrata, Tripoli and Benghazi and served cities');
 // label placement: dx, dy, anchor (mirrored for RTL not needed — geography is fixed)
 const cities = [
   {n:'Tripoli',  a:'طرابلس', c:[13.19,32.89], s:'hub',    l:[-3,-14,'end']},
@@ -25,7 +25,7 @@ const cities = [
   {n:'Zawiya',   a:'الزاوية', c:[12.73,32.75], s:'served', l:[-8,16,'end']},
   {n:'Al Khums', a:'الخمس',  c:[14.26,32.65], s:'served', l:[2,-11,'start']},
   {n:'Zliten',   a:'زليتن',  c:[14.57,32.47], s:'served', l:[-6,16,'end']},
-  {n:'Misrata',  a:'مصراتة', c:[15.09,32.38], s:'served', l:[6,15,'start']},
+  {n:'Misrata',  a:'مصراتة', c:[15.09,32.38], s:'hub',    l:[6,15,'start']},
   {n:'Sirte',    a:'سرت',    c:[16.59,31.21], s:'soon',   l:[0,18,'middle']},
   {n:'Al Bayda', a:'البيضاء', c:[21.76,32.76], s:'served', l:[0,-11,'middle']},
   {n:'Tobruk',   a:'طبرق',   c:[23.98,32.08], s:'served', l:[0,-11,'middle']},
