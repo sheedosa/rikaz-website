@@ -253,6 +253,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ma1/"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ma1/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ma1/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/maretti-product-1.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://rikazfoods.ly/product/ma2/</loc>
@@ -261,6 +262,51 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ma2/"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ma2/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ma2/"/>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ma3/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ma3/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ma3/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ma3/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/maretti-product-2.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ma4/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ma4/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ma4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ma4/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/maretti-product-3.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ma5/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ma5/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ma5/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ma5/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/maretti-product-4.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ma6/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ma6/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ma6/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ma6/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/maretti-product-5.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/product/ma7/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ma7/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ma7/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ma7/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/maretti-product-6.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://rikazfoods.ly/product/sp1/</loc>
@@ -647,6 +693,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ma1/"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ma1/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ma1/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/maretti-product-1.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://rikazfoods.ly/ar/product/ma2/</loc>
@@ -655,6 +702,51 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ma2/"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ma2/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ma2/"/>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ma3/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ma3/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ma3/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ma3/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/maretti-product-2.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ma4/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ma4/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ma4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ma4/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/maretti-product-3.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ma5/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ma5/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ma5/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ma5/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/maretti-product-4.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ma6/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ma6/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ma6/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ma6/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/maretti-product-5.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://rikazfoods.ly/ar/product/ma7/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rikazfoods.ly/product/ma7/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://rikazfoods.ly/ar/product/ma7/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rikazfoods.ly/product/ma7/"/>
+    <image:image><image:loc>https://rikazfoods.ly/assets/brands/maretti-product-6.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://rikazfoods.ly/ar/product/sp1/</loc>
