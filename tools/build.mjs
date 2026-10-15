@@ -371,7 +371,7 @@ if (/^#\\/./.test(location.hash)) location.replace('${R}' + location.hash.slice(
 </head>
 <body>
 <main>
-  <img src="${R}assets/logo-full-horizontal.webp" alt="Rikaz — رِكاز" width="600" height="145" style="height:52px;width:auto">
+  <img src="${R}assets/logo-full-horizontal.webp" alt="Rikaz — رِكاز" width="600" height="191" style="height:52px;width:auto">
   <h1>Page not found</h1>
   <p>The page you were looking for has moved or no longer exists.</p>
   <p dir="rtl" lang="ar" style="font-family:'Readex Pro',sans-serif">الصفحة التي تبحث عنها غير موجودة.</p>
