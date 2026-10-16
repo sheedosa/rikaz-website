@@ -752,8 +752,23 @@ html.scrolled .hdr{box-shadow:0 10px 30px -22px rgba(15,40,35,.45)}
 @media(min-width:1000px){.hdr{background:rgba(247,246,241,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}html.scrolled .hdr{background:rgba(247,246,241,.94)}.hdr-in{height:76px}html.scrolled .hdr-logo{transform:scale(.86)}}
 .nav a{position:relative;padding:8px 2px;font-size:14.5px;white-space:nowrap;font-weight:500;color:#3E4A48;transition:color .2s}.nav a::after{content:'';position:absolute;left:2px;right:2px;bottom:2px;height:2px;border-radius:2px;background:#B5A422;transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.2,.7,.2,1)}[dir=rtl] .nav a::after{transform-origin:right}.nav a:hover,.nav a[aria-current=page]{color:#0F4F45}.nav a[aria-current=page]::after{transform:scaleX(1)}
 .lang{display:inline-flex;border-radius:999px;background:rgba(15,79,69,.08);padding:3px}.lang a{padding:6px 12px;border-radius:999px;font-size:12.5px;font-weight:600;color:#0F4F45;transition:background .2s,color .2s}.lang a[aria-current=true]{background:#0F4F45;color:#fff}@media(max-width:999px){.lang a{padding:12px 18px;min-height:44px;display:inline-flex;align-items:center;font-size:13.5px}}
-.hero{padding-top:clamp(12px,2.5vw,32px);padding-bottom:0}.hero .stage{margin-top:-2%}.hero .statrow{gap:clamp(20px,3vw,44px)}@media(min-width:820px) and (max-width:1120px){.hero .statrow{display:grid;grid-template-columns:1fr 1fr;gap:18px 24px}}[dir=rtl] .h1{font-size:clamp(36px,5vw,66px)}@media(max-width:819px){.hero .stage{margin-top:28px}}
+.hero{padding-top:clamp(12px,2.5vw,32px);padding-bottom:0;display:grid;grid-template-areas:"t s" "b s";column-gap:clamp(24px,4vw,64px);align-items:start}
+.hero-t{grid-area:t}.hero-b{grid-area:b}.hero .stage{grid-area:s;margin-top:-2%}.hero-sub{margin-top:24px;max-width:540px}.hero-cta{margin-top:36px;display:flex;flex-wrap:wrap;gap:12px}.hero .hero-stats{margin-top:clamp(28px,3.5vw,48px);gap:clamp(20px,3vw,44px)}
+@media(min-width:820px) and (max-width:1120px){.hero .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:18px 24px}}[dir=rtl] .h1{font-size:clamp(36px,5vw,66px)}
 .mqsec{padding:clamp(16px,2.5vw,32px) 0 clamp(24px,3vw,40px)}
+/* Phones: logos first, headline, the spread right under it, then the intro, buttons and stats. Sized so the
+   logos, title and spread share the opening screen from 360px up. */
+@media(max-width:819px){
+ .hero{grid-template-areas:"t" "s" "b";padding-top:4px;padding-bottom:20px;row-gap:0}
+ .hero-t{font-size:clamp(30px,8.4vw,42px)}[dir=rtl] .hero-t{font-size:clamp(28px,7.6vw,38px)}
+ .hero .stage{margin:14px auto 0;max-width:460px;aspect-ratio:1.38}.blob{inset:4% 4% 2% 4%}
+ .hs1{left:27%;top:6%;width:42%;height:70%}.hs2{left:1%;top:22%;width:27%;height:64%;--r:-8deg}.hs3{right:1%;top:0;width:28%;height:52%}
+ .hs4{right:2%;top:48%;width:26%;height:50%}.hs5{left:15%;top:62%;width:30%;height:40%}.hs6{left:42%;top:64%;width:27%;height:40%}
+ .hero-sub{margin-top:22px;font-size:16.5px}.hero .hero-cta{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}.hero-cta .btn{padding:15px 20px;font-size:15px}
+ .hero .hero-stats{margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:20px 16px}
+ .mq-top{padding:12px 0 12px}.mq-top .mq-t img{height:30px;max-width:110px}.mq-top .mq-t{gap:30px;animation-duration:38s}
+}
+@media(max-width:400px){.hero .stage{aspect-ratio:1.32}}@media(min-width:600px) and (max-width:819px){.hero .stage{max-width:560px}}
 .stage{position:relative;aspect-ratio:1.08;width:100%}
 .blob{position:absolute;inset:6% 2% 4% 6%;border-radius:52% 48% 44% 56%/48% 56% 44% 52%;background:radial-gradient(circle at 35% 30%,#FFFFFF 0%,#EAF1EE 55%,#E2ECE8 100%);transform:translate(calc(var(--mx,0)*-6px),calc(var(--my,0)*-6px))}
 .hs{position:absolute;display:block;transform:translate(calc(var(--mx,0)*var(--px,0)*1px),calc(var(--my,0)*var(--py,0)*1px)) rotate(var(--r,0deg))}
@@ -766,7 +781,7 @@ html.scrolled .hdr{box-shadow:0 10px 30px -22px rgba(15,40,35,.45)}
 .hs6{left:40%;top:60%;width:30%;height:38%;z-index:10;--px:6;--py:18;--ps:16;--r:6deg}
 .hs7{left:2%;top:2%;width:22%;height:32%;z-index:4;--px:-18;--py:-14;--ps:-8;--r:-10deg}
 .hs8{right:14%;top:-2%;width:18%;height:30%;z-index:3;--px:12;--py:-18;--ps:-10;--r:12deg}
-@media(max-width:700px){.stage{aspect-ratio:1.15}.hs7,.hs8{display:none}}
+@media(max-width:819px){.hs7,.hs8{display:none}}
 .statrow{display:flex;flex-wrap:wrap;gap:clamp(20px,4vw,56px);align-items:flex-end}.stat>b{display:block;font-size:clamp(34px,3.6vw,52px);line-height:1;letter-spacing:-.04em;font-weight:650;color:#0F4F45;font-variant-numeric:tabular-nums}.stat>span{display:block;margin-top:8px;font-size:13.5px;color:#5C6866;font-weight:500}@media(max-width:600px){.statrow{display:grid;grid-template-columns:1fr 1fr;gap:22px 16px}}
 .mq{overflow:hidden;direction:ltr;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}.mq-t{display:flex;align-items:center;gap:clamp(40px,5vw,72px);width:max-content;animation:mq 46s linear infinite}.mq.off .mq-t{animation-play-state:paused}.mq-t img{height:44px;width:auto;max-width:150px;object-fit:contain;opacity:.92;transition:transform .3s,opacity .3s}@keyframes mq{to{transform:translateX(-50%)}}
 .strip{display:flex;gap:16px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;padding:6px 6px 14px;margin:-6px -6px 0;scrollbar-width:none}.strip::-webkit-scrollbar{display:none}.strip>*{flex:0 0 auto;width:min(70vw,250px);scroll-snap-align:start}
@@ -831,19 +846,25 @@ html.rv-on .rv.anim{animation:rvIn .8s cubic-bezier(.2,.7,.2,1) both}@keyframes 
 <!-- ============ HOME ============ -->
 <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
 <main data-screen-label="Home">
-  <section class="wrap hero" style="display:grid;grid-template-columns:{{ heroCols }};gap:clamp(24px,4vw,64px);align-items:{{ heroAlign }}">
-    <div>
-      <h1 class="h1 rv">{{ t.hero.title }}</h1>
-      <p class="lead rv d1" style="margin-top:24px;max-width:540px">{{ t.hero.sub }}</p>
-      <div class="rv d2" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:36px">
+  <sc-if value="{{ heroStack }}" hint-placeholder-val="{{ false }}">
+  <section class="rv mqsec mq-top">
+    <div class="mq"><div class="mq-t">
+      <sc-for list="{{ featuredBrands }}" as="b" hint-placeholder-count="13"><a href="{{ b.href }}" onClick="{{ b.open }}" aria-label="{{ b.name }}"><img loading="lazy" decoding="async" src="{{ b.logo }}" alt="{{ b.logoAlt }}"></a></sc-for>
+      <sc-for list="{{ featuredBrands }}" as="b" hint-placeholder-count="13"><a href="{{ b.href }}" onClick="{{ b.open }}" tabIndex="-1" aria-hidden="true"><img loading="lazy" decoding="async" src="{{ b.logo }}" alt="{{ b.logoAlt }}"></a></sc-for>
+    </div></div>
+  </section>
+  </sc-if>
+  <section class="wrap hero" style="grid-template-columns:{{ heroCols }}">
+    <h1 class="h1 rv hero-t">{{ t.hero.title }}</h1>
+    <div class="hero-b">
+      <p class="lead rv d1 hero-sub">{{ t.hero.sub }}</p>
+      <div class="rv d2 hero-cta">
         <a href="{{ brandsHref }}" onClick="{{ goBrands }}" class="btn btn-p">{{ t.hero.cta1 }} <span class="ar">{{ arrow }}</span></a>
         <a href="{{ partnerHref }}" onClick="{{ goPartner }}" class="btn btn-g">{{ t.hero.cta2 }}</a>
       </div>
-      <sc-if value="{{ heroSide }}" hint-placeholder-val="{{ true }}">
-      <div class="statrow rv d3" style="margin-top:clamp(28px,3.5vw,48px)">
+      <div class="statrow rv d3 hero-stats">
         <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4"><div class="stat"><b data-count="{{ s.n }}">{{ s.v }}</b><span>{{ s.l }}</span></div></sc-for>
       </div>
-      </sc-if>
     </div>
     <div class="stage rv d1" aria-label="{{ t.hero.spreadLabel }}">
       <div class="blob"></div>
@@ -853,23 +874,18 @@ html.rv-on .rv.anim{animation:rvIn .8s cubic-bezier(.2,.7,.2,1) both}@keyframes 
     </div>
   </section>
 
-  <!-- Logo marquee -->
+  <!-- Logo marquee (desktop: under the hero; phones: above it) -->
+  <sc-if value="{{ heroSide }}" hint-placeholder-val="{{ true }}">
   <section class="rv mqsec">
     <div class="mq"><div class="mq-t">
       <sc-for list="{{ featuredBrands }}" as="b" hint-placeholder-count="13"><a href="{{ b.href }}" onClick="{{ b.open }}" aria-label="{{ b.name }}"><img loading="lazy" decoding="async" src="{{ b.logo }}" alt="{{ b.logoAlt }}"></a></sc-for>
       <sc-for list="{{ featuredBrands }}" as="b" hint-placeholder-count="13"><a href="{{ b.href }}" onClick="{{ b.open }}" tabIndex="-1" aria-hidden="true"><img loading="lazy" decoding="async" src="{{ b.logo }}" alt="{{ b.logoAlt }}"></a></sc-for>
     </div></div>
   </section>
-  <sc-if value="{{ heroStack }}" hint-placeholder-val="{{ false }}">
-  <section class="wrap rv" style="padding:4px 0 28px">
-    <div class="statrow" style="justify-content:center;text-align:center">
-      <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4"><div class="stat"><b data-count="{{ s.n }}">{{ s.v }}</b><span>{{ s.l }}</span></div></sc-for>
-    </div>
-  </section>
   </sc-if>
 
   <!-- Product strip -->
-  <section class="wrap" style="padding-top:clamp(20px,3vw,40px);padding-bottom:clamp(56px,7vw,112px)">
+  <section class="wrap" style="padding-top:clamp(32px,4vw,48px);padding-bottom:clamp(56px,7vw,112px)">
     <div class="rv" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:26px">
       <div><h2 class="h2">{{ t.featured.title }}</h2><p class="p" style="margin-top:10px;max-width:520px">{{ t.featured.sub }}</p></div>
       <a href="{{ brandsHref }}" onClick="{{ goBrands }}" class="lnk">{{ t.featured.link }} <span class="ar">{{ arrow }}</span></a>
@@ -1811,7 +1827,7 @@ class Component extends DCLogic {
     const w = s.width, rep = (n) => `repeat(${n},minmax(0,1fr))`;
     const mob = isMobile;
     const layout = { stickyPos: w < 820 ? 'static' : 'sticky', mapRatio: w < 600 ? '4/3' : '16/8', mapOrder: w < 820 ? '1' : '0', fGap: mob ? '0px' : '9px', fTap: mob ? '44px' : '0px',
-      heroCols: w >= 820 ? 'minmax(0,1.05fr) minmax(0,1fr)' : 'minmax(0,1fr)', heroAlign: w >= 820 ? 'start' : 'stretch', heroSide: w >= 820, heroStack: w < 820, footerCols: w >= 900 ? 'minmax(0,1.4fr) repeat(3,minmax(0,1fr))' : rep(w >= 520 ? 2 : 1) };
+      heroCols: w >= 820 ? 'minmax(0,1.05fr) minmax(0,1fr)' : 'minmax(0,1fr)', heroSide: w >= 820, heroStack: w < 820, footerCols: w >= 900 ? 'minmax(0,1.4fr) repeat(3,minmax(0,1fr))' : rep(w >= 520 ? 2 : 1) };
     const dly = (i, n = 4) => i % n ? 'd' + (i % n) : '';   // reveal stagger within a row
     const go = (p, extra) => (e) => this.nav(p, extra, e);
     const href = (p, extra = {}) => hrefFor(this.route({ ...s, page: p, ...extra }));
