@@ -1,6 +1,8 @@
 # Rikaz website (v2)
 
 Exported from Claude Design. `index.html` is the design file; `support.js` is its runtime.
+The visual system (type scale, buttons, cards, reveal/parallax motion) lives in the `<helmet><style>` block at the top of the
+template in `index.html`; the data and page logic sit in the `data-dc-script` block at the bottom.
 Static site — serve locally with `python3 -m http.server` and open http://localhost:8000.
 
 Live: https://rikazfoods.ly/ (GitHub Pages, custom domain set by the `CNAME` file)

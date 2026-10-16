@@ -235,8 +235,6 @@ function draw() {
   const libyaD = pathOf(proj, LIBYA, true);
   const defs = add(svg, 'defs');
   add(add(defs, 'clipPath', {id: 'ly'}), 'path', {d: libyaD});
-  const grid = add(defs, 'pattern', {id: 'grid', width: 14, height: 14, patternUnits: 'userSpaceOnUse'});
-  add(grid, 'path', {d: 'M14 0H0V14', fill: 'none', stroke: 'rgba(15,79,69,0.07)', 'stroke-width': 1});
 
   // neighbours
   add(svg, 'path', {d: pathOf(proj, LAND, true), fill: '#F3F2EC'});
@@ -259,7 +257,6 @@ function draw() {
 
   // Libya
   add(svg, 'path', {d: libyaD, fill: '#EAF1EE'});
-  add(svg, 'rect', {width: W, height: H, fill: 'url(#grid)', 'clip-path': 'url(#ly)'});
   add(svg, 'path', {d: libyaD, fill: 'none', stroke: GREEN, 'stroke-width': 1.25, 'stroke-linejoin': 'round'});
   const [lx, ly] = proj([19.2, 25.2]);
   if (!small) add(svg, 'text', {class: 'deco', x: lx, y: ly, 'text-anchor': 'middle', 'font-family': FONT, 'font-size': 13, 'font-weight': 600,

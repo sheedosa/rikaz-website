@@ -50,7 +50,7 @@ const D = vm.runInNewContext(script + '\n;({ HERO_IDS, BRANDS, PRODUCTS, CATS, C
   React: { createElement: () => null, createRef: () => ({}) }, DCLogic: class {}, URL,
 });
 const { BRANDS, PRODUCTS, CATS, COUNTRIES, T, seoFor, pathFor, locU } = D;
-const HERO_BG = { antat: '#F8EFEA', mymotto: '#EDF3F8', sweetsmil: '#F7F0E6', coach: '#EFF5E8', kemo: '#FCF1E6', maretti: '#F5F0E4', uber: '#FBEDEB', bonucci: '#F2EEF7', moulindor: '#FBEEEE' };
+const HERO_BG = { antat:'#FBEFEA', mymotto:'#EAF2FB', sweetsmil:'#FBF3E6', maretti:'#EAF3EC', spuds:'#F5EEE8', bonucci:'#EFEFEF', moulindor:'#FBECEC', troflex:'#E9F1FA', ka:'#F6F1E3', soffi:'#EAF0FA', kemo:'#FBF0E3', coach:'#EAF4EA', uber:'#FBEBEB' };   // mirrors BRAND_TINT in index.html
 
 const LANGS = ['en', 'ar'];
 const routes = [];
@@ -214,6 +214,7 @@ async function prerender(browser, base) {
   for (const [key, viewport] of [['d', { width: 1280, height: 800 }], ['m', { width: 390, height: 844 }]]) {
     const ctx = await browser.newContext({ viewport });
     const page = await ctx.newPage();
+    await page.addInitScript(() => { window.__PRERENDER = true; });   // the app skips reveal/count-up motion, so snapshots are the plain page
     page.on('pageerror', (e) => console.error('  page error:', e.message));
     for (const r of routes) {
       await page.goto(base + pathFor(r), { waitUntil: 'load' });
