@@ -31,12 +31,13 @@ function addCommit(files, parent, message, date = new Date()) {
   commits.set(s, { sha: s, tree: treeSha, parent, message, date: date.toISOString() });
   return s;
 }
-const fileAt = (ref, path) => trees.get(commits.get(ref === BRANCH ? head : ref).tree).get(path);
+// Files not committed through the fake (the site's existing photos) are read from the working copy.
+const fileAt = (ref, path) => trees.get(commits.get(ref === BRANCH ? head : ref).tree).get(path) ?? (path.startsWith('assets/') && existsSync(join(ROOT, path)) ? readFileSync(join(ROOT, path)) : undefined);
 const contentNow = () => Object.fromEntries(['brands', 'products', 'settings'].map(k => [k, JSON.parse(fileAt(head, `content/${k}.json`))]));
 head = addCommit(Object.fromEntries(['brands', 'products', 'settings'].map(k => [`content/${k}.json`, readFileSync(join(ROOT, `content/${k}.json`), 'utf8')])), null, 'Initial catalogue', new Date(Date.now() - 86400000));
 let failNextRefUpdate = 0;
 
-function github(method, url, body) {
+function github(method, url, body, accept = '') {
   const u = new URL(url), p = u.pathname.replace(`/repos/${OWNER}/${NAME}`, '');
   const ok = (data, status = 200) => ({ status, data });
   if (p === '/user') return ok({ login: 'rikaz-owner', name: 'Rikaz Owner', avatar_url: 'https://avatars.githubusercontent.com/u/1' });
@@ -44,7 +45,8 @@ function github(method, url, body) {
   if (p === `/git/ref/heads/${BRANCH}`) return ok({ object: { sha: head } });
   if (p.startsWith('/contents/')) {
     const f = fileAt(u.searchParams.get('ref'), decodeURIComponent(p.slice(10)));
-    return f == null ? { status: 404, data: { message: 'Not Found' } } : { status: 200, raw: f };
+    if (f == null) return { status: 404, data: { message: 'Not Found' } };
+    return /raw/.test(accept) ? { status: 200, raw: f } : ok({ type: 'file', path: decodeURIComponent(p.slice(10)), size: f.length });
   }
   let m;
   if ((m = p.match(/^\/git\/commits\/(\w+)$/))) return ok({ sha: m[1], tree: { sha: commits.get(m[1]).tree } });
@@ -87,6 +89,35 @@ function simulateOtherAdmin() {
   head = addCommit({ 'content/products.json': JSON.stringify(c.products, null, 2) + '\n' }, head, 'Edited product "Fruit Jelly Mix" (other admin)');
 }
 
+let failures = 0, passed = 0;
+const check = (cond, msg) => { if (cond) { passed++; console.log('  ✓ ' + msg); } else { failures++; console.log('  ✖ ' + msg); } };
+
+// ── Merge rules (no browser needed) ───────────────────────────────────────────────────────────────
+{
+  const store = await import('../admin/store.js');
+  const base = store.normalize(JSON.parse(JSON.stringify(Object.fromEntries(['brands', 'products', 'settings'].map(k => [k, JSON.parse(readFileSync(join(ROOT, `content/${k}.json`), 'utf8'))])))));
+  const copy = () => JSON.parse(JSON.stringify(base));
+  const mk = (id, name) => ({ ...base.products.find(p => p.id === 'ke1'), id, name, sku: 'T-' + name });
+  console.log('Merge rules');
+  const mine = copy(), theirs = copy();
+  mine.products.push(mk('ke10', 'Mine')); theirs.products.push(mk('ke10', 'Theirs'));
+  mine.settings.countries.FR = { en: 'France', ar: 'فرنسا' }; theirs.settings.countries.GR = { en: 'Greece', ar: 'اليونان' };
+  let m = store.merge(base, mine, theirs);
+  const ids = m.content.products.filter(p => /^(Mine|Theirs)$/.test(p.name)).map(p => p.id + ':' + p.name).sort();
+  check(ids.join() === 'ke10:Theirs,ke11:Mine', `two people adding a product at once keep both (${ids})`);
+  check(m.notes.some(n => /ke11/.test(n)), 'and the owner is told about the new address');
+  check(m.content.settings.countries.FR && m.content.settings.countries.GR, 'countries added on both sides are both kept');
+  const del = copy(); del.products = del.products.filter(p => p.id !== 'ma7');
+  const r = store.retire(base, del);
+  check(r.settings.retired.products.includes('ma7'), 'a deleted product ID is retired');
+  const { nextProductId } = await import('../admin/schema.js');
+  check(nextProductId('maretti', r.products, r.settings.retired.products) === 'ma8', 'and never given to a new product');
+  const ed = copy(); ed.products.find(p => p.id === 'an1').name = 'X';
+  const ot = copy(); ot.products.find(p => p.id === 'an2').name = 'Y';
+  m = store.merge(base, ed, ot);
+  check(m.content.products.find(p => p.id === 'an1').name === 'X' && m.content.products.find(p => p.id === 'an2').name === 'Y' && !m.notes.length, 'edits to different products merge cleanly');
+}
+
 // ── Static server for the site ────────────────────────────────────────────────────────────────────
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.woff2': 'font/woff2', '.ico': 'image/x-icon' };
 const srv = http.createServer((q, s) => {
@@ -103,8 +134,6 @@ const BASE = `http://127.0.0.1:${srv.address().port}/admin/`;
 const req = createRequire(import.meta.url);
 let playwright; try { playwright = req(req.resolve('playwright', { paths: [ROOT, execSync('npm root -g', { encoding: 'utf8' }).trim()] })); } catch { console.error('Playwright is not installed (npm i -g playwright).'); process.exit(1); }
 const browser = await playwright.chromium.launch();
-let failures = 0, passed = 0;
-const check = (cond, msg) => { if (cond) { passed++; console.log('  ✓ ' + msg); } else { failures++; console.log('  ✖ ' + msg); } };
 async function newPage(viewport = { width: 1280, height: 860 }) {
   const ctx = await browser.newContext({ viewport });
   const page = await ctx.newPage();
@@ -114,7 +143,7 @@ async function newPage(viewport = { width: 1280, height: 860 }) {
   await ctx.route('https://api.github.com/**', async (route) => {
     const r = route.request();
     if (r.headers().authorization !== `Bearer ${TOKEN}`) return route.fulfill({ status: 401, json: { message: 'Bad credentials' } });
-    const res = github(r.method(), r.url(), r.postData() ? JSON.parse(r.postData()) : null);
+    const res = github(r.method(), r.url(), r.postData() ? JSON.parse(r.postData()) : null, r.headers().accept);
     const headers = { 'access-control-allow-origin': '*' };
     if ('raw' in res) return route.fulfill({ status: 200, headers, contentType: 'text/plain; charset=utf-8', body: typeof res.raw === 'string' ? res.raw : res.raw.toString('utf8') });
     return route.fulfill({ status: res.status, headers, json: res.data });
@@ -130,7 +159,7 @@ const shot = async (page, name) => SHOTS && page.screenshot({ path: join(SHOTS, 
 const publishAll = async (page) => {
   await page.click('header .btn.publish');
   await page.click('text=Publish to website');
-  await page.waitForSelector('.modal-h >> text=Published', { timeout: 15000 });
+  await page.waitForSelector('.modal-h >> text=Published', { timeout: 15000 }).catch(async (e) => { throw new Error('publish did not finish: ' + await page.locator('.modal').textContent()); });
   await page.waitForSelector('.steps li.done >> text=Live on', { timeout: 30000 });
   await page.click('.modal-f >> text=Done');
 };

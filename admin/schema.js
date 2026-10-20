@@ -23,7 +23,9 @@ export function cleanProduct(p) {
   return Object.fromEntries(PRODUCT_KEYS.filter(k => k in o).map(k => [k, o[k]]));
 }
 export function cleanSettings(s) {
-  return { heroProducts: (s.heroProducts || []).map(str), categories: s.categories || {}, countries: s.countries || {} };
+  const r = s.retired || {};
+  // IDs of deleted brands/products are never given out again, so old links never point at a different item.
+  return { heroProducts: (s.heroProducts || []).map(str), categories: s.categories || {}, countries: s.countries || {}, retired: { brands: [...new Set(r.brands || [])].sort(), products: [...new Set(r.products || [])].sort() } };
 }
 
 export const slugify = (s) => String(s).normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '').slice(0, 24);
@@ -37,14 +39,14 @@ export function prefixFor(brandId, products) {
   const cands = [s.slice(0, 2), s[0] + (s[2] || ''), s.slice(0, 3), ...[...'abcdefghijklmnopqrstuvwxyz'].map(c => s[0] + c)];
   return cands.find(c => c.length >= 2 && !taken.has(c)) || s + 'x';
 }
-export function nextProductId(brandId, products) {
-  const pre = prefixFor(brandId, products), ids = new Set(products.map(p => p.id));
-  let n = Math.max(0, ...products.filter(p => p.id.replace(/\d+$/, '') === pre).map(p => +p.id.slice(pre.length) || 0)) + 1;
+export function nextProductId(brandId, products, retired = []) {
+  const pre = prefixFor(brandId, products), all = [...products.map(p => p.id), ...retired], ids = new Set(all);
+  let n = Math.max(0, ...all.filter(id => id.replace(/\d+$/, '') === pre).map(id => +id.slice(pre.length) || 0)) + 1;
   while (ids.has(pre + n)) n++;
   return pre + n;
 }
-export function newBrandId(name, brands) {
-  const base = slugify(name) || 'brand', ids = new Set(brands.map(b => b.id));
+export function newBrandId(name, brands, retired = []) {
+  const base = slugify(name) || 'brand', ids = new Set([...brands.map(b => b.id), ...retired]);
   let id = base, n = 2;
   while (ids.has(id)) id = base + n++;
   return id;
@@ -57,6 +59,7 @@ export function validate({ brands, products, settings }, { fileExists } = {}) {
   const cats = settings.categories || {}, countries = settings.countries || {};
   const brandIds = new Set(), productIds = new Set(), skus = new Map();
   const imgOk = (p) => !fileExists || fileExists(p);
+  const PATH = /^assets\/[A-Za-z0-9._\/-]+\.(webp|png|jpe?g)$/;   // plain file paths only (they end up in HTML attributes)
   for (const b of brands) {
     const w = 'brand:' + b.id;
     if (!/^[a-z0-9]{2,24}$/.test(b.id)) err(w, 'id', 'Brand ID must be 2–24 lowercase letters or digits.');
@@ -64,6 +67,7 @@ export function validate({ brands, products, settings }, { fileExists } = {}) {
     brandIds.add(b.id);
     if (!str(b.name)) err(w, 'name', 'Brand name is required.');
     if (!str(b.logo)) err(w, 'logo', 'A logo is required.');
+    else if (!PATH.test(b.logo) || b.logo.includes('..')) err(w, 'logo', `Logo path ${b.logo} is not valid.`);
     else if (!imgOk(b.logo)) err(w, 'logo', `Logo file ${b.logo} is missing.`);
     if (!cats[b.cat]) err(w, 'cat', 'Choose a category.');
     if (!countries[b.country]) err(w, 'country', 'Choose a country of origin.');
@@ -86,7 +90,8 @@ export function validate({ brands, products, settings }, { fileExists } = {}) {
       if (!str(p.pack && p.pack[L])) err(w, `pack.${L}`, `Packaging (${L === 'en' ? 'English' : 'Arabic'}) is required.`);
       if (!str(p.desc && p.desc[L])) err(w, `desc.${L}`, `Description (${L === 'en' ? 'English' : 'Arabic'}) is required.`);
     }
-    if (p.img && !imgOk(p.img)) err(w, 'img', `Image file ${p.img} is missing.`);
+    if (p.img && (!PATH.test(p.img) || p.img.includes('..'))) err(w, 'img', `Image path ${p.img} is not valid.`);
+    else if (p.img && !imgOk(p.img)) err(w, 'img', `Image file ${p.img} is missing.`);
     if (!p.img) warn(w, 'img', 'No photo yet — the site shows a placeholder.');
   }
   for (const b of brands) if (!products.some(p => p.brand === b.id)) warn('brand:' + b.id, 'products', 'This brand has no products yet.');

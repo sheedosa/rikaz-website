@@ -6,7 +6,7 @@
 // Drafts (and photos waiting to be uploaded) are saved in this browser, so closing the tab loses nothing.
 // Publishing writes everything in one commit. If someone else published in the meantime, the owner's changes
 // are re-applied on top of the newest catalogue (item by item), so nobody's work is overwritten silently.
-import { cleanBrand, cleanProduct, cleanSettings, validate } from './schema.js';
+import { cleanBrand, cleanProduct, cleanSettings, validate, nextProductId, newBrandId } from './schema.js';
 
 const LS_KEY = 'rikaz-admin-draft-v1';
 const clone = (x) => JSON.parse(JSON.stringify(x));
@@ -37,12 +37,13 @@ export const pendingImages = {
 };
 
 // ── Saved draft ───────────────────────────────────────────────────────────────────────────────────
-export function loadSaved() {
-  try { const s = JSON.parse(localStorage.getItem(LS_KEY)); return s && s.base && s.draft ? s : null; } catch { return null; }
+export function loadSaved(login) {
+  try { const s = JSON.parse(localStorage.getItem(LS_KEY)); return s && s.base && s.draft && s.login === login ? s : null; } catch { return null; }
 }
-export function save(state) {
-  try { localStorage.setItem(LS_KEY, JSON.stringify({ base: state.base, draft: state.draft, savedAt: Date.now() })); } catch {}
+export function save(state, login) {
+  try { localStorage.setItem(LS_KEY, JSON.stringify({ base: state.base, draft: state.draft, login, savedAt: Date.now() })); } catch {}
 }
+export const SAVED_KEY = LS_KEY;
 export function forget() { try { localStorage.removeItem(LS_KEY); } catch {} }
 
 // ── What changed ──────────────────────────────────────────────────────────────────────────────────
@@ -108,13 +109,62 @@ function mergeList(base, draft, latest, notes, label) {
 }
 export function merge(base, draft, latest) {
   const notes = [];
+  draft = renameClashes(base, draft, latest, notes);
   const out = {
     brands: mergeList(base.brands, draft.brands, latest.brands, notes, (x) => `Brand “${x.name}”`),
     products: mergeList(base.products, draft.products, latest.products, notes, (x) => `Product “${x.name}”`),
     settings: { ...latest.settings },
   };
-  for (const k of Object.keys(draft.settings)) if (!same(base.settings[k], draft.settings[k])) out.settings[k] = draft.settings[k];
+  // Lists of named entries (countries, categories): merge entry by entry, so additions on both sides survive.
+  for (const k of ['countries', 'categories']) {
+    const b = base.settings[k] || {}, d = draft.settings[k] || {}, m = { ...(latest.settings[k] || {}) };
+    for (const key of new Set([...Object.keys(b), ...Object.keys(d)])) {
+      if (same(b[key], d[key])) continue;
+      if (d[key] === undefined) delete m[key]; else m[key] = d[key];
+    }
+    out.settings[k] = m;
+  }
+  if (!same(base.settings.heroProducts, draft.settings.heroProducts)) {
+    if (!same(base.settings.heroProducts, latest.settings.heroProducts)) notes.push('The home page products were also changed by someone else — your selection was kept.');
+    out.settings.heroProducts = draft.settings.heroProducts;
+  }
+  const r = (x) => x.settings.retired || { brands: [], products: [] };
+  out.settings.retired = { brands: [...r(latest).brands, ...r(draft).brands], products: [...r(latest).products, ...r(draft).products] };
   return { content: normalize(out), notes };
+}
+
+// Something we added has the same ID as something someone else added meanwhile (both picked the next free
+// number): give ours a new ID so neither is lost, and update everything that points at it.
+function renameClashes(base, draft, latest, notes) {
+  const isNew = (list, id) => !list.some(x => x.id === id);
+  let d = clone(draft);
+  const retired = { brands: [...((latest.settings.retired || {}).brands || []), ...((d.settings.retired || {}).brands || [])], products: [...((latest.settings.retired || {}).products || []), ...((d.settings.retired || {}).products || [])] };
+  for (const b of draft.brands) {
+    const theirs = latest.brands.find(x => x.id === b.id);
+    if (!isNew(base.brands, b.id) || !theirs || same(theirs, b)) continue;
+    const id = newBrandId(b.name, [...latest.brands, ...d.brands], retired.brands);
+    d.brands = d.brands.map(x => x.id === b.id ? { ...x, id } : x);
+    d.products = d.products.map(p => p.brand === b.id && isNew(base.products, p.id) ? { ...p, brand: id } : p);
+    notes.push(`Someone else also added a brand with the address “${b.id}”; yours now uses “${id}”.`);
+  }
+  for (const p of draft.products) {
+    const mine = d.products.find(x => x.id === p.id), theirs = latest.products.find(x => x.id === p.id);
+    if (!isNew(base.products, p.id) || !theirs || same(theirs, mine)) continue;
+    const id = nextProductId(mine.brand, [...latest.products, ...d.products], retired.products);
+    d.products = d.products.map(x => x === mine ? { ...x, id } : x);
+    d.settings = { ...d.settings, heroProducts: d.settings.heroProducts.map(h => h === p.id ? id : h) };
+    notes.push(`Someone else also added a product with the address “${p.id}”; “${p.name}” now uses “${id}”.`);
+  }
+  return d;
+}
+
+// Records the IDs of brands/products deleted between `from` and `to`, so they are never reused.
+export function retire(from, to) {
+  const gone = (k) => from[k].map(x => x.id).filter(id => !to[k].some(x => x.id === id));
+  const r = to.settings.retired || { brands: [], products: [] };
+  const brands = [...new Set([...r.brands, ...gone('brands')])].sort(), products = [...new Set([...r.products, ...gone('products')])].sort();
+  // An item brought back (e.g. by Undo) is no longer retired.
+  return { ...to, settings: { ...to.settings, retired: { brands: brands.filter(id => !to.brands.some(b => b.id === id)), products: products.filter(id => !to.products.some(p => p.id === id)) } } };
 }
 
 // ── Commit message ────────────────────────────────────────────────────────────────────────────────

@@ -194,8 +194,8 @@ function pageHtml(r, pre) {
   let html = SRC
     .replace(/<html[^>]*>/, `<html lang="${r.lang}" dir="${r.lang === 'ar' ? 'rtl' : 'ltr'}">`)
     .replace(/<base href="[^"]*">/, `<base href="${'../'.repeat(depthOf(r)) || './'}">`)
-    .replace(/<!-- seo:start -->[\s\S]*?<!-- seo:end -->/, seoBlock(r));
-  if (pre) html = html.replace('<body>\n', `<body>\n<!-- prerender:start --><div id="dc-pre"><div class="dcp-d">${pre.d}</div><div class="dcp-m">${pre.m}</div></div><!-- prerender:end -->\n`);
+    .replace(/<!-- seo:start -->[\s\S]*?<!-- seo:end -->/, () => seoBlock(r));
+  if (pre) html = html.replace('<body>\n', () => `<body>\n<!-- prerender:start --><div id="dc-pre"><div class="dcp-d">${pre.d}</div><div class="dcp-m">${pre.m}</div></div><!-- prerender:end -->\n`);
   return html;
 }
 const writePage = (r, pre) => { const f = fileFor(r); mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, pageHtml(r, pre)); };

@@ -54,11 +54,11 @@ const I = {
 // Image from the repository, a photo waiting to be published, or (right after publishing, before the site is
 // rebuilt) the copy on GitHub.
 function Img({ path, alt = '', ...rest }) {
-  const { imgUrl, branch } = useApp();
+  const { imgUrl, base } = useApp();
   const [fallback, setFallback] = useState(false);
   useEffect(() => setFallback(false), [path]);
   if (!path) return null;
-  const src = imgUrl(path) || (fallback ? RAW(branch, path) : '../' + path);
+  const src = imgUrl(path) || (fallback ? RAW(base.sha, path) : '../' + path);
   return html`<img src=${src} alt=${alt} loading="lazy" onError=${() => !fallback && setFallback(true)} ...${rest} />`;
 }
 const Thumb = ({ product, tint, size }) => product && product.img
@@ -159,7 +159,21 @@ function App() {
       return value;
     });
   }, []);
-  useEffect(() => { if (base && draft) store.save({ base, draft }); }, [base, draft]);
+  useEffect(() => { if (base && draft && session) store.save({ base, draft }, session.user.login); }, [base, draft]);
+  // Another tab of the dashboard saved a draft: adopt it, so two open tabs never overwrite each other's work.
+  useEffect(() => {
+    if (!session) return;
+    const on = (e) => {
+      if (e.key !== store.SAVED_KEY || !e.newValue) return;
+      try {
+        const s = JSON.parse(e.newValue);
+        if (s.login !== session.user.login || (baseRef.current && store.same(s.base, baseRef.current) && store.same(s.draft, draftRef.current))) return;
+        setBase(s.base); setDraftRaw(s.draft);
+      } catch {}
+    };
+    addEventListener('storage', on);
+    return () => removeEventListener('storage', on);
+  }, [session]);
 
   // Sign in → load the catalogue.
   useEffect(() => {
@@ -174,7 +188,7 @@ function App() {
         const branch = repo.default_branch;
         const sha = await api.head(branch);
         const latest = store.normalize(await api.content(sha));
-        const saved = store.loadSaved();
+        const saved = store.loadSaved(user.login);
         let b = { sha, ...latest }, d = store.clone(latest), note = null;
         if (saved && store.changes(saved.base, saved.draft).length) {
           if (saved.base.sha === sha) { b = saved.base; d = saved.draft; }
@@ -374,7 +388,7 @@ function Login({ onToken, error }) {
           <li>Under <b>Permissions</b> set <b>Contents</b> to <b>Read and write</b> and <b>Actions</b> to <b>Read-only</b>.</li>
           <li>Click <b>Generate token</b>, copy it and paste it above.</li>
         </ol>
-        <p class="small muted">If the repository belongs to someone else's account and it does not appear in step 4, use a <a href=${'https://github.com/settings/tokens/new?scopes=public_repo&description=Rikaz%20admin'} target="_blank" rel="noopener">classic token</a> with only the <b>public_repo</b> box ticked instead.</p>
+        <p class="small muted">If the repository belongs to someone else's account and it does not appear in step 4, use a <a href=${'https://github.com/settings/tokens/new?scopes=public_repo&description=Rikaz%20admin'} target="_blank" rel="noopener">classic token</a> with only the <b>public_repo</b> box ticked instead. Note that a classic token can change every public repository your account can write to, so keep it extra safe.</p>
       </details>
     </form></div>
   </div>`;
@@ -463,13 +477,23 @@ function Brands() {
 function useEditor(initial) {
   const [form, setForm] = useState(initial);
   const [tried, setTried] = useState(false);
-  const dirty = JSON.stringify(form) !== JSON.stringify(initial);
+  const [shownInitial, setShownInitial] = useState(initial);
+  const dirty = JSON.stringify(form) !== JSON.stringify(shownInitial);
+  // The stored item changed underneath the form (another tab, another admin, a merge): show the new
+  // version if nothing is being edited; otherwise keep the edits and say so.
+  const [stale, setStale] = useState(false);
+  useEffect(() => {
+    if (JSON.stringify(initial) === JSON.stringify(shownInitial)) return;
+    if (!dirty) { setForm(initial); setShownInitial(initial); setStale(false); }
+    else setStale(true);
+  }, [JSON.stringify(initial)]);
   useEffect(() => {
     leaveGuard = dirty ? () => confirm('You have unsaved changes on this page. Leave without saving them?') : null;
     return () => { leaveGuard = null; };
   }, [dirty]);
   const upd = (path) => (v) => setForm(f => set(f, path, v));
-  return { form, setForm, upd, dirty, tried, setTried };
+  const reset = (v) => { setForm(v); setShownInitial(v); setStale(false); };
+  return { form, setForm: reset, edit: setForm, upd, dirty, tried, setTried, stale };
 }
 const errorsFor = (problems, where) => Object.fromEntries(problems.filter(p => p.where === where && p.level === 'error').reverse().map(p => [p.field, p.msg]));
 
@@ -477,13 +501,13 @@ function BrandEditor({ id }) {
   const { draft, setDraft, base, toast, addImage, setPublishing } = useApp();
   const existing = id && draft.brands.find(b => b.id === id);
   const blank = { id: '', name: '', logo: '', cat: 'snacks', country: '', tint: '#EFEFEF', desc: { en: '', ar: '' }, story: { en: '', ar: '' } };
-  const initial = useMemo(() => existing ? store.clone(existing) : blank, [id, !!existing]);
-  const { form, setForm, upd, dirty, tried, setTried } = useEditor(initial);
+  const initial = useMemo(() => existing ? store.clone(existing) : blank, [id, JSON.stringify(existing || null)]);
+  const { form, setForm, edit, upd, dirty, tried, setTried, stale } = useEditor(initial);
   const [addingCountry, setAddingCountry] = useState(false);
   if (id && !existing) return html`<div class="empty"><h1>Brand not found</h1><p>It may have been deleted. <a href="#/brands">Back to brands</a></p></div>`;
 
   const isNew = !existing;
-  const candidate = cleanBrand({ ...form, id: isNew ? newBrandId(form.name, draft.brands) : form.id });
+  const candidate = cleanBrand({ ...form, id: isNew ? newBrandId(form.name, draft.brands, draft.settings.retired.brands) : form.id });
   const problems = store.validate({ ...draft, brands: isNew ? [...draft.brands, candidate] : draft.brands.map(b => b.id === id ? candidate : b) });
   const errs = errorsFor(problems, 'brand:' + candidate.id);
   const shown = tried ? errs : {};
@@ -518,6 +542,7 @@ function BrandEditor({ id }) {
     <a class="back" href="#/brands"><${Icon} d=${I.left} size=${16} /> All brands</a>
     <div class="page-head"><div><h1>${isNew ? 'New brand' : existing.name}</h1>
       <div class="sub">${isNew ? (form.name ? html`Web address: <span class="mono">rikazfoods.ly/brand/${candidate.id}/</span>` : 'Fill in the details below, then save.') : html`<a href=${siteLink('brand/' + id + '/')} target="_blank" rel="noopener">rikazfoods.ly/brand/${id}/ ↗</a> ${store.itemChanged(base, draft, 'brand', id) && html`<span class="pill draft">Unpublished changes</span>`}`}</div></div></div>
+    ${stale && html`<div class="notice warn" style="margin-bottom:16px"><div style="flex:1">This brand was changed elsewhere (another tab or another admin) while you were editing. Saving will replace that version with what you see here.</div><button class="btn sm" onClick=${() => setForm(initial)}>Load the new version</button></div>`}
     <div class="editor">
       <div class="editor-side">
         <div class="card">
@@ -652,12 +677,12 @@ function ProductEditor({ id, brandId }) {
   const existing = id && draft.products.find(p => p.id === id);
   const firstBrand = (brandId && draft.brands.some(b => b.id === brandId)) ? brandId : '';
   const blank = { id: '', brand: firstBrand, img: null, name: '', nameAr: '', size: '', sku: '', status: 'stock', shelf: '', pack: { en: '', ar: '' }, caseQty: '', desc: { en: '', ar: '' } };
-  const initial = useMemo(() => existing ? { ...store.clone(existing), img: existing.img || null, size: existing.size || '', shelf: existing.shelf || '', caseQty: existing.caseQty || '' } : blank, [id, !!existing]);
-  const { form, setForm, upd, dirty, tried, setTried } = useEditor(initial);
+  const initial = useMemo(() => existing ? { ...store.clone(existing), img: existing.img || null, size: existing.size || '', shelf: existing.shelf || '', caseQty: existing.caseQty || '' } : blank, [id, JSON.stringify(existing || null)]);
+  const { form, setForm, edit, upd, dirty, tried, setTried, stale } = useEditor(initial);
   if (id && !existing) return html`<div class="empty"><h1>Product not found</h1><p>It may have been deleted. <a href="#/products">Back to products</a></p></div>`;
 
   const isNew = !existing;
-  const newId = isNew && form.brand ? nextProductId(form.brand, draft.products) : null;
+  const newId = isNew && form.brand ? nextProductId(form.brand, draft.products, draft.settings.retired.products) : null;
   const candidate = cleanProduct({ ...form, id: isNew ? (newId || 'new1') : form.id });
   const others = draft.products.filter(p => p.id !== candidate.id);
   const problems = store.validate({ ...draft, products: isNew ? [...draft.products, candidate] : draft.products.map(p => p.id === id ? candidate : p) });
@@ -693,7 +718,7 @@ function ProductEditor({ id, brandId }) {
   // Copy the shared details (pack, case size, shelf life…) from another product of the same brand.
   const copyFrom = (pid) => {
     const s = draft.products.find(p => p.id === pid); if (!s) return;
-    setForm(f => ({ ...f, size: s.size || '', shelf: s.shelf || '', caseQty: s.caseQty || '', pack: { ...s.pack }, status: s.status }));
+    edit(f => ({ ...f, size: s.size || '', shelf: s.shelf || '', caseQty: s.caseQty || '', pack: { ...s.pack }, status: s.status }));
     toast(`Copied size, packaging, case and shelf life from “${s.name}”.`);
   };
 
@@ -701,6 +726,7 @@ function ProductEditor({ id, brandId }) {
     <a class="back" href=${'#/products' + (form.brand ? '?brand=' + form.brand : '')}><${Icon} d=${I.left} size=${16} /> Products</a>
     <div class="page-head"><div><h1>${isNew ? 'New product' : existing.name}</h1>
       <div class="sub">${isNew ? (newId ? html`Web address: <span class="mono">rikazfoods.ly/product/${newId}/</span>` : 'Start by choosing the brand.') : html`<a href=${siteLink('product/' + id + '/')} target="_blank" rel="noopener">rikazfoods.ly/product/${id}/ ↗</a> ${store.itemChanged(base, draft, 'product', id) && html`<span class="pill draft">Unpublished changes</span>`}`}</div></div></div>
+    ${stale && html`<div class="notice warn" style="margin-bottom:16px"><div style="flex:1">This product was changed elsewhere (another tab or another admin) while you were editing. Saving will replace that version with what you see here.</div><button class="btn sm" onClick=${() => setForm(initial)}>Load the new version</button></div>`}
     <div class="editor">
       <div class="editor-side">
         <div class="card">
@@ -825,6 +851,7 @@ function PublishDialog({ onClose }) {
             throw new Error(`The catalogue was changed by someone else while you were editing, and some of your changes no longer fit: ${errs.map(e => e.msg).join(' ')} Fix these, then publish again.`);
           }
         }
+        target = store.retire(ref, target);
         const list = store.changes(ref, target);
         if (!list.length) { setBase({ sha: head, ...target }); setDraft(store.clone(target)); setStep('done'); setNotes(['Nothing to publish — the website already has these changes.']); return; }
         const used = store.referencedImages(target), keys = await store.pendingImages.keys();
@@ -833,16 +860,24 @@ function PublishDialog({ onClose }) {
           { path: 'content/products.json', text: store.fileText(target.products) },
           { path: 'content/settings.json', text: store.fileText(target.settings) },
         ];
-        for (const k of keys) if (used.has(k)) files.push({ path: k, base64: await blobToB64(await store.pendingImages.get(k)) });
+        const uploads = keys.filter(k => used.has(k)), known = store.referencedImages(ref);
+        for (const k of uploads) files.push({ path: k, base64: await blobToB64(await store.pendingImages.get(k)) });
+        // A new photo whose file was lost from this browser (e.g. browser data cleared) must be added again.
+        const lost = [];
+        for (const p of used) if (!uploads.includes(p) && !known.has(p) && !(await api.exists(p, ref.sha))) lost.push(p);
+        if (lost.length) {
+          const who = [...target.products.filter(p => lost.includes(p.img)).map(p => p.name), ...target.brands.filter(b => lost.includes(b.logo)).map(b => b.name + ' (logo)')];
+          throw new Error(`These photos are no longer stored in this browser, please add them again: ${[...new Set(who)].join(', ')}.`);
+        }
         try {
           const commit = await api.commit({ branch, parentSha: ref.sha, files, message: store.commitMessage(list) });
-          for (const k of keys) store.pendingImages.del(k).catch(() => {});
+          for (const k of uploads) store.pendingImages.del(k).catch(() => {});   // other tabs may still need the rest
           setBase({ sha: commit.sha, ...target }); setDraft(store.clone(target));
           setNotes(notesAll); setStep('done');
           watchDeploy(commit.sha);
           return;
         } catch (e) {
-          if (e.status === 409 && attempt < 4) continue;   // branch moved during the save: merge again and retry
+          if (e.status === 409 && attempt < 4) { await new Promise(r => setTimeout(r, 1500 * attempt)); continue; }   // branch moved during the save: merge again and retry
           throw e;
         }
       }
@@ -904,6 +939,7 @@ function History() {
       let next = store.clone(draft), count = 0;
       const notes = [];
       for (const k of ['brands', 'products']) {
+        let here = 0;
         const b = new Map(before[k].map(x => [x.id, x])), a = new Map(after[k].map(x => [x.id, x]));
         for (const id of new Set([...b.keys(), ...a.keys()])) {
           if (store.same(b.get(id), a.get(id))) continue;
@@ -912,12 +948,15 @@ function History() {
           if (!b.has(id)) next[k] = next[k].filter(x => x.id !== id);                       // was added → remove
           else if (next[k].some(x => x.id === id)) next[k] = next[k].map(x => x.id === id ? b.get(id) : x);
           else { const i = before[k].findIndex(x => x.id === id); next[k].splice(Math.min(i, next[k].length), 0, b.get(id)); }   // was deleted → restore
-          count++;
+          count++; here++;
         }
         const order = (list) => list.map(x => x.id).join();
-        if (order(before[k]) !== order(after[k]) && count === 0) { next[k] = [...before[k].filter(x => next[k].some(y => y.id === x.id)).map(x => next[k].find(y => y.id === x.id)), ...next[k].filter(x => !before[k].some(y => y.id === x.id))]; count++; }
+        if (order(before[k]) !== order(after[k]) && here === 0) { next[k] = [...before[k].filter(x => next[k].some(y => y.id === x.id)).map(x => next[k].find(y => y.id === x.id)), ...next[k].filter(x => !before[k].some(y => y.id === x.id))]; count++; }
       }
-      for (const key of Object.keys(before.settings)) if (!store.same(before.settings[key], after.settings[key])) { next.settings = { ...next.settings, [key]: before.settings[key] }; count++; }
+      for (const key of ['heroProducts', 'countries', 'categories']) if (!store.same(before.settings[key], after.settings[key])) {
+        if (!store.same(next.settings[key], after.settings[key])) notes.push(key === 'heroProducts' ? 'The home page products were changed again later; they were set back anyway.' : `The ${key} list was changed again later; it was set back anyway.`);
+        next.settings = { ...next.settings, [key]: before.settings[key] }; count++;
+      }
       if (!count) { toast('That change has nothing to undo.'); return; }
       setDraft(next);
       toast(`Undo prepared as a draft (${count} item${count > 1 ? 's' : ''}). Review it, then press Publish.`);

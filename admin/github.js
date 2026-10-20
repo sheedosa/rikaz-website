@@ -64,10 +64,14 @@ export function createClient(token) {
       try {
         await call('PATCH', `${repoPath}/git/refs/heads/${enc(branch)}`, { sha: commit.sha, force: false });
       } catch (e) {
-        if (e.status === 422 || e.status === 409) throw new GitHubError(409, 'moved');
+        if (e.status === 409 || (e.status === 422 && /fast.?forward/i.test(e.message))) throw new GitHubError(409, 'moved');
         throw e;
       }
       return commit;
+    },
+    async exists(path, ref) {
+      try { await call('GET', `${repoPath}/contents/${enc(path)}?ref=${encodeURIComponent(ref)}`, null, { accept: 'application/vnd.github.object+json' }); return true; }
+      catch (e) { if (e.status === 404) return false; throw e; }
     },
     // Commits that changed the catalogue, newest first.
     history: (branch, page = 1) => call('GET', `${repoPath}/commits?sha=${encodeURIComponent(branch)}&path=content&per_page=25&page=${page}`),
