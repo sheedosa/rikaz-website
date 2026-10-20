@@ -1,0 +1,84 @@
+{
+  "heroProducts": [
+    "an3",
+    "co1",
+    "ke1",
+    "ma4",
+    "ub5",
+    "bo5",
+    "ss3",
+    "md12"
+  ],
+  "categories": {
+    "snacks": {
+      "en": "Snacks & Confectionery",
+      "ar": "وجبات خفيفة وحلويات"
+    },
+    "beverages": {
+      "en": "Beverages",
+      "ar": "مشروبات"
+    },
+    "dairy": {
+      "en": "Dairy",
+      "ar": "ألبان"
+    },
+    "canned": {
+      "en": "Canned & Preserved",
+      "ar": "معلبات ومحفوظات"
+    },
+    "grains": {
+      "en": "Grains & Pasta",
+      "ar": "حبوب ومعكرونة"
+    },
+    "oils": {
+      "en": "Oils & Condiments",
+      "ar": "زيوت وتوابل"
+    },
+    "frozen": {
+      "en": "Frozen",
+      "ar": "مجمدات"
+    },
+    "household": {
+      "en": "Household",
+      "ar": "منزلية"
+    }
+  },
+  "countries": {
+    "TR": {
+      "en": "Türkiye",
+      "ar": "تركيا"
+    },
+    "IT": {
+      "en": "Italy",
+      "ar": "إيطاليا"
+    },
+    "DE": {
+      "en": "Germany",
+      "ar": "ألمانيا"
+    },
+    "EG": {
+      "en": "Egypt",
+      "ar": "مصر"
+    },
+    "ES": {
+      "en": "Spain",
+      "ar": "إسبانيا"
+    },
+    "NL": {
+      "en": "Netherlands",
+      "ar": "هولندا"
+    },
+    "TN": {
+      "en": "Tunisia",
+      "ar": "تونس"
+    },
+    "BE": {
+      "en": "Belgium",
+      "ar": "بلجيكا"
+    },
+    "IN": {
+      "en": "India",
+      "ar": "الهند"
+    }
+  }
+}

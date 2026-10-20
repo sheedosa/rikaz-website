@@ -1,5 +1,6 @@
 # Rikaz — https://rikazfoods.ly/
 User-agent: *
 Allow: /
+Disallow: /admin/
 
 Sitemap: https://rikazfoods.ly/sitemap.xml

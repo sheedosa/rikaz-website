@@ -1,0 +1,210 @@
+[
+  {
+    "id": "antat",
+    "name": "Antat",
+    "logo": "assets/brands/antat-logo.webp",
+    "cat": "snacks",
+    "country": "TR",
+    "tint": "#FBEFEA",
+    "desc": {
+      "en": "Chocolate, candy and jelly confectionery, plus the Verona de luxe praline range.",
+      "ar": "شوكولاتة وحلوى وجيلي، إضافةً إلى تشكيلة برالين فيرونا الفاخرة."
+    },
+    "story": {
+      "en": "Antat is a Turkish confectionery house producing wrapped candies, jellies and boxed chocolate pralines for export markets across MENA. Rikaz distributes the full Antat range in Libya through retail and wholesale channels.",
+      "ar": "أنتات دار حلويات تركية تنتج الحلوى المغلفة والجيلي وبرالين الشوكولاتة المعلّبة لأسواق التصدير في المنطقة. توزّع رِكاز تشكيلة أنتات الكاملة في ليبيا عبر قنوات التجزئة والجملة."
+    }
+  },
+  {
+    "id": "mymotto",
+    "name": "My Motto",
+    "logo": "assets/brands/mymotto-logo.webp",
+    "cat": "snacks",
+    "country": "TR",
+    "tint": "#EAF2FB",
+    "desc": {
+      "en": "Crispy wafer bars in five flavours — no palm oil, no artificial colourings.",
+      "ar": "ألواح ويفر مقرمشة بخمس نكهات — بدون زيت نخيل وبدون ألوان صناعية."
+    },
+    "story": {
+      "en": "My Motto crispy wafers combine layered wafer with cream fillings and a source of fibre, in impulse-friendly single bars.",
+      "ar": "ويفر ماي موتو المقرمش يجمع طبقات الويفر بحشوات الكريمة ومصدر للألياف، في ألواح فردية مناسبة للشراء الفوري."
+    }
+  },
+  {
+    "id": "sweetsmil",
+    "name": "Sweet Smile",
+    "logo": "assets/brands/sweetsmile-logo.webp",
+    "cat": "snacks",
+    "country": "TR",
+    "tint": "#FBF3E6",
+    "desc": {
+      "en": "Assorted chocolate pralines in gift tins.",
+      "ar": "برالين شوكولاتة متنوّعة في علب هدايا معدنية."
+    },
+    "story": {
+      "en": "Sweet Smile offers filled chocolates in tall display tins — a gifting and seasonal line for supermarkets and sweet shops.",
+      "ar": "تقدّم سويت سمايل شوكولاتة محشوة في علب معدنية طويلة للعرض — خط للهدايا والمواسم للمتاجر الكبرى ومحلات الحلويات."
+    }
+  },
+  {
+    "id": "maretti",
+    "name": "Maretti",
+    "logo": "assets/brands/maretti-logo.webp",
+    "cat": "snacks",
+    "country": "IT",
+    "tint": "#EAF3EC",
+    "desc": {
+      "en": "Oven-baked Italian-style bruschette chips.",
+      "ar": "رقائق بروسكيتا إيطالية الطابع مخبوزة بالفرن."
+    },
+    "story": {
+      "en": "Maretti bruschette are baked bread chips in savoury flavours, a premium salty snack for retail and HoReCa.",
+      "ar": "بروسكيتا ماريتي رقائق خبز مخبوزة بنكهات مالحة، وجبة خفيفة فاخرة للتجزئة وقطاع الضيافة."
+    }
+  },
+  {
+    "id": "spuds",
+    "name": "Spuds",
+    "logo": "assets/brands/spuds-logo.webp",
+    "cat": "snacks",
+    "country": "TR",
+    "tint": "#F5EEE8",
+    "desc": {
+      "en": "Craft-cooked kettle potato chips.",
+      "ar": "رقائق بطاطس مطبوخة بطريقة الحرفيين."
+    },
+    "story": {
+      "en": "Spuds Craft Cooked chips are slow-cooked in small batches for a thicker, crunchier bite.",
+      "ar": "رقائق سبادز تُطبخ ببطء على دفعات صغيرة لقرمشة أكثف."
+    }
+  },
+  {
+    "id": "bonucci",
+    "name": "Bonucci",
+    "logo": "assets/brands/bonici-logo.webp",
+    "cat": "snacks",
+    "country": "TR",
+    "tint": "#EFEFEF",
+    "desc": {
+      "en": "Snack cakes, soufflés, biscuits and chocolate pralines.",
+      "ar": "كيك وسوفليه وبسكويت وبرالين شوكولاتة."
+    },
+    "story": {
+      "en": "Bonucci is a value confectionery line for the modern and traditional trade — single-serve snack cakes such as Dream, Barcake, Soufflé, Lupix, Lussio and Chocix, plus Vokal chocolate pralines.",
+      "ar": "بونوتشي خط حلويات بقيمة مناسبة للتجارة الحديثة والتقليدية — كيك فردي مثل دريم وباركيك وسوفليه ولوبيكس ولوسيو وشوكيكس، إضافة إلى برالين فوكال بالشوكولاتة."
+    }
+  },
+  {
+    "id": "moulindor",
+    "name": "Moulin d'Or",
+    "logo": "assets/brands/moulindor-logo.webp",
+    "cat": "snacks",
+    "country": "TN",
+    "tint": "#FBECEC",
+    "desc": {
+      "en": "Cakes, tartlets, donuts, wafers and biscuits.",
+      "ar": "كيك وتارت ودونات وويفر وبسكويت."
+    },
+    "story": {
+      "en": "Moulin d'Or is a bakery and biscuit maker with a broad everyday range — Muffins, Crostatini, Browniz, Funkiz Donuts, Adoro, Barre d'Or cakes, Gof wafers and Le Sandwich biscuits — for the modern and traditional trade.",
+      "ar": "مولان دور علامة مخبوزات وبسكويت بتشكيلة يومية واسعة — موفينز وكروستاتيني وبراونيز وفانكيز دونتس وأدورو وكيك بار دور وويفر غوف وبسكويت لو ساندويتش — للتجارة الحديثة والتقليدية."
+    }
+  },
+  {
+    "id": "troflex",
+    "name": "Troflex",
+    "logo": "assets/brands/troflex-logo.webp",
+    "cat": "snacks",
+    "country": "TR",
+    "tint": "#E9F1FA",
+    "desc": {
+      "en": "Fruit-flavoured centre-filled soft candy.",
+      "ar": "حلوى طرية بنكهات الفواكه ومحشوة من الداخل."
+    },
+    "story": {
+      "en": "Troflex is a soft candy with a fruit-flavoured centre filling — cherry, apple, orange, lemon, strawberry and watermelon — sold in large mixed bags for retail and wholesale.",
+      "ar": "تروفلكس حلوى طرية بحشوة داخلية بنكهات الفواكه — الكرز والتفاح والبرتقال والليمون والفراولة والبطيخ — تُباع في أكياس مشكّلة كبيرة للتجزئة والجملة."
+    }
+  },
+  {
+    "id": "ka",
+    "name": "KA",
+    "logo": "assets/brands/ka-logo.webp",
+    "cat": "snacks",
+    "country": "TR",
+    "tint": "#F6F1E3",
+    "desc": {
+      "en": "Individually wrapped candies in gold gift bags.",
+      "ar": "حلويات مغلّفة فردياً في أكياس ذهبية."
+    },
+    "story": {
+      "en": "KA candies come individually wrapped in colour-coded bags with a premium gold finish, suited to gifting, hospitality and bulk retail.",
+      "ar": "تأتي حلويات KA مغلّفة فردياً في أكياس ملوّنة بلمسة ذهبية فاخرة، مناسبة للهدايا والضيافة والبيع بالجملة."
+    }
+  },
+  {
+    "id": "soffi",
+    "name": "Soffi",
+    "logo": "assets/brands/soffi-logo.webp",
+    "cat": "snacks",
+    "country": "TR",
+    "tint": "#EAF0FA",
+    "desc": {
+      "en": "Chocolate surprise eggs by Armas.",
+      "ar": "بيض مفاجآت بالشوكولاتة من أرماس."
+    },
+    "story": {
+      "en": "Soffi surprise eggs from Armas come in bright red, blue, yellow and pink foil — an impulse favourite for children at the checkout.",
+      "ar": "بيض مفاجآت سوفي من أرماس بأغلفة حمراء وزرقاء وصفراء ووردية زاهية — خيار مفضّل للأطفال عند الدفع."
+    }
+  },
+  {
+    "id": "kemo",
+    "name": "Kemo",
+    "logo": "assets/brands/kemo-logo.webp",
+    "cat": "snacks",
+    "country": "TR",
+    "tint": "#FBF0E3",
+    "desc": {
+      "en": "Swiss rolls, sponge layer cakes and brownies.",
+      "ar": "كيك رول وكيك إسفنجي بطبقات وبراوني."
+    },
+    "story": {
+      "en": "Kemo — \"Spread the Joy\" — makes single-serve snack cakes: Riolet Swiss rolls in five flavours and colourful sponge layer cakes, plus the Nazari cocoa-chip brownie, for supermarkets, kiosks and school canteens.",
+      "ar": "كيمو — «انشر الفرح» — تصنع كيكاً فردياً: كيك رول ريوليه بخمس نكهات وكيك إسفنجي ملوّن بطبقات، إضافة إلى براوني نازاري برقائق الكاكاو، للمتاجر والأكشاك ومقاصف المدارس."
+    }
+  },
+  {
+    "id": "coach",
+    "name": "Coach",
+    "logo": "assets/brands/coach-logo.webp",
+    "cat": "beverages",
+    "country": "TR",
+    "tint": "#EAF4EA",
+    "desc": {
+      "en": "Juices, jelly drinks, energy drinks and instant drink powders.",
+      "ar": "عصائر ومشروبات جيلي ومشروبات طاقة ومساحيق مشروبات فورية."
+    },
+    "story": {
+      "en": "Coach is a full beverage range for every shelf: Sally and Coach juice boxes, Coach Jelly and Justo pouches for kids, BROX energy drinks, and Twins and Turkish Juice instant drink sachets.",
+      "ar": "كوتش تشكيلة مشروبات متكاملة لكل رف: علب عصير سالي وكوتش، وأكياس كوتش جيلي وجوستو للأطفال، ومشروبات الطاقة بروكس، وأكياس مشروبات تويْنز وتركيش جوس الفورية."
+    }
+  },
+  {
+    "id": "uber",
+    "name": "Uber Energy Drink",
+    "logo": "assets/brands/uber-logo.webp",
+    "cat": "beverages",
+    "country": "TR",
+    "tint": "#FBEBEB",
+    "desc": {
+      "en": "Energy drinks in five flavours, 250 ml and 500 ml cans.",
+      "ar": "مشروبات طاقة بخمس نكهات في عبوات 250 و500 مل."
+    },
+    "story": {
+      "en": "Uber Energy Drink targets the fast-growing energy segment with a bold dragon identity and competitive pricing.",
+      "ar": "يستهدف مشروب أوبر للطاقة قطاع مشروبات الطاقة سريع النمو بهوية تنين جريئة وتسعير تنافسي."
+    }
+  }
+]
