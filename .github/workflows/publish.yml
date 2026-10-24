@@ -5,7 +5,9 @@
 #   3. commits the generated files back, so the repository always matches the live site
 #   4. deploys to GitHub Pages
 #
-# One-time setup: repository Settings → Pages → Build and deployment → Source: "GitHub Actions".
+# Works with either Pages setting (Settings → Pages → Source):
+#   • "GitHub Actions" (recommended): this workflow deploys the built site itself
+#   • "Deploy from a branch": the branch is the site, so the workflow asks Pages to rebuild after its commit
 name: Publish site
 
 on:
@@ -60,19 +62,41 @@ jobs:
           # If someone published again meanwhile, their own run rebuilds everything — no need to retry here.
           git push origin HEAD:${{ github.event.repository.default_branch }} || echo "::warning::Branch moved on; the next run publishes the newer version."
 
+      - name: Check how Pages publishes
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mode=$(gh api "repos/${{ github.repository }}/pages" --jq .build_type 2>/dev/null || echo legacy)
+          echo "Pages build type: $mode"
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+
+      - name: Rebuild Pages from the branch
+        if: steps.pages.outputs.mode != 'workflow'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "::warning::Could not request a Pages build; it will run on the next push."
+
       - uses: actions/configure-pages@v5
+        if: steps.pages.outputs.mode == 'workflow'
 
       - name: Collect site files
+        if: steps.pages.outputs.mode == 'workflow'
         run: |
           mkdir -p _site
           rsync -a --exclude '.git' --exclude '.github' --exclude '_site' --exclude 'tools' --exclude 'content' --exclude 'docs' ./ _site/
 
       - uses: actions/upload-pages-artifact@v3
+        if: steps.pages.outputs.mode == 'workflow'
         with:
           path: _site
 
+    outputs:
+      mode: ${{ steps.pages.outputs.mode }}
+
   deploy:
     needs: build
+    if: needs.build.outputs.mode == 'workflow'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

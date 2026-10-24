@@ -373,13 +373,14 @@ function Login({ onToken, error }) {
     <div class="login-r"><form class="login-box" onSubmit=${submit}>
       <h1 style="font-size:24px">Sign in</h1>
       <p class="muted" style="margin-top:6px">Paste your GitHub access key. You only need to do this once on each device.</p>
+      <div class="notice info" style="margin:14px 0"><div style="flex:1">No key yet? Sign in to GitHub, then <a href=${'https://github.com/settings/tokens/new?scopes=public_repo&description=Rikaz%20admin'} target="_blank" rel="noopener">create one here</a>: pick an expiry, keep only <b>public_repo</b> ticked, click <b>Generate token</b> and copy it.</div></div>
       ${error && html`<div class="notice error" style="margin:12px 0">${error}</div>`}
       <${Field} label="GitHub access key" hint="It starts with github_pat_ or ghp_">
         <input type="password" value=${t} onInput=${e => setT(e.target.value)} placeholder="github_pat_…" autocomplete="off" spellcheck="false" autofocus />
       <//>
       <label class="row small" style="margin:12px 0 16px;gap:8px"><input type="checkbox" checked=${remember} onChange=${e => setRemember(e.target.checked)} /> Keep me signed in on this device</label>
       <button class="btn primary" style="width:100%" disabled=${!t.trim()}>Sign in</button>
-      <details style="margin-top:24px"><summary>How do I get an access key?</summary>
+      <details style="margin-top:24px"><summary>Owner of the repository? Use a key limited to this site</summary>
         <ol style="margin-top:10px">
           <li>Sign in to <a href="https://github.com" target="_blank" rel="noopener">github.com</a> with the account that has access to the Rikaz website.</li>
           <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Settings → Developer settings → Fine-grained tokens → Generate new token</a>.</li>
