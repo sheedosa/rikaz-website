@@ -36,7 +36,7 @@ prerender and share-image steps; `--no-prerender` skips those.
 
 The build reads `content/*.json` and the `SEO` copy in `index.html`, and writes:
 
-- **One real page per route and language**: `brands/`, `brand/antat/`, `product/an3/`, `ar/…` (66 pages).
+- **One real page per route and language**: Arabic (the default) at `brands/`, `brand/antat/`, `product/an3/`, English under `en/…`.
   Each has its own title, description, canonical URL, `hreflang` (EN/AR), Open Graph + Twitter tags and
   schema.org JSON-LD (organisation, breadcrumbs, product details).
 - **A prerendered snapshot** of each page (desktop + mobile), so search engines, AI crawlers and slow
@@ -47,7 +47,8 @@ The build reads `content/*.json` and the `SEO` copy in `index.html`, and writes:
 Don't edit the generated pages by hand. Change `index.html` and rebuild.
 
 ## Notes
-- **URLs:** pages use clean paths (`brands/`, `ar/brand/antat/`); old `#/…` links redirect automatically.
+- **URLs:** Arabic is the default language at the root (`brands/`, `brand/antat/`); English is under `en/`. Old `ar/…` addresses and old `#/…` links redirect automatically.
+- **Enquiries** go to WhatsApp (`WHATSAPP` in index.html): product buttons and the contact form open a chat with the message already written.
   Links are real `<a href>` links, so they can be crawled and opened in a new tab.
 - **SEO copy:** titles and descriptions live in the `SEO` object inside `index.html`'s script.
 - **Custom domain:** set `SITE_URL` at the top of `tools/build.mjs`, add a `CNAME` file, and rebuild.

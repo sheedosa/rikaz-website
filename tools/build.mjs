@@ -160,7 +160,7 @@ function seoBlock(r) {
 <link rel="canonical" href="${url}">
 <link rel="alternate" hreflang="en" href="${abs(m.enPath)}">
 <link rel="alternate" hreflang="ar" href="${abs(m.arPath)}">
-<link rel="alternate" hreflang="x-default" href="${abs(m.enPath)}">
+<link rel="alternate" hreflang="x-default" href="${abs(m.arPath)}">
 <meta property="og:type" content="${m.type === 'product' ? 'product' : 'website'}">
 <meta property="og:site_name" content="${esc(m.siteName)}">
 <meta property="og:title" content="${esc(m.title)}">
@@ -200,19 +200,38 @@ function pageHtml(r, pre) {
 }
 const writePage = (r, pre) => { const f = fileFor(r); mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, pageHtml(r, pre)); };
 
+// Arabic used to live under ar/ (English was the default). Those addresses keep working: each one is a small
+// page that sends visitors and search engines to the same page at its new Arabic address.
+const legacyAr = routes.filter(r => r.lang === 'ar').map(r => ['ar/' + pathFor(r), pathFor(r)]);
+function writeLegacyRedirects() {
+  for (const [from, to] of legacyAr) {
+    const url = abs(to), f = join(ROOT, from, 'index.html');
+    mkdirSync(dirname(f), { recursive: true });
+    writeFileSync(f, `<!DOCTYPE html>
+<!-- redirect-stub -->
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>رِكاز</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="${url}">
+<meta http-equiv="refresh" content="0; url=${url}">
+<script>location.replace(${JSON.stringify(SITE_PATH + to)} + location.hash)</script>
+</head><body><a href="${url}">${url}</a></body></html>
+`);
+  }
+}
+
 // Remove route folders from a previous build that no longer exist (e.g. a deleted product).
 function cleanStale() {
-  const keep = new Set(routes.map(r => pathFor(r)));
+  const keep = new Set([...routes.map(r => pathFor(r)), ...legacyAr.map(([from]) => from)]);
   const walk = (rel) => {
     for (const e of readdirSync(join(ROOT, rel), { withFileTypes: true })) {
       if (!e.isDirectory()) continue;
       const sub = rel + e.name + '/', page = join(ROOT, sub, 'index.html');
-      if (!keep.has(sub) && existsSync(page) && readFileSync(page, 'utf8').includes('<!-- seo:start -->')) {
+      if (!keep.has(sub) && existsSync(page) && /<!-- (seo:start|redirect-stub) -->/.test(readFileSync(page, 'utf8'))) {
         rmSync(join(ROOT, sub), { recursive: true }); console.log(`  removed stale ${sub}`);
       } else walk(sub);
     }
   };
-  for (const top of ['ar', 'about', 'brands', 'brand', 'product', 'market', 'partner', 'contact']) if (existsSync(join(ROOT, top))) walk(top + '/');
+  for (const top of ['ar', 'en', 'about', 'brands', 'brand', 'product', 'market', 'partner', 'contact']) if (existsSync(join(ROOT, top))) walk(top + '/');
 }
 
 // ── Static server + Playwright (for prerendering and share images) ─────────────────────────────────
@@ -385,10 +404,10 @@ function writeExtras() {
     return `  <url>
     <loc>${abs(m.path)}</loc>
     <lastmod>${today}</lastmod>
-    <priority>${r.lang === 'en' ? pri[r.page] : (pri[r.page] - 0.1).toFixed(1)}</priority>
+    <priority>${r.lang === 'ar' ? pri[r.page] : (pri[r.page] - 0.1).toFixed(1)}</priority>
     <xhtml:link rel="alternate" hreflang="en" href="${abs(m.enPath)}"/>
     <xhtml:link rel="alternate" hreflang="ar" href="${abs(m.arPath)}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="${abs(m.enPath)}"/>${img ? `
+    <xhtml:link rel="alternate" hreflang="x-default" href="${abs(m.arPath)}"/>${img ? `
     <image:image><image:loc>${abs(img)}</image:loc></image:image>` : ''}
   </url>`;
   });
@@ -399,7 +418,7 @@ ${urls.join('\n')}
 `);
   writeFileSync(join(ROOT, 'robots.txt'), `# Rikaz — ${SITE_URL}\nUser-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: ${abs('sitemap.xml')}\n`);
   writeFileSync(join(ROOT, 'site.webmanifest'), JSON.stringify({
-    name: 'Rikaz — Food Import & Distribution, Libya', short_name: 'Rikaz', description: D.SEO.en.home.d, lang: 'en', dir: 'ltr',
+    name: 'رِكاز — استيراد وتوزيع المواد الغذائية في ليبيا', short_name: 'رِكاز', description: D.SEO.ar.home.d, lang: 'ar', dir: 'rtl',
     start_url: './', scope: './', display: 'minimal-ui', background_color: '#F7F6F1', theme_color: '#0F4F45',
     icons: [
       { src: 'assets/icon-192.png', sizes: '192x192', type: 'image/png' },
@@ -410,31 +429,33 @@ ${urls.join('\n')}
   // GitHub Pages serves this for unknown URLs at any depth, so it links with root-absolute paths.
   const R = SITE_PATH;
   writeFileSync(join(ROOT, '404.html'), `<!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Page not found — Rikaz</title>
+<title>الصفحة غير موجودة — رِكاز</title>
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0F4F45">
 <link rel="icon" type="image/png" sizes="32x32" href="${R}assets/favicon-32.png">
 <link rel="stylesheet" href="${R}${FONTS}">
-<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#F7F6F1;color:#1F2A28;font-family:'Instrument Sans','Readex Pro',sans-serif;-webkit-font-smoothing:antialiased}
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#F7F6F1;color:#1F2A28;font-family:'Readex Pro','Instrument Sans',sans-serif;-webkit-font-smoothing:antialiased}
 main{max-width:560px;padding:40px 24px;text-align:center}h1{margin:28px 0 10px;font-size:34px;font-weight:600;letter-spacing:-.02em;color:#0F4F45}
 p{margin:0 0 6px;color:#3E4A48;line-height:1.6}nav{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 a{display:inline-block;padding:13px 22px;border-radius:3px;font-weight:600;font-size:14.5px;text-decoration:none;background:#0F4F45;color:#fff}a.alt{background:transparent;color:#0F4F45;border:1px solid rgba(15,79,69,.35)}</style>
 <script>
 // Old share links used #/… routes — send them to the matching clean URL.
 if (/^#\\/./.test(location.hash)) location.replace('${R}' + location.hash.slice(2).replace(/\\/?$/, '/'));
+// Arabic pages used to live under ar/; they are now at the root.
+else if (location.pathname.indexOf('${R}ar/') === 0) location.replace('${R}' + location.pathname.slice(${R.length + 3}));
 </script>
 </head>
 <body>
 <main>
   <img src="${R}assets/logo-full-horizontal.webp" alt="Rikaz — رِكاز" width="600" height="191" style="height:52px;width:auto">
-  <h1>Page not found</h1>
-  <p>The page you were looking for has moved or no longer exists.</p>
-  <p dir="rtl" lang="ar" style="font-family:'Readex Pro',sans-serif">الصفحة التي تبحث عنها غير موجودة.</p>
-  <nav><a href="${R}">Home</a><a class="alt" href="${R}brands/">Our brands</a><a class="alt" href="${R}ar/" lang="ar">العربية</a></nav>
+  <h1>الصفحة غير موجودة</h1>
+  <p>ربما نُقلت الصفحة التي تبحث عنها أو لم تعد موجودة.</p>
+  <p dir="ltr" lang="en" style="font-family:'Instrument Sans',sans-serif">The page you were looking for has moved or no longer exists.</p>
+  <nav><a href="${R}">الرئيسية</a><a class="alt" href="${R}brands/">علاماتنا التجارية</a><a class="alt" href="${R}en/" lang="en" dir="ltr">English</a></nav>
 </main>
 </body>
 </html>
@@ -444,6 +465,7 @@ if (/^#\\/./.test(location.hash)) location.replace('${R}' + location.hash.slice(
 // ── Run ───────────────────────────────────────────────────────────────────────────────────────────
 console.log(`Building ${routes.length} pages for ${SITE_URL}`);
 cleanStale();
+writeLegacyRedirects();
 for (const r of routes) writePage(r, null);
 writeExtras();
 if (PRERENDER) {
